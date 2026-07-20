@@ -1,5 +1,6 @@
 import React from "react";
 import { cn } from "@/lib/utils";
+import { LiquidGlassSurface } from "@/components/glass/liquid-glass-surface";
 
 interface GlassButtonProps extends React.ComponentPropsWithoutRef<"a"> {
   variant?: "primary" | "secondary";
@@ -8,18 +9,24 @@ interface GlassButtonProps extends React.ComponentPropsWithoutRef<"a"> {
 export const GlassButton = React.forwardRef<HTMLAnchorElement, GlassButtonProps>(
   ({ children, className, variant = "primary", ...props }, ref) => {
     return (
-      <a
-        ref={ref}
-        className={cn(
-          "px-6 py-3 rounded-full font-medium transition-colors text-center inline-flex justify-center items-center cursor-pointer",
-          variant === "primary" && "bg-foreground text-background hover:bg-foreground/90",
-          variant === "secondary" && "border border-glass-border bg-glass-base hover:bg-glass-highlight",
-          className
-        )}
-        {...props}
+      <LiquidGlassSurface
+        className="inline-flex rounded-full"
+        intensity={variant === "primary" ? 0.03 : 0.08}
+        cornerRadius={999}
       >
-        {children}
-      </a>
+        <a
+          ref={ref}
+          className={cn(
+            "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-6 text-center text-sm font-semibold transition-opacity",
+            variant === "primary" && "bg-foreground text-background hover:opacity-85",
+            variant === "secondary" && "hover:bg-glass-highlight",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </a>
+      </LiquidGlassSurface>
     );
   }
 );

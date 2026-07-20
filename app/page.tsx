@@ -13,9 +13,12 @@ import { Footer } from "@/components/layout/footer";
 export default function Home() {
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to content
+      </a>
       <GlassNavbar />
-      <main className="flex-1 w-full pb-24">
-        <Container>
+      <main id="main-content" className="w-full flex-1 overflow-x-clip pb-20" tabIndex={-1}>
+        <Container className="relative">
           <HeroSection />
           <AboutSection />
           <ProjectsSection />

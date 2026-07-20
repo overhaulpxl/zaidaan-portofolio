@@ -3,39 +3,129 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
   --color-glass-base: var(--glass-base);
   --color-glass-border: var(--glass-border);
   --color-glass-highlight: var(--glass-highlight);
-  --color-semantic-success: #16a34a;
-  --color-semantic-warning: #d97706;
-  --color-semantic-error: #dc2626;
+  --color-semantic-success: #15803d;
+  --color-semantic-warning: #a16207;
+  --color-semantic-error: #b91c1c;
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 :root {
-  --background: #fbfbfd;
-  --foreground: #1d1d1f;
-  --glass-base: rgba(255, 255, 255, 0.6);
-  --glass-border: rgba(0, 0, 0, 0.05);
-  --glass-highlight: rgba(255, 255, 255, 0.8);
+  color-scheme: light;
+  --background: #f5f5f7;
+  --foreground: #161617;
+  --muted: #5f5f66;
+  --glass-base: rgb(255 255 255 / 0.68);
+  --glass-border: rgb(17 17 19 / 0.11);
+  --glass-highlight: rgb(255 255 255 / 0.82);
+  --ambient: rgb(255 255 255 / 0.84);
+  --surface-solid: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #000000;
+    color-scheme: dark;
+    --background: #050506;
     --foreground: #f5f5f7;
-    --glass-base: rgba(30, 30, 32, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --glass-highlight: rgba(255, 255, 255, 0.05);
+    --muted: #aaaab2;
+    --glass-base: rgb(28 28 31 / 0.68);
+    --glass-border: rgb(255 255 255 / 0.13);
+    --glass-highlight: rgb(255 255 255 / 0.075);
+    --ambient: rgb(36 36 40 / 0.54);
+    --surface-solid: #171719;
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
+}
+
 body {
-  background: var(--background);
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, var(--ambient) 0, transparent 34rem),
+    var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
-  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+}
+
+section {
+  scroll-margin-top: 7rem;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+p,
+li {
+  text-wrap: pretty;
+}
+
+a,
+button,
+[role="link"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 80;
+  top: 0.75rem;
+  left: 0.75rem;
+  translate: 0 -180%;
+  border-radius: 999px;
+  background: var(--foreground);
+  color: var(--background);
+  padding: 0.7rem 1rem;
+  min-height: 2.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: translate 160ms ease-out;
+}
+
+.skip-link:focus {
+  translate: 0;
+}
+
+.focus-ring:focus-visible,
+a:focus-visible,
+button:focus-visible,
+[role="link"]:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.text-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  border-radius: 0.25rem;
+  color: var(--muted);
+  text-underline-offset: 0.25rem;
+  transition: color 180ms ease-out;
+}
+
+.text-link:hover {
+  color: var(--foreground);
+  text-decoration: underline;
 }
 
 .liquid-glass-surface {
@@ -43,9 +133,13 @@ body {
   isolation: isolate;
   min-width: 0;
   overflow: hidden;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-base);
   box-shadow:
     inset 0 1px 0 var(--glass-highlight),
-    0 4px 8px rgb(0 0 0 / 0.12);
+    0 4px 8px rgb(0 0 0 / 0.1);
+  backdrop-filter: blur(18px) saturate(118%);
+  -webkit-backdrop-filter: blur(18px) saturate(118%);
 }
 
 .liquid-glass-content {
@@ -65,7 +159,7 @@ body {
   overflow: hidden;
   border-radius: inherit;
   pointer-events: none;
-  opacity: 0.72;
+  opacity: 0.62;
 }
 
 .liquid-glass-enhancement > * {
@@ -88,7 +182,29 @@ body {
   height: 100% !important;
 }
 
+.tool-icon {
+  color: var(--muted);
+  transition: color 180ms ease-out, transform 180ms ease-out;
+}
+
+@media (hover: hover) {
+  .group:hover .tool-icon {
+    color: var(--foreground);
+    transform: translateY(-1px);
+  }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .liquid-glass-surface {
+    background: var(--surface-solid);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *,
   ::before,
   ::after {

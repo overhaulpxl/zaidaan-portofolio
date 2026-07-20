@@ -5,6 +5,7 @@ export const experiences: Experience[] = [
     company: "Way 2 Eternal Community",
     role: "Community Operations & Transactions",
     period: "Nov 2025 – Present",
+    employment: "Part-time · Remote / Self-managed",
     context: "Discord-based online trading and community platform",
     responsibilities: [
       "Acted as a transaction middleman for a Discord-based online trading community, completing 500+ buyer-seller transactions.",
@@ -17,6 +18,7 @@ export const experiences: Experience[] = [
     company: "NXRDEN Store",
     role: "Website & Order Management",
     period: "Nov 2025 – May 2026",
+    employment: "Part-time · Remote / Self-managed",
     context: "Online Robux top-up store",
     responsibilities: [
       "Managed daily operations of an online Robux top-up store, from order intake to delivery.",
@@ -28,6 +30,7 @@ export const experiences: Experience[] = [
     company: "Seraphim Robux Store",
     role: "Customer Service & Order Processing",
     period: "Feb 2026 – Mar 2026",
+    employment: "Part-time · Remote",
     context: "Online Robux top-up store",
     responsibilities: [
       "Answered customer questions and processed daily orders for an online Robux store.",

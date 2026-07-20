@@ -10,7 +10,7 @@ export function GlassCard({ children, className, intensity = 0.05, ...props }: G
   return (
     <LiquidGlassSurface
       intensity={intensity}
-      className={cn("rounded-2xl border border-glass-border shadow-sm", className)}
+      className={cn("rounded-2xl", className)}
       {...props}
     >
       {children}

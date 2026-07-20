@@ -5,24 +5,22 @@ import { GlassCard } from "./glass-card";
 export function SkillCard({ skill }: { skill: Skill }) {
   return (
     <GlassCard
-      className="p-5 group hover:-translate-y-1 transition-transform"
-      intensity={0.05}
+      className="group"
+      intensity={0.07}
     >
-      <div className="flex flex-col h-full">
-        <div className="flex justify-between items-start mb-3">
-          <h4 className="font-semibold">{skill.name}</h4>
-        </div>
-        <p className="text-sm text-foreground/70 mb-4 flex-grow">
+      <article className="flex h-full flex-col p-5 sm:p-6">
+        <h4 className="mb-3 text-lg font-semibold tracking-[-0.015em]">{skill.name}</h4>
+        <p className="mb-5 flex-grow text-sm leading-relaxed text-muted">
           {skill.evidence}
         </p>
         {skill.badge && (
           <div className="mt-auto">
-            <span className="inline-block text-xs font-medium px-2 py-1 bg-foreground/5 border border-glass-border rounded-full">
+            <span className="inline-block rounded-full bg-foreground/[0.06] px-2.5 py-1 text-xs font-semibold text-muted">
               {skill.badge}
             </span>
           </div>
         )}
-      </div>
+      </article>
     </GlassCard>
   );
 }

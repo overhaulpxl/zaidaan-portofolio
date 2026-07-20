@@ -1,49 +1,68 @@
-import React from "react";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/types";
 import { GlassCard } from "./glass-card";
+import { cn } from "@/lib/utils";
 
-export function ProjectCard({ project }: { project: Project }) {
+interface ProjectCardProps {
+  project: Project;
+  index: number;
+  className?: string;
+}
+
+export function ProjectCard({ project, index, className }: ProjectCardProps) {
   const displayedTechnologies = project.cardTechnologies ?? project.technologies;
 
   return (
-    <GlassCard
-      className="h-full flex flex-col group hover:shadow-md transition-shadow"
-      intensity={0.1}
-    >
-      <div className="p-6 flex flex-col h-full">
-        <div className="flex justify-between items-start mb-4 gap-4">
+    <GlassCard className={cn("group flex h-full flex-col", className)} intensity={0.1}>
+      <article className="flex h-full flex-col p-6 sm:p-8">
+        <div className="mb-10 flex items-start justify-between gap-4">
           <div className="min-w-0">
-            {project.category && (
-              <div className="mb-1 text-xs font-medium text-foreground/60">
-                {project.category}
-              </div>
-            )}
-            <h3 className="text-xl font-semibold tracking-tight">{project.title}</h3>
+            {project.category && <p className="mb-2 text-sm font-medium text-muted">{project.category}</p>}
+            <h3 className="text-2xl font-semibold tracking-[-0.025em] sm:text-3xl">{project.title}</h3>
           </div>
-          <span className="text-xs px-2 py-1 bg-foreground/5 rounded-full border border-glass-border whitespace-nowrap">
-            {project.status}
+          <span className="text-sm font-semibold tabular-nums text-muted">
+            {String(index).padStart(2, "0")}
           </span>
         </div>
 
-        <p className="text-foreground/70 text-sm mb-6 flex-grow">
+        <p className="mb-8 max-w-xl flex-grow text-base leading-relaxed text-muted">
           {project.shortDescription}
         </p>
 
-        <div className="space-y-4 mt-auto">
+        <div className="mt-auto space-y-5 border-t border-glass-border pt-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <span className="rounded-full bg-foreground/[0.06] px-3 py-1.5 text-xs font-semibold">
+              {project.status}
+            </span>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="focus-ring inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-semibold"
+              >
+                Visit Website <ArrowUpRight aria-hidden="true" className="size-4" />
+              </a>
+            )}
+          </div>
+
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-foreground/50 mb-1">Role</div>
-            <div className="text-sm">{project.role}</div>
+            <p className="mb-1 text-xs font-semibold text-muted">Role</p>
+            <p className="text-sm font-medium">{project.role}</p>
           </div>
 
           <div className="flex flex-wrap gap-2">
-            {displayedTechnologies.map(tech => (
-              <span key={tech} className="text-xs px-2 py-1 bg-glass-highlight rounded-md border border-glass-border">
-                {tech}
+            {displayedTechnologies.map((technology) => (
+              <span
+                key={technology}
+                className="rounded-md border border-glass-border px-2.5 py-1 text-xs font-medium text-muted"
+              >
+                {technology}
               </span>
             ))}
           </div>
         </div>
-      </div>
+      </article>
     </GlassCard>
   );
 }

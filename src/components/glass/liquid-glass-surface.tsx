@@ -63,7 +63,11 @@ export function LiquidGlassSurface({
   intensity = 0.5,
   ...props
 }: LiquidGlassSurfaceProps) {
-  const mounted = useSyncExternalStore(subscribeToMount, getMountSnapshot, getServerMountSnapshot);
+  const mounted = useSyncExternalStore(
+    subscribeToMount,
+    getMountSnapshot,
+    getServerMountSnapshot
+  );
   const prefersReducedMotion = useSyncExternalStore(
     subscribeToReducedMotion,
     getReducedMotionSnapshot,
@@ -81,7 +85,7 @@ export function LiquidGlassSurface({
       )}
       {...props}
     >
-      {mounted && !prefersReducedMotion && (
+      {mounted && !prefersReducedMotion && normalizedIntensity > 0 && (
         <EnhancementBoundary>
           <div className="liquid-glass-enhancement" aria-hidden="true">
             <LiquidGlass
