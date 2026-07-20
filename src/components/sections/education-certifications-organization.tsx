@@ -80,6 +80,7 @@ export function EducationSection() {
                       href={certificate.certificateUrl}
                       target="_blank"
                       rel="noreferrer"
+                      aria-label={`View ${certificate.title} certificate (opens in a new tab)`}
                     >
                       View Certificate <ArrowUpRight aria-hidden="true" className="size-4" />
                     </a>

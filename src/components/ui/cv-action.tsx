@@ -25,7 +25,8 @@ export function CvAction({ appearance = "glass", className }: CvActionProps) {
     const link = (
       <a
         href={siteConfig.cvUrl}
-        download
+        download="zaidaan-zalfaa-cv.pdf"
+        aria-label="Download Zaidaan Zalfaa CV"
         className={cn(
           "focus-ring inline-flex rounded-full",
           appearance === "text" && "hover:text-foreground/70",

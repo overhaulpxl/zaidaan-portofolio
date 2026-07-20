@@ -66,7 +66,7 @@ export const siteConfig: SiteConfig = {
       "Cianjur",
     ],
   },
-  cvUrl: null,
+  cvUrl: "/documents/zaidaan-zalfaa-cv.pdf",
   contact: {
     phoneDisplay: "+62 857-9371-9676",
     phoneInternational: whatsappNumber,
