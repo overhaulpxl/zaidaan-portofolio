@@ -9,10 +9,12 @@ import { ToolsSection } from "@/components/sections/tools";
 import { EducationSection } from "@/components/sections/education-certifications-organization";
 import { ContactSection } from "@/components/sections/contact";
 import { Footer } from "@/components/layout/footer";
+import { StructuredData } from "@/components/seo/structured-data";
 
 export default function Home() {
   return (
     <>
+      <StructuredData />
       <a href="#main-content" className="skip-link">
         Skip to content
       </a>

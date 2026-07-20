@@ -1,12 +1,14 @@
+import { siteConfig } from "@/content/site";
+
 export const profile = {
-  name: "Zaidaan Zalfaa",
+  name: siteConfig.name,
   headline: "Helping people. Supporting operations. Building practical digital solutions.",
   roles: "CUSTOMER SERVICE · OPERATIONS · DIGITAL SUPPORT",
   availability: "OPEN TO OPPORTUNITIES",
   introduction: "I’m Zaidaan Zalfaa, a Computer and Network Engineering graduate with hands-on experience in customer service, online transaction handling, order and website management, community operations, event facilitation, automation, and basic IT support.",
   opportunityNote: "Open to on-site, remote, and project-based opportunities.",
   opportunityModes: ["On-site", "Remote", "Project-based"],
-  location: "Cianjur, West Java, Indonesia",
+  location: siteConfig.location.label,
   stats: [
     { label: "Buyer–Seller Transactions", value: "500+" },
     { label: "Academic GPA", value: "3.80 / 4.00" },

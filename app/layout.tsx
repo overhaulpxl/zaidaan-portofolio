@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+import { siteConfig } from "@/content/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -7,9 +8,53 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
+const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
+
 export const metadata: Metadata = {
-  title: "Zaidaan Zalfaa — Customer Service, Operations & Digital Support",
-  description: "Portfolio of Zaidaan Zalfaa, featuring experience in customer service, community operations, transaction handling, event facilitation, IT support, networking, automation, and digital projects.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: siteConfig.seo.title,
+    template: siteConfig.seo.titleTemplate,
+  },
+  description: siteConfig.seo.description,
+  applicationName: siteConfig.applicationName,
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  keywords: siteConfig.seo.keywords,
+  alternates: {
+    canonical: siteConfig.url,
+  },
+  openGraph: {
+    type: "website",
+    locale: siteConfig.locale,
+    url: siteConfig.url,
+    siteName: siteConfig.applicationName,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+    images: [{ url: socialImageUrl, alt: `${siteConfig.name} portfolio` }],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  formatDetection: {
+    address: false,
+    email: false,
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang={siteConfig.language}
       className={`${geistSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
