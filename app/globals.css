@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-glass-base: var(--glass-base);
+  --color-glass-border: var(--glass-border);
+  --color-glass-highlight: var(--glass-highlight);
+  --color-semantic-success: #16a34a;
+  --color-semantic-warning: #d97706;
+  --color-semantic-error: #dc2626;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
+:root {
+  --background: #fbfbfd;
+  --foreground: #1d1d1f;
+  --glass-base: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(0, 0, 0, 0.05);
+  --glass-highlight: rgba(255, 255, 255, 0.8);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #000000;
+    --foreground: #f5f5f7;
+    --glass-base: rgba(30, 30, 32, 0.5);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-highlight: rgba(255, 255, 255, 0.05);
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+.liquid-glass-surface {
+  position: relative;
+  isolation: isolate;
+  min-width: 0;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 var(--glass-highlight),
+    0 4px 8px rgb(0 0 0 / 0.12);
+}
+
+.liquid-glass-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  min-width: 0;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.liquid-glass-enhancement {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.72;
+}
+
+.liquid-glass-enhancement > * {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  transform: none !important;
+  pointer-events: none !important;
+}
+
+.liquid-glass-effect .glass {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.liquid-glass-effect svg {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .liquid-glass-enhancement {
+    display: none;
+  }
 }

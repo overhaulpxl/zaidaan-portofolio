@@ -12,6 +12,15 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local agent tooling and vendored skill runtimes are not application source.
+    ".agents/**",
+    ".claude/**",
+    ".codex/**",
+    ".gemini/**",
+    ".kiro/**",
+    ".pi/**",
+    ".qoder/**",
+    ".rovodev/**",
   ]),
 ]);
 

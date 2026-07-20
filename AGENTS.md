@@ -27,7 +27,7 @@ The PRD is the product source of truth.
 Locked names:
 
 - Zaidaan Zalfaa
-- Norden Secure Commerce
+- NORDEN
 - Way 2 Eternal Community
 - Way 2 Eternal Bot
 - Middleman
@@ -36,6 +36,7 @@ Locked names:
 
 Do not:
 
+- Rename NORDEN.
 - Shorten Way 2 Eternal to W2E in primary headings.
 - Rename Middleman to ZAIDAAN Middleman.
 - Rename Event Facilitator to Tour Guide.

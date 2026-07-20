@@ -136,6 +136,12 @@ Avoid:
 
 The result must feel deliberately designed by a human product designer.
 
+
+
+### 3.5 Impeccable anti-slop gate
+
+Before visual work is accepted, run Impeccable critique, polish, and detector passes. Reject generic SaaS composition, purple-to-blue gradients, gradient text, nested cards, excessive pills, rounded-square icon tiles, arbitrary three-column grids, decorative blobs, and over-rounding. Design quality must come from typography, hierarchy, spacing, contrast, and purposeful material effects.
+
 ---
 
 ## 4. Goals
@@ -245,7 +251,7 @@ The final one-page homepage order is:
 
 Optional project routes:
 
-- `/projects/norden-secure-commerce`
+- `/projects/norden`
 - `/projects/way-2-eternal-bot`
 - `/projects/middleman`
 - `/projects/mandalawangi-outbound`
@@ -435,7 +441,7 @@ This draft must be reviewed before publication. Any change must preserve the CV�
 
 ### Project order
 
-1. Norden Secure Commerce
+1. NORDEN
 2. Way 2 Eternal Bot
 3. Middleman
 4. Mandalawangi Outbound
@@ -469,24 +475,36 @@ Each card includes:
 
 ### Initial project definitions
 
-#### Norden Secure Commerce
+#### NORDEN
 
-**Status:** In Development  
-**Type:** Secure commerce platform  
-**Role:** Product development / platform development
+**Slug:** `norden`
 
-Initial scope may include:
+**Status:** In Development
 
-- Structured digital transaction workflows
-- Service or transaction dashboard
-- Secure commerce portal
-- Payment-related workflow support
-- Vouch or reputation features
-- Identity or verification-related features
+**Category:** Discord Bot
 
-Only features explicitly approved by Zaidaan may be published.
+**Role:** Product Development & Full-Stack Engineering
 
-The project page must not reveal private architecture, credentials, customer data, secret endpoints, or security-sensitive details.
+Approved description:
+
+> A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.
+
+Primary technologies:
+
+- Python
+- discord.py
+- PostgreSQL
+- Redis
+
+Homepage card technologies:
+
+- Python
+- discord.py
+- PostgreSQL
+
+Do not associate Supabase with NORDEN. Supabase is reserved for the portfolio backend.
+
+Only explicitly approved features may be published. The project page must not reveal private architecture, credentials, customer data, secret endpoints, or security-sensitive details.
 
 #### Way 2 Eternal Bot
 
@@ -560,7 +578,7 @@ Do not use `MAP OBM` as the primary project title.
 
 Recommended for:
 
-- Norden Secure Commerce
+- NORDEN
 - Way 2 Eternal Bot
 
 Optional for:
@@ -1221,7 +1239,33 @@ Include:
 
 ---
 
-# 13. Technical Architecture
+# 13. Design Workflow with Impeccable
+
+Impeccable is required for design planning, critique, refinement, and deterministic anti-slop checks.
+
+Official project:
+
+- Website: `https://impeccable.style/`
+- Repository: `https://github.com/pbakaus/impeccable`
+- Install from the project root: `npx impeccable install`
+
+The repository includes `PRODUCT.md` and `DESIGN.md`. They define the audience, brand voice, references, anti-references, and visual system. Impeccable must read them but must not override this PRD or invent factual content.
+
+Recommended design sequence:
+
+1. `/impeccable shape the Zaidaan portfolio homepage`
+2. Review the design brief before implementation.
+3. `/impeccable craft the approved homepage direction`
+4. `/impeccable critique the homepage`
+5. `/impeccable polish the homepage`
+6. Use `/impeccable live` for browser-based selection and variants when useful.
+7. Run `npx impeccable detect app/` before accepting visual work.
+
+Impeccable is a design-quality tool, not a factual source of truth.
+
+---
+
+# 14. Technical Architecture
 
 ## Core stack
 
@@ -1270,7 +1314,7 @@ Next.js handles:
 
 ---
 
-# 14. Content Storage Strategy
+# 15. Content Storage Strategy
 
 ## Static, CV-backed content
 
@@ -1317,7 +1361,7 @@ Store these in Supabase:
 
 ---
 
-# 15. Backend Requirements
+# 16. Backend Requirements
 
 ## Authentication
 
@@ -1413,7 +1457,7 @@ Suggested folders:
 ```text
 zaidaan-portfolio/
 ├── projects/
-│   ├── norden-secure-commerce/
+│   ├── norden/
 │   ├── way-2-eternal-bot/
 │   ├── middleman/
 │   └── mandalawangi-outbound/
@@ -1424,7 +1468,7 @@ zaidaan-portfolio/
 
 ---
 
-# 16. Suggested Database Schema
+# 17. Suggested Database Schema
 
 ## `projects`
 
@@ -1536,7 +1580,7 @@ Do not store:
 
 ---
 
-# 17. CV Download
+# 18. CV Download
 
 Recommended file:
 
@@ -1560,7 +1604,7 @@ Behavior:
 
 ---
 
-# 18. Performance Requirements
+# 19. Performance Requirements
 
 - Fast first render
 - Optimized images
@@ -1577,7 +1621,7 @@ Behavior:
 
 ---
 
-# 19. Security Requirements
+# 20. Security Requirements
 
 - Supabase Row Level Security enabled
 - Public read only for published projects and certificates
@@ -1595,7 +1639,7 @@ Behavior:
 
 ---
 
-# 20. Suggested Project Structure
+# 21. Suggested Project Structure
 
 ```text
 src/
@@ -1642,7 +1686,7 @@ src/
 
 ---
 
-# 21. Environment Variables
+# 22. Environment Variables
 
 ```env
 NEXT_PUBLIC_SITE_URL=https://zaidaan.my.id
@@ -1667,7 +1711,7 @@ Rules:
 
 ---
 
-# 22. Free-Tier Constraints
+# 23. Free-Tier Constraints
 
 Use:
 
@@ -1692,7 +1736,7 @@ To remain within free usage:
 
 ---
 
-# 23. Content Administration Rules
+# 24. Content Administration Rules
 
 ## Admin-editable
 
@@ -1722,7 +1766,7 @@ To remain within free usage:
 
 ---
 
-# 24. Quality Assurance Checklist
+# 25. Quality Assurance Checklist
 
 ## Content accuracy
 
@@ -1795,7 +1839,7 @@ To remain within free usage:
 
 ---
 
-# 25. Acceptance Criteria
+# 26. Acceptance Criteria
 
 Version 1.0 is complete when:
 
@@ -1804,7 +1848,7 @@ Version 1.0 is complete when:
 3. The site does not resemble the old portfolio layout.
 4. The homepage includes all approved sections.
 5. “Who Is Zaidaan Zalfaa?” is present.
-6. Projects include Norden Secure Commerce, Way 2 Eternal Bot, Middleman, and Mandalawangi Outbound.
+6. Projects include NORDEN, Way 2 Eternal Bot, Middleman, and Mandalawangi Outbound.
 7. Work experience matches the approved CV.
 8. Skills use evidence-based cards without percentages.
 9. Tools use logo plus text.
@@ -1822,7 +1866,7 @@ Version 1.0 is complete when:
 
 ---
 
-# 26. Implementation Phases
+# 27. Implementation Phases
 
 ## Phase 1 — Foundation
 
@@ -1882,7 +1926,7 @@ Version 1.0 is complete when:
 
 ---
 
-# 27. Locked Decisions Summary
+# 28. Locked Decisions Summary
 
 - Website language: English
 - Framework: Next.js
@@ -1896,7 +1940,14 @@ Version 1.0 is complete when:
 - Contact uses WhatsApp and email
 - “Who Is Zaidaan Zalfaa?” is mandatory
 - Section title: Projects & Ongoing Work
-- Project title: Norden Secure Commerce
+- Project title: NORDEN
+- NORDEN slug: `norden`
+- NORDEN category: Discord Bot
+- NORDEN status: In Development
+- NORDEN description: A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.
+- NORDEN role: Product Development & Full-Stack Engineering
+- NORDEN primary technologies: Python, discord.py, PostgreSQL, Redis
+- NORDEN homepage card technologies: Python, discord.py, PostgreSQL
 - Project title: Way 2 Eternal Bot
 - Project title: Middleman
 - Project title: Mandalawangi Outbound
@@ -1920,7 +1971,7 @@ Version 1.0 is complete when:
 
 ---
 
-# 28. Source-of-Truth Appendix
+# 29. Source-of-Truth Appendix
 
 ## Approved contact
 
