@@ -15,7 +15,7 @@ export function CvAction({ appearance = "glass", className }: CvActionProps) {
       Download CV
       {!siteConfig.cvUrl && (
         <span className="text-[0.625rem] font-bold tracking-[0.08em] text-current uppercase">
-          Unavailable
+          COMING SOON
         </span>
       )}
     </span>

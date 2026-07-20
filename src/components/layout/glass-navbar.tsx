@@ -179,7 +179,7 @@ export function GlassNavbar() {
               })}
             </nav>
 
-            <div className="hidden items-center gap-2 sm:flex">
+            <div className="hidden items-center gap-2 lg:flex">
               <CvAction appearance="text" className="hidden xl:inline-flex" />
               <a
                 href="#contact"
