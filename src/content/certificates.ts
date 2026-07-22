@@ -1,37 +1,32 @@
-import type { Certificate } from "@/types";
+import type { Certification } from "@/types/portfolio";
 
-export const certificates: Certificate[] = [
+export const certificates: Certification[] = [
   {
-    title: "Goethe-Zertifikat (B1)",
+    title: "Goethe-Zertifikat B1",
     issuer: "Goethe-Institut",
-    issued: "Jul 2025",
-    certificateUrl: "/documents/certificates/goethe-zertifikat-b1.pdf",
+    issuedLabel: "Jul 2025",
+    level: "B1",
+    documentUrl: "/documents/certificates/goethe-zertifikat-b1.pdf",
+    published: true,
+    sortOrder: 1,
   },
   {
     title: "Computer Network Development with MikroTik",
     issuer: "Karier.mu / LKP Bina Karya Mandiri",
-    issued: "Sep 2023",
-    certificateUrl: "/documents/certificates/mikrotik-network-development.pdf",
-    result: "Excellent",
-    duration: "14 hours 56 minutes",
-    activityScore: "88",
-    competencies: [
-      "LAN design",
-      "UTP cabling",
-      "Wireless networking",
-      "Static TCP/IP configuration",
-      "Internet gateway installation and configuration",
-      "Network device administration",
-      "Network system administration",
-      "Testing and troubleshooting",
-      "Network maintenance",
-      "Network security monitoring and administration"
-    ]
+    issuedLabel: "9 Sep 2023",
+    scoreLabel: "Training Activity Score",
+    scoreValue: "88",
+    duration: "14h 56m",
+    documentUrl: "/documents/certificates/mikrotik-network-development.pdf",
+    published: true,
+    sortOrder: 2,
   },
   {
     title: "TOEIC",
     issuer: "Educational Testing Service (ETS)",
-    issued: "Aug 2022",
-    certificateUrl: "/documents/certificates/toeic.pdf",
+    issuedLabel: "Aug 2022",
+    documentUrl: "/documents/certificates/toeic.pdf",
+    published: true,
+    sortOrder: 3,
   },
 ];

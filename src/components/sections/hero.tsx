@@ -1,64 +1,42 @@
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
-import { profile } from "@/content/profile";
-import { siteConfig } from "@/content/site";
+import { ArrowDownRight } from "lucide-react";
 import { CvAction } from "@/components/ui/cv-action";
 import { GlassButton } from "@/components/ui/glass-button";
 
 export function HeroSection() {
   return (
-    <section id="home" className="relative flex min-h-0 flex-col justify-start pb-12 pt-24 sm:min-h-[min(940px,100svh)] sm:justify-center sm:pb-20 sm:pt-36">
-      <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-semantic-success/30 bg-semantic-success/10 px-3 py-1.5 text-xs font-bold text-semantic-success sm:mb-7">
-        <span aria-hidden="true" className="size-1.5 rounded-full bg-semantic-success" />
-        {profile.availability}
-      </div>
+    <section
+      id="home"
+      className="relative flex min-h-[min(52rem,100svh)] flex-col justify-center pb-16 pt-32 [@media(max-height:40rem)]:pb-10 [@media(max-height:40rem)]:pt-20 sm:pb-24 sm:pt-40"
+    >
+      <p className="type-metadata text-muted">Personal Portfolio</p>
 
-      <div className="grid items-start gap-6 sm:gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-12">
+      <h1 className="type-display mt-5 max-w-5xl" aria-label="Zaidaan Zalfaa">
+        <span className="block">ZAIDAAN</span>
+        {" "}
+        <span className="block">ZALFAA</span>
+      </h1>
+
+      <div className="mt-10 grid gap-8 border-t border-line-subtle pt-7 [@media(max-height:40rem)]:mt-7 [@media(max-height:40rem)]:gap-6 [@media(max-height:40rem)]:pt-5 sm:mt-12 sm:pt-9 lg:grid-cols-[minmax(0,1fr)_minmax(19rem,0.72fr)] lg:items-end lg:gap-16">
+        <p className="max-w-[36ch] text-[clamp(1.25rem,1.05rem+0.8vw,1.75rem)] font-medium leading-[1.35] tracking-[-0.02em]">
+          Building practical digital products, community systems, and
+          automation.
+        </p>
+
         <div>
-          <p className="mb-4 text-xs font-bold tracking-[0.12em] text-muted sm:mb-5">{profile.roles}</p>
-          <h1 className="max-w-5xl text-[clamp(2.25rem,10.7vw,2.625rem)] font-semibold leading-[0.98] tracking-[-0.035em] sm:text-[clamp(2.75rem,7.5vw,6rem)] sm:leading-[0.94] sm:tracking-[-0.04em]">
-            {profile.headline}
-          </h1>
-          <p className="mt-5 max-w-3xl text-base leading-relaxed text-muted sm:mt-7 sm:text-lg">
-            {profile.introduction}
+          <p className="max-w-[44ch] text-base leading-relaxed text-muted sm:text-[1.0625rem]">
+            Based in Cianjur <span aria-hidden="true">·</span> Open to on-site,
+            remote, and project-based opportunities
           </p>
 
-          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
-            <GlassButton href="#projects" variant="primary">
-              View Projects <ArrowDownRight aria-hidden="true" className="size-4" />
+          <div className="mt-6 flex flex-col gap-3 [@media(max-height:40rem)]:mt-4 sm:flex-row sm:flex-wrap">
+            <GlassButton href="/#work" variant="primary">
+              View Selected Work
+              <ArrowDownRight aria-hidden="true" className="size-4" />
             </GlassButton>
             <CvAction />
           </div>
         </div>
-
-        <aside className="border-y border-glass-border py-4 sm:py-5 lg:self-end" aria-label="Availability and profiles">
-          <p className="text-sm font-semibold">Available for</p>
-          <ul className="mt-4 space-y-3 text-sm text-muted">
-            {profile.opportunityModes.map((mode) => (
-              <li key={mode} className="flex items-center justify-between gap-4">
-                <span>{mode}</span>
-                <span aria-hidden="true" className="size-1 rounded-full bg-semantic-success" />
-              </li>
-            ))}
-          </ul>
-          <div className="mt-5 flex gap-4 border-t border-glass-border pt-5 text-sm font-semibold">
-            <a className="text-link inline-flex items-center gap-1" href={siteConfig.socials.github} target="_blank" rel="noreferrer">
-              GitHub <ArrowUpRight aria-hidden="true" className="size-3.5" />
-            </a>
-            <a className="text-link inline-flex items-center gap-1" href={siteConfig.socials.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn <ArrowUpRight aria-hidden="true" className="size-3.5" />
-            </a>
-          </div>
-        </aside>
       </div>
-
-      <dl className="mt-8 grid border-y border-glass-border sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
-        {profile.stats.map((stat) => (
-          <div key={stat.label} className="flex items-baseline justify-between gap-4 border-b border-glass-border py-3.5 sm:block sm:border-r sm:px-5 sm:py-4 sm:first:pl-0 lg:border-b-0 lg:last:border-r-0 lg:last:pr-0">
-            <dt className="max-w-40 text-xs leading-relaxed text-muted sm:mt-1">{stat.label}</dt>
-            <dd className="order-first text-lg font-semibold tabular-nums sm:text-xl">{stat.value}</dd>
-          </div>
-        ))}
-      </dl>
     </section>
   );
 }

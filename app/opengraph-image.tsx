@@ -40,7 +40,7 @@ export default function OpenGraphImage() {
           <span>{siteConfig.contact.website}</span>
         </div>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
             style={{
               display: "flex",
@@ -48,6 +48,7 @@ export default function OpenGraphImage() {
               fontWeight: 700,
               lineHeight: 1,
               letterSpacing: "-0.04em",
+              textTransform: "uppercase",
             }}
           >
             {siteConfig.name}
@@ -60,9 +61,19 @@ export default function OpenGraphImage() {
               fontSize: 35,
               lineHeight: 1.25,
               letterSpacing: "-0.02em",
+              textTransform: "uppercase",
             }}
           >
-            Customer Service · Operations · Digital Support
+            PERSONAL PORTFOLIO
+          </div>
+          <div
+            style={{
+              display: "flex",
+              color: "#aaaab2",
+              fontSize: 28,
+            }}
+          >
+            Digital products · Community systems · Automation
           </div>
         </div>
 

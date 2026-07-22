@@ -1,39 +1,74 @@
-import { Project } from "@/types";
+import type { Project } from "@/types/portfolio";
 
 export const projects: Project[] = [
   {
     slug: "norden",
     title: "NORDEN",
-    category: "Discord Bot",
+    category: "Bots",
+    displayCategory: "Discord Bot",
     status: "In Development",
-    shortDescription: "A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.",
+    description:
+      "A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.",
     role: "Product Development & Full-Stack Engineering",
     technologies: ["Python", "discord.py", "PostgreSQL", "Redis"],
-    cardTechnologies: ["Python", "discord.py", "PostgreSQL"]
+    featuredTechnologies: ["Python", "discord.py", "PostgreSQL"],
+    featured: true,
+    published: true,
+    sortOrder: 1,
   },
   {
     slug: "way-2-eternal-bot",
     title: "Way 2 Eternal Bot",
+    category: "Bots",
+    displayCategory: "Discord Bot",
     status: "Active Development",
-    shortDescription: "Discord community system for operations support, transaction workflows, and moderation utilities.",
-    role: "Bot development and system maintenance",
-    technologies: ["Python", "Discord API"]
+    description:
+      "A Discord community bot combining AI-powered interactions, RPG and economy systems, community utilities, and structured transaction workflows.",
+    role: "Bot Development & System Maintenance",
+    technologies: ["Python", "discord.py", "aiosqlite", "Gemini API"],
+    featured: true,
+    published: true,
+    sortOrder: 2,
   },
   {
     slug: "middleman",
     title: "Middleman",
+    category: "Services",
     status: "Active Service",
-    shortDescription: "Buyer–seller transaction assistance, coordinating payments and resolving disputes.",
+    description:
+      "Structured buyer-seller transaction coordination, providing reliable record handling, dispute support, and customer communication. Completed 500+ buyer-seller transactions.",
     role: "Middleman / transaction handling",
-    technologies: ["Discord", "Spreadsheets"]
+    technologies: ["Discord", "Spreadsheets"],
+    featured: true,
+    published: true,
+    sortOrder: 3,
   },
   {
     slug: "mandalawangi-outbound",
     title: "Mandalawangi Outbound",
+    category: "Websites",
     status: "Completed · Live",
-    shortDescription: "Developed the Mandalawangi Outbound website to serve as the company’s information platform.",
+    description:
+      "Developed the Mandalawangi Outbound website to serve as the company’s information platform.",
     role: "Website Development",
     technologies: ["Next.js", "Tailwind CSS"],
-    liveUrl: "https://mandalawangioutbound.com"
-  }
+    projectUrl: "https://mandalawangioutbound.com",
+    featured: true,
+    published: true,
+    sortOrder: 4,
+  },
+  {
+    slug: "norden-finance",
+    title: "Norden Finance",
+    category: "Websites",
+    displayCategory: "AI-Powered Personal Finance Platform",
+    status: "Archived · No Longer Maintained",
+    description:
+      "A full-stack personal finance platform with wallet management, budgeting, analytics, automation, and Gemini-powered transaction capture and receipt extraction.",
+    role: "Product Development, Full-Stack Engineering & AI Integration",
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Gemini API"],
+    featured: false,
+    published: true,
+    sortOrder: 5,
+  },
 ];

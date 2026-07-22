@@ -1,4 +1,5 @@
 import { siteConfig } from "@/content/site";
+import type { ProfilePhoto } from "@/types/portfolio";
 
 export const profile = {
   name: siteConfig.name,
@@ -9,6 +10,7 @@ export const profile = {
   opportunityNote: "Open to on-site, remote, and project-based opportunities.",
   opportunityModes: ["On-site", "Remote", "Project-based"],
   location: siteConfig.location.label,
+  profilePhoto: null as ProfilePhoto | null,
   stats: [
     { label: "Buyer–Seller Transactions", value: "500+" },
     { label: "Academic GPA", value: "3.80 / 4.00" },
@@ -16,10 +18,11 @@ export const profile = {
     { label: "MikroTik Training Activity Score", value: "88" },
   ],
   about: [
-    "Zaidaan Zalfaa is a Computer and Network Engineering graduate based in Cianjur, West Java, Indonesia. He has hands-on experience in customer service, online transaction handling, community operations, administrative support, and order and website management for small digital businesses.",
-    "He has completed more than 500 buyer–seller transactions as a trading middleman for an online community, responded to customer and member inquiries, and assisted in resolving order, payment, and transaction-related issues.",
-    "Zaidaan also has experience in event facilitation, basic IT troubleshooting, website development, computer networking, and Python-based automation. He is comfortable working independently, communicating directly with customers and partners, and supporting day-to-day operations in digital and on-site environments."
+    "I’m a Computer and Network Engineering graduate based in Cianjur, West Java, with hands-on experience across community operations, digital transactions, customer support, website and order management, automation, and basic IT support.",
+    "My work includes managing buyer-seller transactions, helping resolve day-to-day customer and community issues, operating online services, and building practical Telegram and Discord bot systems."
   ],
+  aiWorkflow: "I use modern tools, including AI-assisted workflows, to support research, development, documentation, and quality review.",
+  aboutEvidence: "Through community middleman operations, I have completed 500+ buyer-seller transactions.",
   capabilityTags: [
     "Customer Service",
     "Community Operations",

@@ -1,8 +1,13 @@
-export const education = {
-  school: "SMKN 1 Pacet",
-  location: "Cianjur, Indonesia",
-  period: "2020 – 2023",
-  qualification: "High School Diploma",
-  major: "Computer and Network Engineering",
-  gpa: "3.80 / 4.00"
-};
+import type { Education } from "@/types/portfolio";
+
+export const education: readonly Education[] = [
+  {
+    institution: "SMKN 1 Pacet",
+    program: "Computer and Network Engineering",
+    startYear: "2020",
+    endYear: "2023",
+    gradeLabel: "GPA",
+    gradeValue: "3.80/4.00",
+    sortOrder: 1,
+  },
+];

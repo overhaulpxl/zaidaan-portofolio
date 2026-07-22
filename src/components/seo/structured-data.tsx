@@ -11,8 +11,8 @@ const structuredData = {
       "@id": personId,
       name: siteConfig.name,
       url: siteConfig.url,
+      description: "Digital products, community systems, automation, community operations, and technical work.",
       email: `mailto:${siteConfig.contact.email}`,
-      jobTitle: siteConfig.positioning,
       address: {
         "@type": "PostalAddress",
         addressLocality: siteConfig.location.locality,
@@ -32,7 +32,7 @@ const structuredData = {
     {
       "@type": "WebSite",
       "@id": websiteId,
-      name: siteConfig.applicationName,
+      name: `${siteConfig.name} — Personal Portfolio`,
       url: siteConfig.url,
       description: siteConfig.seo.description,
       inLanguage: siteConfig.language,

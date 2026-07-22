@@ -10,28 +10,32 @@ import { EducationSection } from "@/components/sections/education-certifications
 import { ContactSection } from "@/components/sections/contact";
 import { Footer } from "@/components/layout/footer";
 import { StructuredData } from "@/components/seo/structured-data";
+import { CriticalReadinessLoader } from "@/components/layout/critical-readiness-loader";
 
 export default function Home() {
   return (
     <>
       <StructuredData />
-      <a href="#main-content" className="skip-link">
-        Skip to content
-      </a>
-      <GlassNavbar />
-      <main id="main-content" className="w-full flex-1 overflow-x-clip pb-20" tabIndex={-1}>
-        <Container className="relative">
-          <HeroSection />
-          <AboutSection />
-          <ProjectsSection />
-          <ExperienceSection />
-          <SkillsSection />
-          <ToolsSection />
-          <EducationSection />
-          <ContactSection />
-        </Container>
-      </main>
-      <Footer />
+      <CriticalReadinessLoader />
+      <div id="top" className="flex min-h-full flex-col">
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        <GlassNavbar />
+        <main id="main-content" className="w-full flex-1 overflow-x-clip pb-20" tabIndex={-1}>
+          <Container className="relative">
+            <HeroSection />
+            <AboutSection />
+            <ProjectsSection />
+            <ExperienceSection />
+            <SkillsSection />
+            <ToolsSection />
+            <EducationSection />
+            <ContactSection />
+          </Container>
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

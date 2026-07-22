@@ -1,62 +1,66 @@
-import { Experience } from "@/types";
+import type { Experience } from "@/types/portfolio";
 
-export const experiences: Experience[] = [
+export const experiences: readonly Experience[] = [
   {
     company: "Way 2 Eternal Community",
     role: "Community Operations & Transactions",
-    period: "Nov 2025 – Present",
-    employment: "Part-time · Remote / Self-managed",
-    context: "Discord-based online trading and community platform",
+    arrangement: "Part-time · Remote / Self-managed",
+    startDate: "Nov 2025",
+    endDate: "Present",
     responsibilities: [
-      "Acted as a transaction middleman for a Discord-based online trading community, completing 500+ buyer-seller transactions.",
-      "Responded to member inquiries and helped resolve disputes between buyers and sellers.",
-      "Coordinated a partnership with Bloxistry and worked with a Shopee affiliate marketing analyst to distribute promotional vouchers.",
-      "Recorded transaction details and tracked basic finance-related activity for the community."
-    ]
+      "Managed and coordinated buyer-seller transactions for a Discord-based online trading community.",
+      "Responded to member inquiries and supported dispute resolution between buyers and sellers.",
+      "Supported the Bloxistry partnership and Shopee affiliate voucher activities.",
+      "Maintained transaction records and supported basic financial administration."
+    ],
+    sortOrder: 1
   },
   {
     company: "NXRDEN Store",
     role: "Website & Order Management",
-    period: "Nov 2025 – May 2026",
-    employment: "Part-time · Remote / Self-managed",
-    context: "Online Robux top-up store",
+    arrangement: "Part-time · Remote / Self-managed",
+    startDate: "Nov 2025",
+    endDate: "May 2026",
     responsibilities: [
-      "Managed daily operations of an online Robux top-up store, from order intake to delivery.",
-      "Processed customer orders and payments, and confirmed accurate, on-time delivery.",
-      "Responded to customer questions and responded to customer questions and resolved order or payment issues."
-    ]
+      "Supported daily operations for an online Robux store, including website, order, payment, and delivery workflows.",
+      "Processed customer orders and checked payment information.",
+      "Responded to customer questions and helped resolve order or payment issues."
+    ],
+    sortOrder: 2
   },
   {
     company: "Seraphim Robux Store",
     role: "Customer Service & Order Processing",
-    period: "Feb 2026 – Mar 2026",
-    employment: "Part-time · Remote",
-    context: "Online Robux top-up store",
+    startDate: "Feb 2026",
+    endDate: "Mar 2026",
     responsibilities: [
-      "Answered customer questions and processed daily orders for an online Robux store.",
-      "Checked transaction details before fulfilling orders to avoid mistakes.",
-      "Built a Python-based Telegram bot to automate order tracking, cutting down on manual reporting."
-    ]
+      "Processed customer orders and checked transaction information before fulfillment.",
+      "Communicated with customers about order progress and issues.",
+      "Built a Python-based Telegram bot to automate order tracking."
+    ],
+    sortOrder: 3
   },
   {
     company: "Mandalawangi Outbound",
     role: "Event Facilitator",
-    period: "Sep 2022 – Oct 2023",
-    context: "Outbound training and corporate team-building events",
+    startDate: "Sep 2022",
+    endDate: "Oct 2023",
     responsibilities: [
-      "Guided participants through outbound and team-building activities, briefing groups and keeping sessions on schedule.",
-      "Monitored participant safety during activities and kept event documentation and on-site logistics organized.",
-      "Developed the MAP OBM website to serve as the company’s information platform."
-    ]
+      "Facilitated outbound and team-building activities.",
+      "Supported participant safety and event logistics.",
+      "Developed the MAP OBM website as the company’s information platform."
+    ],
+    sortOrder: 4
   },
   {
     company: "JP.Computindo",
-    role: "IT Intern (IT Team & Archive)",
-    period: "Mar 2022 – Jun 2023",
-    context: "A private company engaged in computer services, sales, and maintenance",
+    role: "IT Intern",
+    startDate: "Mar 2022",
+    endDate: "Jun 2023",
     responsibilities: [
-      "Diagnosed and fixed hardware issues on office PCs, printers, and other equipment.",
-      "Installed software and set up systems for daily office use, and provided basic technical support to staff."
-    ]
+      "Performed basic troubleshooting for office PCs and printers.",
+      "Installed software, supported system setup, and provided basic office IT support."
+    ],
+    sortOrder: 5
   }
 ];

@@ -40,7 +40,7 @@ const whatsappMessage =
 export const siteConfig: SiteConfig = {
   url: "https://zaidaan.my.id",
   name: "Zaidaan Zalfaa",
-  applicationName: "Zaidaan Zalfaa Portfolio",
+  applicationName: "Personal Portfolio",
   positioning: "Customer Service, Operations & Digital Support",
   location: {
     label: "Cianjur, West Java, Indonesia",
@@ -51,10 +51,10 @@ export const siteConfig: SiteConfig = {
   locale: "en_US",
   language: "en",
   seo: {
-    title: "Zaidaan Zalfaa — Customer Service, Operations & Digital Support",
-    titleTemplate: "%s | Zaidaan Zalfaa",
+    title: "Zaidaan Zalfaa — Personal Portfolio",
+    titleTemplate: "%s | Zaidaan Zalfaa — Personal Portfolio",
     description:
-      "Portfolio of Zaidaan Zalfaa, a Computer and Network Engineering graduate with experience in customer service, community operations, digital transactions, website management, IT support, and practical automation.",
+      "Personal portfolio of Zaidaan Zalfaa, featuring practical digital products, community systems, automation, operations, and technical work.",
     keywords: [
       "Zaidaan Zalfaa",
       "customer service",
@@ -73,7 +73,7 @@ export const siteConfig: SiteConfig = {
     email: "zaidaan1337@gmail.com",
     website: "zaidaan.my.id",
     whatsappMessage,
-    whatsappUrl: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
+    whatsappUrl: `https://wa.me/${whatsappNumber}`,
   },
   socials: {
     github: "https://github.com/overhaulpxl",

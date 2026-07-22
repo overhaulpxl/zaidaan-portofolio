@@ -5,42 +5,68 @@ export type ProjectStatus =
   | "Completed · Live"
   | "Private Project"
   | "Paused"
+  | "Archived · No Longer Maintained"
   | "Archived";
+
+export type ProjectCategory =
+  | "Bots"
+  | "Websites"
+  | "Services"
+  | "Automation"
+  | "Community Systems";
+
+export type ProjectMedia = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
 
 export interface Project {
   slug: string;
   title: string;
-  category?: string;
+  category: ProjectCategory;
+  displayCategory?: string;
   status: ProjectStatus;
-  shortDescription: string;
+  description: string;
   role: string;
-  technologies: string[];
-  cardTechnologies?: string[];
-  liveUrl?: string;
-  githubUrl?: string;
+  technologies: readonly string[];
+  featuredTechnologies?: readonly string[];
+  year?: string;
+  featured: boolean;
+  published: boolean;
+  sortOrder: number;
+  projectUrl?: string | null;
+  repositoryUrl?: string | null;
+  media?: ProjectMedia | null;
 }
 
-export interface Experience {
+export type Experience = {
   company: string;
   role: string;
-  period: string;
-  employment?: string;
-  context: string;
-  responsibilities: string[];
-}
+  arrangement?: string;
+  startDate: string;
+  endDate: string | "Present";
+  responsibilities: readonly string[];
+  sortOrder: number;
+};
 
-export interface Skill {
-  category: "Core & Operations" | "Technical Skills";
+export type SkillGroup = {
+  title: string;
+  skills: readonly SkillItem[];
+  sortOrder: number;
+};
+
+export type SkillItem = {
   name: string;
-  evidence: string;
-  badge?: string;
-}
+};
 
 export type ToolCategory =
-  | "Operations & Communication"
-  | "Development & Automation"
-  | "Networking & IT"
-  | "Creative";
+  | "Operations"
+  | "Development"
+  | "Networking"
+  | "Creative"
+  | "AI & Automation";
 
 export type ToolIconKey =
   | "discord"
@@ -59,21 +85,62 @@ export type ToolIconKey =
   | "photoshop"
   | "affinity"
   | "canva"
-  | "capcut";
+  | "capcut"
+  | "chatgpt"
+  | "codex"
+  | "claude"
+  | "gemini"
+  | "antigravity";
 
-export interface Tool {
-  category: ToolCategory;
-  name: string;
-  icon: ToolIconKey;
-}
-
-export interface Certificate {
+export type ToolGroup = {
   title: string;
-  issuer: string;
-  issued: string;
-  result?: string;
+  tools: readonly Tool[];
+  sortOrder: number;
+};
+
+export type Tool = {
+  name: string;
+  iconKey?: ToolIconKey;
+  sortOrder: number;
+};
+
+export type Education = {
+  institution: string;
+  program: string;
+  startYear: string;
+  endYear: string;
+  gradeLabel?: string;
+  gradeValue?: string;
+  description?: string;
+  sortOrder: number;
+};
+
+export type Certification = {
+  title: string;
+  issuer?: string;
+  issuedLabel: string;
+  issuedDate?: string;
+  level?: string;
+  scoreLabel?: string;
+  scoreValue?: string;
   duration?: string;
-  activityScore?: string;
-  competencies?: string[];
-  certificateUrl?: string;
-}
+  documentUrl?: string | null;
+  published: boolean;
+  sortOrder: number;
+};
+
+export type Organization = {
+  name: string;
+  role: string;
+  period?: string;
+  description?: string;
+  sortOrder: number;
+};
+
+export type ProfilePhoto = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  focalPoint?: string;
+};
