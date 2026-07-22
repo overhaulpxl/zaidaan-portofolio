@@ -8,8 +8,8 @@ export function EducationSection() {
   const sortedCertifications = [...certificates]
     .filter((c) => c.published)
     .sort((a, b) => a.sortOrder - b.sortOrder);
+  const sortedEducation = [...education].sort((a, b) => a.sortOrder - b.sortOrder);
   const sortedOrganizations = [...organizations].sort((a, b) => a.sortOrder - b.sortOrder);
-  const primaryEducation = education[0];
 
   return (
     <>
@@ -22,26 +22,38 @@ export function EducationSection() {
               <h2 id="education-heading" className="text-xl font-semibold tracking-[-0.02em]">Education</h2>
             </div>
 
-            <article className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end">
-              <div>
-                <h3 className="text-[clamp(2rem,4vw,3.75rem)] font-semibold leading-none tracking-[-0.035em] text-foreground">
-                  {primaryEducation.institution}
-                </h3>
-                <p className="mt-4 text-lg text-foreground">{primaryEducation.program}</p>
-                <p className="mt-2 text-sm font-medium text-muted">
-                  <time>{primaryEducation.startYear}</time>–<time>{primaryEducation.endYear}</time>
-                </p>
-              </div>
-
-              {primaryEducation.gradeLabel && primaryEducation.gradeValue && (
-                <dl className="border-y border-glass-border py-4">
-                  <div className="flex items-baseline justify-between gap-4">
-                    <dt className="text-sm font-medium text-muted">{primaryEducation.gradeLabel}</dt>
-                    <dd className="text-xl font-semibold tabular-nums text-foreground">{primaryEducation.gradeValue}</dd>
+            <div className="divide-y divide-glass-border border-b border-glass-border">
+              {sortedEducation.map((record) => (
+                <article
+                  key={record.institution}
+                  className="grid gap-6 py-6 sm:py-8 lg:grid-cols-[minmax(0,1fr)_18rem] lg:items-end"
+                >
+                  <div>
+                    <h3 className="text-[clamp(2rem,4vw,3.75rem)] font-semibold leading-none tracking-[-0.035em] text-foreground">
+                      {record.institution}
+                    </h3>
+                    <p className="mt-4 text-lg text-foreground">{record.program}</p>
+                    <p className="mt-2 text-sm font-medium text-muted">
+                      <time>{record.startYear}</time>–<time>{record.endYear}</time>
+                    </p>
+                    {record.description && (
+                      <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">
+                        {record.description}
+                      </p>
+                    )}
                   </div>
-                </dl>
-              )}
-            </article>
+
+                  {record.gradeLabel && record.gradeValue && (
+                    <dl className="border-y border-glass-border py-4">
+                      <div className="flex items-baseline justify-between gap-4">
+                        <dt className="text-sm font-medium text-muted">{record.gradeLabel}</dt>
+                        <dd className="text-xl font-semibold tabular-nums text-foreground">{record.gradeValue}</dd>
+                      </div>
+                    </dl>
+                  )}
+                </article>
+              ))}
+            </div>
           </section>
 
           <section id="certifications" aria-labelledby="certifications-heading">
