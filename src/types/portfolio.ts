@@ -22,11 +22,23 @@ export type ProjectMedia = {
   height: number;
 };
 
+export type ProjectFilterType =
+  | "All"
+  | "Bots"
+  | "Websites"
+  | "Services"
+  | "Automation"
+  | "Community Systems";
+
+export type ProjectLink = {
+  label: string;
+  href: string;
+};
 export interface Project {
   slug: string;
   title: string;
-  category: ProjectCategory;
-  displayCategory?: string;
+  category: string;
+  filters?: readonly ProjectFilterType[];
   status: ProjectStatus;
   description: string;
   role: string;
@@ -36,8 +48,7 @@ export interface Project {
   featured: boolean;
   published: boolean;
   sortOrder: number;
-  projectUrl?: string | null;
-  repositoryUrl?: string | null;
+  links?: readonly ProjectLink[];
   media?: ProjectMedia | null;
 }
 

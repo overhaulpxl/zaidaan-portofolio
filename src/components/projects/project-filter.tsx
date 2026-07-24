@@ -1,10 +1,10 @@
 "use client";
 
-import type { ProjectCategory } from "@/types/portfolio";
+import type { ProjectFilterType } from "@/types/portfolio";
 import { cn } from "@/lib/utils";
 import { LiquidGlassSurface } from "@/components/glass/liquid-glass-surface";
 
-const CATEGORIES: ("All" | ProjectCategory)[] = [
+const CATEGORIES: ProjectFilterType[] = [
   "All",
   "Bots",
   "Websites",
@@ -14,8 +14,8 @@ const CATEGORIES: ("All" | ProjectCategory)[] = [
 ];
 
 interface ProjectFilterProps {
-  activeCategory: "All" | ProjectCategory;
-  onCategoryChange: (category: "All" | ProjectCategory) => void;
+  activeCategory: ProjectFilterType;
+  onCategoryChange: (category: ProjectFilterType) => void;
 }
 
 export function ProjectFilter({ activeCategory, onCategoryChange }: ProjectFilterProps) {

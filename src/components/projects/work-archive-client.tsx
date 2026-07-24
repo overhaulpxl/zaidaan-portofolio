@@ -3,19 +3,19 @@
 import { useState, useMemo } from "react";
 import { ProjectCard } from "@/components/ui/project-card";
 import { ProjectFilter } from "@/components/projects/project-filter";
-import type { Project, ProjectCategory } from "@/types/portfolio";
+import type { Project, ProjectFilterType } from "@/types/portfolio";
 
 interface WorkArchiveClientProps {
   initialProjects: Project[];
 }
 
 export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
-  const [activeCategory, setActiveCategory] = useState<"All" | ProjectCategory>("All");
+  const [activeCategory, setActiveCategory] = useState<ProjectFilterType>("All");
 
   const filteredProjects = useMemo(() => {
     return activeCategory === "All"
       ? initialProjects
-      : initialProjects.filter((p) => p.category === activeCategory);
+      : initialProjects.filter((p) => p.filters?.includes(activeCategory) ?? p.category === activeCategory);
   }, [initialProjects, activeCategory]);
 
   const selectedWork = filteredProjects

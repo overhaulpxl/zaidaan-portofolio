@@ -15,7 +15,7 @@ export function ProjectCard({ project, variant = "featured", index }: ProjectCar
       <div className="mb-8 flex items-start justify-between gap-4">
         <div className="min-w-0">
           <p className="mb-2 text-sm font-medium text-muted">
-            {project.displayCategory ?? project.category}
+            {project.category}
           </p>
           <h3 className="text-2xl font-semibold tracking-[-0.025em] sm:text-3xl">{project.title}</h3>
         </div>
@@ -35,26 +35,17 @@ export function ProjectCard({ project, variant = "featured", index }: ProjectCar
           <span className="rounded-full bg-foreground/[0.06] px-3 py-1.5 text-xs font-semibold">
             {project.status}
           </span>
-          {project.projectUrl && (
+          {project.links?.map((link) => (
             <a
-              href={project.projectUrl}
+              key={link.href}
+              href={link.href}
               target="_blank"
               rel="noopener noreferrer"
               className="focus-ring inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-semibold"
             >
-              Visit Project <ArrowUpRight aria-hidden="true" className="size-4" />
+              {link.label} <ArrowUpRight aria-hidden="true" className="size-4" />
             </a>
-          )}
-          {project.repositoryUrl && !project.projectUrl && (
-            <a
-              href={project.repositoryUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="focus-ring inline-flex min-h-11 items-center gap-1 rounded-md text-sm font-semibold"
-            >
-              View Repository <ArrowUpRight aria-hidden="true" className="size-4" />
-            </a>
-          )}
+          ))}
         </div>
 
         <div>

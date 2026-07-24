@@ -19,6 +19,8 @@ const NAV_LINKS = [
   { href: "/#work", hash: "#work", label: "Work" },
   { href: "/#experience", hash: "#experience", label: "Experience" },
   { href: "/#skills", hash: "#skills", label: "Skills" },
+  { href: "/#tools", hash: "#tools", label: "Tools" },
+  { href: "/#education", hash: "#education", label: "Education" },
   { href: "/#contact", hash: "#contact", label: "Contact" },
 ] as const;
 
