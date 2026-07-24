@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>02-experience-desktop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f3f4",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454748",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#e1e3e4",
+                        "primary-container": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "surface": "#f9f9f9",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-bright": "#f9f9f9",
+                        "secondary": "#5c5f60",
+                        "primary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#4c4546",
+                        "on-primary-container": "#848484",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-tint": "#5e5e5e",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#626566",
+                        "outline-variant": "#cfc4c5",
+                        "outline": "#7e7576",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "surface-container": "#eeeeee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#7e848c",
+                        "tertiary-container": "#161c22",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-secondary-fixed": "#191c1d",
+                        "inverse-primary": "#c6c6c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-page": "5vw",
+                        "hairline": "1px",
+                        "gutter-grid": "2rem",
+                        "section-gap": "12rem"
+                    },
+                    "fontFamily": {
+                        "metadata": ["Inter"],
+                        "nav-control": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-xl": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "editorial-subtitle": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "metadata": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "nav-control": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "display-xl": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "editorial-subtitle": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["80px", { "lineHeight": "84px", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background border-b border-tertiary dark:border-tertiary-fixed-dim flex justify-between items-center w-full px-margin-page py-6 z-50 sticky top-0">
+<a class="font-nav-control text-nav-control font-black tracking-tighter text-primary dark:text-primary-fixed uppercase" href="#">ZAIDAAN ZALFAA</a>
+<nav class="hidden md:flex gap-8 font-nav-control text-nav-control uppercase">
+<!-- No active state needed here as it's not a top-level dest in the JSON, but rendering shell per JSON -->
+</nav>
+<button class="cursor-pointer active:scale-95 transition-transform hover:opacity-50 duration-300">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed" style="font-variation-settings: 'FILL' 0;">menu</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow w-full max-w-[1920px] mx-auto px-margin-page py-section-gap">
+<div class="w-full max-w-5xl mx-auto flex flex-col">
+<!-- Header Section -->
+<div class="mb-12 lg:mb-16 border-b border-tertiary pb-4">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest block mb-4">CHAPTER 02 / EXPERIENCE</span>
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">EXPERIENCE</h2>
+</div>
+<!-- Chronology List -->
+<div class="flex flex-col w-full">
+<!-- Entry 1 -->
+<div class="w-full border-b border-tertiary py-6 lg:py-8 flex flex-col gap-1 group hover:bg-surface transition-colors duration-300">
+<div class="flex justify-between items-baseline w-full mb-1">
+<h3 class="font-editorial-subtitle text-editorial-subtitle text-primary m-0 p-0">Senior Art Director</h3>
+<span class="font-metadata text-metadata text-secondary text-right shrink-0 ml-4">2021 — PRESENT</span>
+</div>
+<p class="font-nav-control text-nav-control text-primary uppercase m-0 p-0 mb-3">STUDIO ARCHETYPE</p>
+<p class="font-body-md text-body-md text-secondary m-0 p-0 max-w-4xl">
+                            Directed global brand campaigns focusing on structural typography and minimalist execution. Led a multidisciplinary team to redefine the digital presence of premium architectural firms, ensuring a rigid adherence to the Swiss International Typographic Style across all touchpoints.
+                        </p>
+</div>
+<!-- Entry 2 -->
+<div class="w-full border-b border-tertiary py-6 lg:py-8 flex flex-col gap-1 group hover:bg-surface transition-colors duration-300">
+<div class="flex justify-between items-baseline w-full mb-1">
+<h3 class="font-editorial-subtitle text-editorial-subtitle text-primary m-0 p-0">Lead Interactive Designer</h3>
+<span class="font-metadata text-metadata text-secondary text-right shrink-0 ml-4">2018 — 2021</span>
+</div>
+<p class="font-nav-control text-nav-control text-primary uppercase m-0 p-0 mb-3">MONOLITH DIGITAL</p>
+<p class="font-body-md text-body-md text-secondary m-0 p-0 max-w-4xl">
+                            Pioneered high-contrast, flat UI systems for enterprise financial platforms. Stripped away skeuomorphic elements in favor of raw information hierarchy. Designed bespoke grid systems that utilized dramatic whitespace and asynchronous layouts to guide user focus objectively.
+                        </p>
+</div>
+<!-- Entry 3 -->
+<div class="w-full border-b border-tertiary py-6 lg:py-8 flex flex-col gap-1 group hover:bg-surface transition-colors duration-300">
+<div class="flex justify-between items-baseline w-full mb-1">
+<h3 class="font-editorial-subtitle text-editorial-subtitle text-primary m-0 p-0">Typographic Researcher</h3>
+<span class="font-metadata text-metadata text-secondary text-right shrink-0 ml-4">2015 — 2018</span>
+</div>
+<p class="font-nav-control text-nav-control text-primary uppercase m-0 p-0 mb-3">BASEL INSTITUTE OF DESIGN</p>
+<p class="font-body-md text-body-md text-secondary m-0 p-0 max-w-4xl">
+                            Conducted foundational research on legibility and scale shifts in digital environments. Published whitepapers on the application of 20th-century modernist principles to modern responsive web layouts, emphasizing structural integrity over decorative embellishment.
+                        </p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-background dark:bg-background border-t border-tertiary dark:border-tertiary-fixed-dim flex flex-col md:flex-row justify-between items-start md:items-center w-full px-margin-page py-12 mt-section-gap">
+<div class="font-nav-control text-nav-control font-black text-primary mb-8 md:mb-0">
+            ZAIDAAN ZALFAA
+        </div>
+<div class="flex gap-8 mb-8 md:mb-0">
+<a class="font-metadata text-metadata uppercase text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">INDEX</a>
+<a class="font-metadata text-metadata uppercase text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">ARCHIVE</a>
+<a class="font-metadata text-metadata uppercase text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">ABOUT</a>
+<a class="font-metadata text-metadata uppercase text-secondary dark:text-secondary-fixed-dim hover:text-primary dark:hover:text-primary-fixed transition-colors duration-200" href="#">CONTACT</a>
+</div>
+<div class="font-metadata text-metadata uppercase text-primary dark:text-primary-fixed">
+            © 2024 ZAIDAAN ZALFAA. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

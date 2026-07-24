@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>00-entry-mobile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e2e2e2",
+                      "surface-container-high": "#e8e8e8",
+                      "on-primary-fixed": "#1b1b1b",
+                      "tertiary": "#000000",
+                      "tertiary-container": "#161c22",
+                      "on-surface": "#1a1c1c",
+                      "secondary": "#5c5f60",
+                      "secondary-fixed-dim": "#c5c7c8",
+                      "primary-container": "#1b1b1b",
+                      "inverse-on-surface": "#f0f1f1",
+                      "outline-variant": "#cfc4c5",
+                      "tertiary-fixed": "#dde3eb",
+                      "on-secondary-fixed-variant": "#454748",
+                      "on-primary": "#ffffff",
+                      "on-secondary-fixed": "#191c1d",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container-low": "#f3f3f4",
+                      "surface-dim": "#dadada",
+                      "outline": "#7e7576",
+                      "on-primary-fixed-variant": "#474747",
+                      "primary": "#000000",
+                      "on-tertiary-fixed-variant": "#41474e",
+                      "secondary-container": "#e1e3e4",
+                      "surface": "#f9f9f9",
+                      "on-error": "#ffffff",
+                      "on-secondary-container": "#626566",
+                      "error": "#ba1a1a",
+                      "inverse-primary": "#c6c6c6",
+                      "surface-bright": "#f9f9f9",
+                      "on-secondary": "#ffffff",
+                      "surface-variant": "#e2e2e2",
+                      "on-background": "#1a1c1c",
+                      "on-error-container": "#93000a",
+                      "surface-tint": "#5e5e5e",
+                      "error-container": "#ffdad6",
+                      "on-primary-container": "#848484",
+                      "secondary-fixed": "#e1e3e4",
+                      "on-tertiary-fixed": "#161c22",
+                      "inverse-surface": "#2f3131",
+                      "surface-container": "#eeeeee",
+                      "primary-fixed-dim": "#c6c6c6",
+                      "background": "#f9f9f9",
+                      "on-surface-variant": "#4c4546",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-container": "#7e848c",
+                      "primary-fixed": "#e2e2e2",
+                      "tertiary-fixed-dim": "#c1c7cf"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-gap": "12rem",
+                      "margin-page": "5vw",
+                      "hairline": "1px",
+                      "gutter-grid": "2rem"
+              },
+              "fontFamily": {
+                      "editorial-subtitle": [
+                              "Montserrat"
+                      ],
+                      "display-xl": [
+                              "Montserrat"
+                      ],
+                      "nav-control": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Montserrat"
+                      ],
+                      "headline-lg": [
+                              "Montserrat"
+                      ],
+                      "metadata": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "editorial-subtitle": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-xl": [
+                              "120px",
+                              {
+                                      "lineHeight": "110px",
+                                      "letterSpacing": "-0.04em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "nav-control": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.1em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "letterSpacing": "0em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "48px",
+                              {
+                                      "lineHeight": "52px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "headline-lg": [
+                              "80px",
+                              {
+                                      "lineHeight": "84px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "900"
+                              }
+                      ],
+                      "metadata": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-family: 'Material Symbols Outlined';
+          font-weight: normal;
+          font-style: normal;
+          font-size: 24px;
+          line-height: 1;
+          letter-spacing: normal;
+          text-transform: none;
+          display: inline-block;
+          white-space: nowrap;
+          word-wrap: normal;
+          direction: ltr;
+          font-feature-settings: 'liga';
+          -webkit-font-feature-settings: 'liga';
+          -webkit-font-smoothing: antialiased;
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface flex flex-col min-h-screen font-body-md overflow-x-hidden selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-page py-8 bg-transparent flat no shadows transition-all duration-300">
+<div class="font-display-xl text-metadata uppercase tracking-widest text-primary dark:text-on-primary flex flex-col">
+<span>ZAIDAAN ZALFAA</span>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Menu" class="text-primary dark:text-on-primary hover:opacity-70 transition-opacity Active: scale-95 transition-transform flex items-center justify-center p-2 group">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- SideNavBar / Overlay (Hidden by default, structure provided per instructions, assuming it functions as full-screen menu on mobile based on design rules) -->
+<nav class="hidden fixed inset-0 z-[60] bg-surface dark:bg-tertiary-container flex-col justify-center items-start px-margin-page h-full w-full flat no shadows">
+<!-- Tab implementation omitted as it's typically hidden and revealed via JS not specified in prompt, focusing on entry screen -->
+</nav>
+<!-- Main Entry Content -->
+<main class="flex-grow flex flex-col justify-between px-margin-page pt-32 pb-12 min-h-[884px]">
+<!-- Top Section -->
+<div class="flex flex-col gap-6">
+<div class="flex flex-col">
+<div class="w-full h-hairline bg-tertiary mb-2"></div>
+<div class="flex justify-between items-center text-secondary font-metadata text-metadata uppercase">
+<span>CHAPTER 00: ENTRY</span>
+<span>PERSONAL PORTFOLIO</span>
+</div>
+</div>
+<!-- Massive Headline -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase break-words hyphens-auto max-w-full leading-[0.9]">
+                ZAIDAAN<br/>ZALFAA
+            </h1>
+</div>
+<!-- Middle Section - Asymmetrical placement -->
+<div class="flex flex-col gap-8 self-end max-w-[85%] mt-12 mb-12">
+<p class="font-body-md text-body-md text-on-surface">
+                Building practical digital products, community systems, and automation.
+            </p>
+<p class="font-body-md text-body-md text-secondary">
+                Based in Cianjur, West Java, Indonesia.
+            </p>
+<div class="flex flex-col gap-4 mt-4 w-full">
+<button class="bg-primary text-on-primary font-nav-control text-nav-control uppercase py-4 px-6 text-center w-full transition-colors hover:bg-tertiary-container active:scale-[0.98]">
+                    View Selected Work
+                </button>
+<button class="bg-transparent text-primary font-nav-control text-nav-control uppercase py-4 px-6 text-center w-full border border-primary transition-colors hover:bg-primary hover:text-on-primary active:scale-[0.98]">
+                    Download CV
+                </button>
+</div>
+</div>
+<!-- Bottom Section -->
+<div class="flex flex-col items-center gap-2 mt-auto self-center opacity-80 cursor-pointer animate-pulse group">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest text-center">
+                SCROLL TO BEGIN THE JOURNEY
+            </span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-y-1 transition-transform duration-300" data-icon="arrow_downward">arrow_downward</span>
+</div>
+</main>
+<!-- Decorative Grid Line (Architectural detail) -->
+<div class="fixed left-margin-page top-0 bottom-0 w-hairline bg-surface-container-highest -z-10 opacity-30"></div>
+<div class="fixed right-margin-page top-0 bottom-0 w-hairline bg-surface-container-highest -z-10 opacity-30"></div>
+<script>
+        // Simple JS for header background on scroll if needed later, though prompt asks for white space.
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('bg-surface', 'bg-opacity-90', 'backdrop-blur-sm');
+                header.classList.remove('bg-transparent');
+            } else {
+                header.classList.remove('bg-surface', 'bg-opacity-90', 'backdrop-blur-sm');
+                header.classList.add('bg-transparent');
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>05-tools-desktop</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-high": "#e8e8e8",
+                    "on-background": "#1a1c1c",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f3f3f4",
+                    "on-surface": "#1a1c1c",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed-variant": "#454748",
+                    "on-primary": "#ffffff",
+                    "secondary-container": "#e1e3e4",
+                    "primary-container": "#1b1b1b",
+                    "tertiary": "#000000",
+                    "on-primary-fixed-variant": "#474747",
+                    "inverse-surface": "#2f3131",
+                    "surface": "#f9f9f9",
+                    "primary": "#000000",
+                    "on-primary-fixed": "#1b1b1b",
+                    "on-secondary": "#ffffff",
+                    "on-error": "#ffffff",
+                    "surface-variant": "#e2e2e2",
+                    "tertiary-fixed-dim": "#c1c7cf",
+                    "primary-fixed-dim": "#c6c6c6",
+                    "surface-dim": "#dadada",
+                    "secondary-fixed-dim": "#c5c7c8",
+                    "error": "#ba1a1a",
+                    "inverse-on-surface": "#f0f1f1",
+                    "surface-bright": "#f9f9f9",
+                    "secondary": "#5c5f60",
+                    "primary-fixed": "#e2e2e2",
+                    "on-surface-variant": "#4c4546",
+                    "on-primary-container": "#848484",
+                    "secondary-fixed": "#e1e3e4",
+                    "surface-tint": "#5e5e5e",
+                    "background": "#f9f9f9",
+                    "surface-container-highest": "#e2e2e2",
+                    "on-secondary-container": "#626566",
+                    "outline-variant": "#cfc4c5",
+                    "outline": "#7e7576",
+                    "on-tertiary-fixed-variant": "#41474e",
+                    "surface-container": "#eeeeee",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-container": "#7e848c",
+                    "tertiary-container": "#161c22",
+                    "surface-container-lowest": "#ffffff",
+                    "tertiary-fixed": "#dde3eb",
+                    "on-tertiary-fixed": "#161c22",
+                    "on-secondary-fixed": "#191c1d",
+                    "inverse-primary": "#c6c6c6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-page": "5vw",
+                    "hairline": "1px",
+                    "gutter-grid": "2rem",
+                    "section-gap": "12rem"
+            },
+            "fontFamily": {
+                    "metadata": [
+                            "Inter"
+                    ],
+                    "nav-control": [
+                            "Inter"
+                    ],
+                    "headline-lg-mobile": [
+                            "Montserrat"
+                    ],
+                    "display-xl": [
+                            "Montserrat"
+                    ],
+                    "body-md": [
+                            "Inter"
+                    ],
+                    "editorial-subtitle": [
+                            "Montserrat"
+                    ],
+                    "headline-lg": [
+                            "Montserrat"
+                    ]
+            },
+            "fontSize": {
+                    "metadata": [
+                            "12px",
+                            {
+                                    "lineHeight": "16px",
+                                    "letterSpacing": "0.05em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "nav-control": [
+                            "14px",
+                            {
+                                    "lineHeight": "20px",
+                                    "letterSpacing": "0.1em",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg-mobile": [
+                            "48px",
+                            {
+                                    "lineHeight": "52px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "900"
+                            }
+                    ],
+                    "display-xl": [
+                            "120px",
+                            {
+                                    "lineHeight": "110px",
+                                    "letterSpacing": "-0.04em",
+                                    "fontWeight": "900"
+                            }
+                    ],
+                    "body-md": [
+                            "18px",
+                            {
+                                    "lineHeight": "28px",
+                                    "letterSpacing": "0em",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "editorial-subtitle": [
+                            "24px",
+                            {
+                                    "lineHeight": "32px",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "headline-lg": [
+                            "80px",
+                            {
+                                    "lineHeight": "84px",
+                                    "letterSpacing": "-0.02em",
+                                    "fontWeight": "900"
+                            }
+                    ]
+            }
+    },
+        },
+      }
+    </script>
+<style>
+        .chapter-indicator {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col relative">
+<!-- TopAppBar -->
+<header class="bg-background border-b border-tertiary flex justify-between items-center w-full px-margin-page py-6 z-50 sticky top-0">
+<div class="font-nav-control text-nav-control font-black tracking-tighter text-primary uppercase">
+            ZAIDAAN ZALFAA
+        </div>
+<div class="flex items-center gap-4 text-primary font-nav-control text-nav-control uppercase">
+<span class="material-symbols-outlined hover:opacity-50 transition-opacity duration-300 cursor-pointer active:scale-95 transition-transform">menu</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow w-full px-margin-page py-section-gap relative grid grid-cols-12 gap-gutter-grid">
+<!-- Chapter Indicator -->
+<div class="hidden lg:block col-span-1 relative">
+<div class="sticky top-32 chapter-indicator font-metadata text-metadata text-secondary tracking-widest uppercase">
+                CHAPTER 05 / TOOLS &amp; PROGRAMS
+            </div>
+</div>
+<!-- Content Area -->
+<div class="col-span-12 lg:col-span-10 flex flex-col">
+<div class="mb-24">
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tighter mb-8 uppercase">TOOLS &amp;<br/>PROGRAMS</h1>
+<p class="font-body-md text-body-md text-secondary max-w-2xl">
+                    An objective index of operational software, development frameworks, and creative applications utilized in active workflows. Structured for rapid reference and systemic evaluation.
+                </p>
+</div>
+<!-- Typographic Matrix -->
+<div class="w-full border-t border-tertiary">
+<!-- Category: OPERATIONS -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid py-12 border-b border-tertiary">
+<div class="md:col-span-3">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">OPERATIONS</h2>
+</div>
+<div class="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-8 font-body-md text-body-md">
+<ul class="space-y-4">
+<li>Linux / Unix</li>
+<li>Docker Containers</li>
+<li>Kubernetes</li>
+<li>Terraform</li>
+</ul>
+<ul class="space-y-4">
+<li>AWS (EC2, S3)</li>
+<li>Google Cloud Platform</li>
+<li>Azure Compute</li>
+<li>Nginx / Apache</li>
+</ul>
+<ul class="space-y-4">
+<li>Ansible</li>
+<li>Prometheus</li>
+<li>Grafana</li>
+<li>Datadog</li>
+</ul>
+</div>
+</div>
+<!-- Category: DEVELOPMENT -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid py-12 border-b border-tertiary">
+<div class="md:col-span-3">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">DEVELOPMENT</h2>
+</div>
+<div class="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-8 font-body-md text-body-md">
+<ul class="space-y-4">
+<li>Python (Django, FastAPI)</li>
+<li>JavaScript / TypeScript</li>
+<li>React / Next.js</li>
+<li>Node.js</li>
+</ul>
+<ul class="space-y-4">
+<li>Go (Golang)</li>
+<li>Rust</li>
+<li>C++</li>
+<li>Java / Spring Boot</li>
+</ul>
+<ul class="space-y-4">
+<li>PostgreSQL</li>
+<li>MongoDB</li>
+<li>Redis</li>
+<li>GraphQL</li>
+</ul>
+</div>
+</div>
+<!-- Category: NETWORKING -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid py-12 border-b border-tertiary">
+<div class="md:col-span-3">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">NETWORKING</h2>
+</div>
+<div class="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-8 font-body-md text-body-md">
+<ul class="space-y-4">
+<li>Cisco IOS</li>
+<li>Juniper Junos</li>
+<li>BGP / OSPF</li>
+<li>IPsec VPNs</li>
+</ul>
+<ul class="space-y-4">
+<li>Wireshark</li>
+<li>Nmap</li>
+<li>pfSense</li>
+<li>HAProxy</li>
+</ul>
+<ul class="space-y-4">
+<li>Cloudflare</li>
+<li>F5 BIG-IP</li>
+<li>Bind9 DNS</li>
+<li>OpenVPN</li>
+</ul>
+</div>
+</div>
+<!-- Category: CREATIVE -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid py-12 border-b border-tertiary">
+<div class="md:col-span-3">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">CREATIVE</h2>
+</div>
+<div class="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-8 font-body-md text-body-md">
+<ul class="space-y-4">
+<li>Figma</li>
+<li>Adobe Photoshop</li>
+<li>Adobe Illustrator</li>
+<li>Adobe InDesign</li>
+</ul>
+<ul class="space-y-4">
+<li>Cinema 4D</li>
+<li>Blender</li>
+<li>Unreal Engine</li>
+<li>Unity</li>
+</ul>
+<ul class="space-y-4">
+<li>DaVinci Resolve</li>
+<li>Ableton Live</li>
+<li>Max/MSP</li>
+<li>TouchDesigner</li>
+</ul>
+</div>
+</div>
+<!-- Category: AI & AUTOMATION -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter-grid py-12 border-b border-tertiary">
+<div class="md:col-span-3">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">AI &amp; AUTOMATION</h2>
+</div>
+<div class="md:col-span-9 grid grid-cols-2 md:grid-cols-3 gap-8 font-body-md text-body-md">
+<ul class="space-y-4">
+<li>TensorFlow</li>
+<li>PyTorch</li>
+<li>Hugging Face Diffusers</li>
+<li>OpenAI API</li>
+</ul>
+<ul class="space-y-4">
+<li>Jenkins</li>
+<li>GitHub Actions</li>
+<li>GitLab CI/CD</li>
+<li>Puppeteer</li>
+</ul>
+<ul class="space-y-4">
+<li>LangChain</li>
+<li>Stable Diffusion</li>
+<li>Midjourney</li>
+<li>Runway Gen-2</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="hidden lg:block col-span-1"></div>
+</main>
+<!-- Footer -->
+<footer class="bg-background border-t border-tertiary flex flex-col md:flex-row justify-between items-start md:items-center w-full px-margin-page py-12 mt-section-gap bottom-0">
+<div class="font-nav-control text-nav-control font-black text-primary uppercase mb-8 md:mb-0">
+            ZAIDAAN ZALFAA
+        </div>
+<div class="flex gap-8 font-metadata text-metadata uppercase">
+<span class="text-secondary hover:text-primary transition-colors duration-200 cursor-pointer">INDEX</span>
+<span class="text-secondary hover:text-primary transition-colors duration-200 cursor-pointer">ARCHIVE</span>
+<span class="text-secondary hover:text-primary transition-colors duration-200 cursor-pointer">ABOUT</span>
+<span class="text-secondary hover:text-primary transition-colors duration-200 cursor-pointer">CONTACT</span>
+</div>
+<div class="font-metadata text-metadata uppercase text-secondary mt-8 md:mt-0">
+            © 2024 ZAIDAAN ZALFAA. ALL RIGHTS RESERVED.
+        </div>
+</footer>
+</body></html>

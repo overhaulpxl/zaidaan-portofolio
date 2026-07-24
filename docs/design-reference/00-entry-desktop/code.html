@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zaidaan Zalfaa - Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-highest": "#e2e2e2",
+                        "surface-container-high": "#e8e8e8",
+                        "on-primary-fixed": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "tertiary-container": "#161c22",
+                        "on-surface": "#1a1c1c",
+                        "secondary": "#5c5f60",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "primary-container": "#1b1b1b",
+                        "inverse-on-surface": "#f0f1f1",
+                        "outline-variant": "#cfc4c5",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-secondary-fixed-variant": "#454748",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#191c1d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f3f3f4",
+                        "surface-dim": "#dadada",
+                        "outline": "#7e7576",
+                        "on-primary-fixed-variant": "#474747",
+                        "primary": "#000000",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "secondary-container": "#e1e3e4",
+                        "surface": "#f9f9f9",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#626566",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#c6c6c6",
+                        "surface-bright": "#f9f9f9",
+                        "on-secondary": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "on-background": "#1a1c1c",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#5e5e5e",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#848484",
+                        "secondary-fixed": "#e1e3e4",
+                        "on-tertiary-fixed": "#161c22",
+                        "inverse-surface": "#2f3131",
+                        "surface-container": "#eeeeee",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "background": "#f9f9f9",
+                        "on-surface-variant": "#4c4546",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-container": "#7e848c",
+                        "primary-fixed": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c1c7cf"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-gap": "12rem",
+                        "margin-page": "5vw",
+                        "hairline": "1px",
+                        "gutter-grid": "2rem"
+                    },
+                    "fontFamily": {
+                        "editorial-subtitle": ["Montserrat"],
+                        "display-xl": ["Montserrat"],
+                        "nav-control": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "metadata": ["Inter"]
+                    },
+                    "fontSize": {
+                        "editorial-subtitle": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-xl": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "nav-control": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "headline-lg": ["80px", { "lineHeight": "84px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "metadata": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface antialiased min-h-screen relative overflow-x-hidden selection:bg-primary selection:text-on-primary" data-screen-label="00-entry-desktop">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-margin-page py-8 bg-transparent flat no shadows docked full-width top-0">
+<div class="font-display-xl text-metadata uppercase tracking-widest text-primary dark:text-on-primary hover:opacity-70 transition-opacity active:scale-95 transition-transform">
+            ZAIDAAN ZALFAA
+        </div>
+<div class="flex items-center gap-4">
+<button aria-label="search" class="hidden material-symbols-outlined text-primary dark:text-on-primary hover:opacity-70 transition-opacity active:scale-95 transition-transform" data-icon="search">search</button>
+<button aria-label="menu" class="material-symbols-outlined text-primary dark:text-on-primary hover:opacity-70 transition-opacity active:scale-95 transition-transform" data-icon="menu">menu</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative min-h-screen w-full flex flex-col justify-end px-margin-page pb-24 pt-32">
+<!-- Chapter Indicator (Right side fixed) -->
+<div class="fixed right-margin-page top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-6">
+<div class="h-24 w-[1px] bg-tertiary"></div>
+<span class="font-metadata text-metadata text-secondary vertical-text tracking-widest">CHAPTER 00: ENTRY</span>
+<div class="h-24 w-[1px] bg-tertiary"></div>
+</div>
+<div class="grid grid-cols-12 gap-gutter-grid items-end relative z-10 w-full">
+<!-- Main Visual Typographic Block (Col 1-8) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<h1 class="font-display-xl text-display-xl text-primary max-w-full break-words uppercase">
+                    ZAIDAAN<br/>ZALFAA
+                </h1>
+<div class="flex flex-col sm:flex-row gap-6 mt-4">
+<button class="bg-primary text-on-primary font-nav-control text-nav-control uppercase px-8 py-4 hover:bg-surface hover:text-primary border border-primary transition-colors flex items-center justify-center gap-2">
+                        View Selected Work
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+<button class="bg-transparent text-primary font-nav-control text-nav-control uppercase px-8 py-4 border border-primary hover:bg-primary hover:text-on-primary transition-colors flex items-center justify-center gap-2">
+                        Download CV
+                        <span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Right Side Metadata (Col 9-12) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col justify-end pb-4 lg:pl-12">
+<div class="flex flex-col gap-8">
+<div class="flex flex-col gap-2">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest">Context</span>
+<div class="h-[1px] w-full bg-tertiary"></div>
+<span class="font-body-md text-body-md text-primary mt-2">PERSONAL PORTFOLIO</span>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest">Focus</span>
+<div class="h-[1px] w-full bg-tertiary"></div>
+<p class="font-body-md text-body-md text-primary mt-2 max-w-sm">
+                            Building practical digital products, community systems, and automation.
+                        </p>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest">Location</span>
+<div class="h-[1px] w-full bg-tertiary"></div>
+<p class="font-body-md text-body-md text-primary mt-2 max-w-sm">
+                            Based in Cianjur, West Java, Indonesia.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Scroll Indicator (Bottom Center Fixed) -->
+<div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 animate-bounce z-40">
+<span class="font-metadata text-metadata text-secondary uppercase tracking-widest text-center">SCROLL TO BEGIN THE JOURNEY</span>
+<span class="material-symbols-outlined text-primary text-[24px]">south</span>
+</div>
+</main>
+<!-- Using the provided image asset as a subtle background element to fulfill image constraint -->
+<div class="fixed inset-0 z-0 opacity-5 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuADil1Q2-SKMqWRRE3J_FDeaeXIq1SFn_klED010-bQSQS2WgK6q2z0VLYfknmDrzgt0wluQ4A45eWtMHudaffbKJJIV8H4R0fZPSEXrfuy9T36Ufot66ssg0jUMkgHqMfbX6sIPAsxllTh0gvwxAbM0WrxPx5XQmD6gI_K4iFAZOYdOjHS_C9mvJSQo383kAlzHDlP9KjMGtqRzF2ti_xiP6tdgaxUZuehIyrMv5BWcPYaISjD2K0H24vXlWrUGlsnk3AoJ_d57uZ8'); background-size: cover; background-position: center;"></div>
+</body></html>

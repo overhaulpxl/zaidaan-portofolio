@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chapter 04: Skills</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Montserrat:wght@600;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e8e8e8",
+                        "on-background": "#1a1c1c",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f3f4",
+                        "on-surface": "#1a1c1c",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#454748",
+                        "on-primary": "#ffffff",
+                        "secondary-container": "#e1e3e4",
+                        "primary-container": "#1b1b1b",
+                        "tertiary": "#000000",
+                        "on-primary-fixed-variant": "#474747",
+                        "inverse-surface": "#2f3131",
+                        "surface": "#f9f9f9",
+                        "primary": "#000000",
+                        "on-primary-fixed": "#1b1b1b",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#e2e2e2",
+                        "tertiary-fixed-dim": "#c1c7cf",
+                        "primary-fixed-dim": "#c6c6c6",
+                        "surface-dim": "#dadada",
+                        "secondary-fixed-dim": "#c5c7c8",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#f0f1f1",
+                        "surface-bright": "#f9f9f9",
+                        "secondary": "#5c5f60",
+                        "primary-fixed": "#e2e2e2",
+                        "on-surface-variant": "#4c4546",
+                        "on-primary-container": "#848484",
+                        "secondary-fixed": "#e1e3e4",
+                        "surface-tint": "#5e5e5e",
+                        "background": "#f9f9f9",
+                        "surface-container-highest": "#e2e2e2",
+                        "on-secondary-container": "#626566",
+                        "outline-variant": "#cfc4c5",
+                        "outline": "#7e7576",
+                        "on-tertiary-fixed-variant": "#41474e",
+                        "surface-container": "#eeeeee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-container": "#7e848c",
+                        "tertiary-container": "#161c22",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#dde3eb",
+                        "on-tertiary-fixed": "#161c22",
+                        "on-secondary-fixed": "#191c1d",
+                        "inverse-primary": "#c6c6c6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-page": "5vw",
+                        "hairline": "1px",
+                        "gutter-grid": "2rem",
+                        "section-gap": "12rem"
+                    },
+                    "fontFamily": {
+                        "metadata": ["Inter"],
+                        "nav-control": ["Inter"],
+                        "headline-lg-mobile": ["Montserrat"],
+                        "display-xl": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "editorial-subtitle": ["Montserrat"],
+                        "headline-lg": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "metadata": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "nav-control": ["14px", { "lineHeight": "20px", "letterSpacing": "0.1em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["48px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "900" }],
+                        "display-xl": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.04em", "fontWeight": "900" }],
+                        "body-md": ["18px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "400" }],
+                        "editorial-subtitle": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-lg": ["80px", { "lineHeight": "84px", "letterSpacing": "-0.02em", "fontWeight": "900" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md overflow-x-hidden selection:bg-primary selection:text-on-primary" id="04-skills-mobile">
+<!-- TopAppBar -->
+<header class="bg-background text-primary font-nav-control uppercase docked full-width top-0 border-b border-tertiary flex justify-between items-center w-full px-margin-page py-6 z-50 sticky top-0 md:hidden">
+<a class="font-nav-control text-nav-control font-black tracking-tighter text-primary" href="#">ZAIDAAN ZALFAA</a>
+<button class="cursor-pointer active:scale-95 transition-transform hover:opacity-50 transition-opacity duration-300 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+</header>
+<main class="flex-grow md:hidden px-margin-page pt-12 pb-24">
+<!-- Chapter Indicator -->
+<div class="mb-16">
+<span class="font-metadata text-metadata text-tertiary uppercase tracking-widest block mb-4">CHAPTER 04</span>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-tighter uppercase">CAPABILITY INDEX</h1>
+</div>
+<!-- Capability Group: CORE OPERATIONS -->
+<section class="mb-12">
+<div class="border-t-[1px] border-tertiary pt-4 mb-6">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">01. CORE OPERATIONS</h2>
+</div>
+<ul class="space-y-4">
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Strategic Planning</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Cross-functional Leadership</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Financial Modeling</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Market Analysis</span></li>
+</ul>
+</section>
+<!-- Capability Group: TECHNICAL -->
+<section class="mb-12">
+<div class="border-t-[1px] border-tertiary pt-4 mb-6">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">02. TECHNICAL</h2>
+</div>
+<ul class="space-y-4">
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Systems Architecture</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Data Engineering</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Cloud Infrastructure (AWS/GCP)</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Full-Stack Development</span></li>
+</ul>
+</section>
+<!-- Capability Group: AI & WORKFLOW -->
+<section class="mb-12">
+<div class="border-t-[1px] border-tertiary pt-4 mb-6">
+<h2 class="font-editorial-subtitle text-editorial-subtitle text-primary uppercase">03. AI &amp; WORKFLOW</h2>
+</div>
+<ul class="space-y-4">
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">LLM Integration &amp; Prompting</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Automated CI/CD Pipelines</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Machine Learning Operations</span></li>
+<li class="flex justify-between items-baseline border-b-[1px] border-surface-dim pb-2"><span class="font-body-md text-body-md text-primary">Process Automation Scripting</span></li>
+</ul>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-background text-primary font-metadata uppercase full-width bottom-0 border-t border-tertiary flex flex-col md:flex-row justify-between items-start md:items-center w-full px-margin-page mt-section-gap md:hidden py-6">
+<div class="mb-8 md:mb-0">
+<span class="font-nav-control text-nav-control font-black text-primary block mb-2">ZAIDAAN ZALFAA</span>
+<span class="text-secondary">© 2024 ZAIDAAN ZALFAA. ALL RIGHTS RESERVED.</span>
+</div>
+<nav class="flex flex-col gap-4">
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#">INDEX</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#">ARCHIVE</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#">ABOUT</a>
+<a class="text-secondary hover:text-primary transition-colors duration-200" href="#">CONTACT</a>
+</nav>
+</footer>
+</body></html>
