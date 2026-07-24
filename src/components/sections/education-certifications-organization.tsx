@@ -34,7 +34,7 @@ export function EducationSection() {
                     </h3>
                     <p className="mt-4 text-lg text-foreground">{record.program}</p>
                     <p className="mt-2 text-sm font-medium text-muted">
-                      <time>{record.startYear}</time>–<time>{record.endYear}</time>
+                      <time>{record.startYear}</time>{record.endYear ? `–` : ""}<time>{record.endYear}</time>
                     </p>
                     {record.description && (
                       <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted sm:text-base">

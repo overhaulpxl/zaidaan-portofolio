@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
   },
   socials: {
     github: "https://github.com/overhaulpxl",
-    linkedin: "https://linkedin.com/in/zaidaan-zalfaa-a09306291",
+    linkedin: "https://www.linkedin.com/in/zaidaanzalfaa/",
     linktree: "https://linktr.ee/zaidaaann",
   },
 };

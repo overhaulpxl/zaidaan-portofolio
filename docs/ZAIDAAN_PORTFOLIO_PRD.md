@@ -1994,7 +1994,7 @@ Version 1.0 is complete when:
 - Website: zaidaan.my.id
 - Linktree: https://linktr.ee/zaidaaann
 - GitHub: github.com/overhaulpxl
-- LinkedIn: linkedin.com/in/zaidaan-zalfaa-a09306291
+- LinkedIn: linkedin.com/in/zaidaanzalfaa
 
 ## Approved CV profile source
 
