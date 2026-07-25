@@ -1,11 +1,18 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import { siteConfig } from "@/content/site";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+  display: "swap",
 });
 
 const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
@@ -65,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${geistSans.variable} h-full antialiased`}
+      className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
         {children}

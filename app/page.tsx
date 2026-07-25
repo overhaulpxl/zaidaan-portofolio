@@ -1,5 +1,4 @@
-import { GlassNavbar } from "@/components/layout/glass-navbar";
-import { Container } from "@/components/ui/container";
+import { Header } from "@/components/layout/header";
 import { HeroSection } from "@/components/sections/hero";
 import { AboutSection } from "@/components/sections/about";
 import { ProjectsSection } from "@/components/sections/projects";
@@ -17,22 +16,20 @@ export default function Home() {
     <>
       <StructuredData />
       <CriticalReadinessLoader />
-      <div id="top" className="flex min-h-full flex-col">
-        <a href="#main-content" className="skip-link">
+      <div id="top" className="flex min-h-full flex-col bg-[#f8f9fa] text-[#1b1b1b]">
+        <a href="#main-content" className="sr-only focus:not-sr-only">
           Skip to content
         </a>
-        <GlassNavbar />
-        <main id="main-content" className="w-full flex-1 overflow-x-clip pb-20" tabIndex={-1}>
-          <Container className="relative">
-            <HeroSection />
-            <AboutSection />
-            <ProjectsSection />
-            <ExperienceSection />
-            <SkillsSection />
-            <ToolsSection />
-            <EducationSection />
-            <ContactSection />
-          </Container>
+        <Header />
+        <main id="main-content" className="w-full flex-1 overflow-x-hidden pt-32 pb-20" tabIndex={-1}>
+          <HeroSection />
+          <AboutSection />
+          <ExperienceSection />
+          <ProjectsSection />
+          <SkillsSection />
+          <ToolsSection />
+          <EducationSection />
+          <ContactSection />
         </main>
         <Footer />
       </div>
