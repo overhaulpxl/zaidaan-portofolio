@@ -69,7 +69,7 @@ export function Header() {
       
       <div className="mb-12">
         <h2 className="text-[24px] font-bold text-[#1b1b1b] uppercase font-['Montserrat'] tracking-widest">
-          ZAIDAAN ZALFAA
+          ZAIDAAN
         </h2>
         <p className="text-[12px] font-semibold text-[#5c5f60] mt-2 font-['Inter'] tracking-[0.05em] uppercase">
           Editorial Portfolio
@@ -98,7 +98,7 @@ export function Header() {
           href="/"
           className="text-[12px] font-semibold text-[#1b1b1b] uppercase tracking-widest font-['Inter'] hover:opacity-70 transition-opacity active:scale-95"
         >
-          ZAIDAAN ZALFAA
+          ZAIDAAN
         </Link>
         <button 
           onClick={openMenu}

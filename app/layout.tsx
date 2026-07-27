@@ -74,7 +74,7 @@ export default function RootLayout({
       lang={siteConfig.language}
       className={`${inter.variable} ${montserrat.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
+      <body className="min-h-full flex flex-col overflow-x-hidden bg-background text-foreground selection:bg-foreground selection:text-background">
         {children}
       </body>
     </html>

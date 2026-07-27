@@ -8,7 +8,7 @@ export default function WorkPage() {
   return (
     <>
       <StructuredData />
-      <div id="top" className="flex min-h-screen flex-col bg-[#f8f9fa] text-[#000000]">
+      <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
         <Header />
         
         <main className="flex-grow pt-[120px] pb-48 px-[5vw]">

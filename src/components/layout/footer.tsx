@@ -1,55 +1,41 @@
+import { FaFileDownload, FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { SiLinktree } from "react-icons/si";
+import { siteConfig } from "@/content/site";
+
+const iconLinkClass =
+  "inline-flex size-11 shrink-0 items-center justify-center bg-transparent text-black outline-none transition-[opacity,transform] duration-200 hover:-translate-y-0.5 hover:opacity-60 focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-black";
+
 export function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="w-full px-[5vw] py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8 border-t border-[#000000] bg-[#f8f9fa] text-[#000000] mt-auto">
-      <div className="flex flex-col md:flex-row w-full justify-between items-start md:items-center">
-        
-        {/* Mobile-only Branding */}
-        <div className="md:hidden font-['Inter'] text-[14px] font-black uppercase mb-8">
-          ZAIDAAN ZALFAA
+    <footer className="mt-auto w-full border-t border-black bg-[#f1f2f3] px-[5vw] text-black">
+      <div className="py-8 md:py-12">
+        <div className="flex flex-col gap-7 md:flex-row md:items-center md:justify-between md:gap-12">
+          <div className="flex min-w-0 flex-col">
+            <span className="whitespace-nowrap font-['Montserrat'] text-[24px] font-black uppercase tracking-wide">ZAIDAAN</span>
+            <span className="mt-2 font-['Inter'] text-[14px] text-[#5c5f60]">{siteConfig.location.label}</span>
+          </div>
+
+          <nav aria-label="Footer links" className="flex max-w-full items-center gap-3">
+            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub" className={iconLinkClass}>
+              <FaGithub className="size-5" aria-hidden="true" />
+            </a>
+            <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconLinkClass}>
+              <FaLinkedinIn className="size-[19px]" aria-hidden="true" />
+            </a>
+            <a href={siteConfig.socials.linktree} target="_blank" rel="noopener noreferrer" aria-label="Linktree" title="Linktree" className={iconLinkClass}>
+              <SiLinktree className="size-[19px]" aria-hidden="true" />
+            </a>
+            {siteConfig.cvUrl ? (
+              <a href={siteConfig.cvUrl} target="_blank" rel="noopener noreferrer" aria-label="Download CV" title="Download CV" className={iconLinkClass}>
+                <FaFileDownload className="size-[19px]" aria-hidden="true" />
+              </a>
+            ) : null}
+          </nav>
         </div>
 
-        {/* Links */}
-        <div className="w-full md:w-auto grid grid-cols-2 md:flex gap-4 md:gap-8 mb-8 md:mb-0">
-          <a 
-            href="https://github.com/overhaulpxl" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] hover:text-[#000000] hover:underline transition-colors uppercase border-b border-[#dadada] md:border-none pb-2 md:pb-0"
-          >
-            GitHub
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/zaidaanzalfaa/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] hover:text-[#000000] hover:underline transition-colors uppercase border-b border-[#dadada] md:border-none pb-2 md:pb-0"
-          >
-            LinkedIn
-          </a>
-          <a 
-            href="https://linktr.ee/zaidaanzalfaa" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] hover:text-[#000000] hover:underline transition-colors uppercase border-b border-[#dadada] md:border-none pb-2 md:pb-0"
-          >
-            Linktree
-          </a>
-          <a 
-            href="/documents/zaidaan-zalfaa-cv.pdf" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] hover:text-[#000000] hover:underline transition-colors uppercase border-b border-[#dadada] md:border-none pb-2 md:pb-0"
-          >
-            CV
-          </a>
-        </div>
-
-        {/* Desktop Branding / Copyright */}
-        <div className="w-full md:w-auto flex justify-between items-center md:gap-8">
-          <span className="hidden md:inline font-['Inter'] text-[14px] font-black uppercase">ZAIDAAN ZALFAA</span>
-          <span className="font-['Inter'] text-[12px] font-semibold uppercase tracking-widest text-[#5c5f60]">© 2024</span>
-        </div>
-        
+        <p className="mt-8 font-['Inter'] text-[12px] font-semibold uppercase tracking-widest text-[#5c5f60] md:mt-10">© {currentYear} Zaidaan Zalfaa</p>
       </div>
     </footer>
   );

@@ -21,7 +21,7 @@ export default function Home() {
           Skip to content
         </a>
         <Header />
-        <main id="main-content" className="w-full flex-1 overflow-x-hidden pt-32 pb-20" tabIndex={-1}>
+        <main id="main-content" className="w-full flex-1 overflow-x-hidden" tabIndex={-1}>
           <HeroSection />
           <AboutSection />
           <ExperienceSection />
