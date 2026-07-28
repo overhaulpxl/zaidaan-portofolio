@@ -1,22 +1,42 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
 import { profile } from "@/content/profile";
 
 export function AboutSection() {
+  const [portraitError, setPortraitError] = useState(false);
+
   return (
     <section id="about" className="w-full px-[5vw] py-14 lg:py-20 relative overflow-hidden">
-      <div className="grid min-w-0 max-w-full grid-cols-12 gap-[2rem] items-center">
-        <div className="col-span-12 lg:hidden mb-8">
+      <div className="grid min-w-0 max-w-full grid-cols-1 gap-[2rem] items-center lg:grid-cols-[minmax(0,37fr)_minmax(0,63fr)]">
+        <div className="lg:hidden mb-8">
           <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest uppercase">CHAPTER 01</span>
           <div className="h-px w-full bg-black mt-2 mb-4" />
           <span className="font-['Montserrat'] text-[24px] font-semibold text-black uppercase tracking-wide">IDENTITY</span>
         </div>
 
-        <div className="col-span-12 lg:col-span-5 aspect-[4/3] min-w-0 w-full max-w-[90vw] lg:max-w-none flex justify-center lg:justify-end items-center relative mb-10 lg:mb-0">
-          <div className="w-full h-full bg-[#e8e8e8] border border-black flex items-center justify-center p-8">
-            <span className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] tracking-widest uppercase">PORTRAIT PENDING</span>
+        <div className="aspect-[3/4] min-w-0 w-full max-w-full flex justify-center lg:justify-end items-center relative mb-10 lg:mb-0">
+          <div className="relative h-full w-full overflow-hidden border border-black bg-[#e8e8e8]">
+            {portraitError ? (
+              <div className="flex h-full w-full items-center justify-center p-8">
+                <span className="font-['Inter'] text-[14px] font-semibold text-[#5c5f60] tracking-widest uppercase">PORTRAIT PENDING</span>
+              </div>
+            ) : (
+              <Image
+                src="/images/zaidaan-portrait.jpg"
+                alt="Portrait of Zaidaan Zalfaa"
+                fill
+                sizes="(min-width: 1024px) 37vw, 90vw"
+                className="object-cover"
+                style={{ objectPosition: "50% 52%" }}
+                onError={() => setPortraitError(true)}
+              />
+            )}
           </div>
         </div>
 
-        <div className="col-span-12 min-w-0 w-full max-w-[90vw] lg:max-w-none lg:col-span-7 lg:pl-12 flex flex-col justify-center">
+        <div className="min-w-0 w-full max-w-full lg:pl-6 flex flex-col justify-center">
           <div className="hidden lg:flex items-center gap-4 mb-6">
             <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest uppercase">CHAPTER 01</span>
             <div className="h-px w-16 bg-black" />
