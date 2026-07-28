@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Project, ProjectFilterType } from "@/types/portfolio";
 
 interface WorkArchiveClientProps {
@@ -18,6 +19,7 @@ const CATEGORIES: readonly ProjectFilterType[] = [
 
 export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
   const [activeCategory, setActiveCategory] = useState<ProjectFilterType>("All");
+  const reduceMotion = useReducedMotion();
 
   const filteredProjects = useMemo(
     () => activeCategory === "All"
@@ -32,23 +34,25 @@ export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
         <div className="col-span-12 flex overflow-x-auto whitespace-nowrap gap-x-6 gap-y-4 pb-2 -mx-[5vw] px-[5vw] md:mx-0 md:px-0 no-scrollbar">
           <div className="flex gap-6 min-w-max">
             {CATEGORIES.map((category) => (
-              <button
+              <motion.button
                 key={category}
                 type="button"
                 onClick={() => setActiveCategory(category)}
                 aria-pressed={activeCategory === category}
-                className={`font-['Inter'] text-[14px] font-semibold uppercase whitespace-nowrap transition-colors ${activeCategory === category ? "text-black border-b-2 border-black pb-1" : "text-[#5c5f60] hover:text-black"}`}
+                className={`relative font-['Inter'] text-[14px] font-semibold uppercase whitespace-nowrap transition-colors pb-1 ${activeCategory === category ? "text-black" : "text-[#5c5f60] hover:text-black"}`}
               >
                 {category}
-              </button>
+                {activeCategory === category ? <motion.span layoutId="archive-filter" className="absolute inset-x-0 -bottom-px h-0.5 bg-black" transition={{ duration: reduceMotion ? 0.01 : 0.3 }} /> : null}
+              </motion.button>
             ))}
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <AnimatePresence mode="popLayout" initial={false}>
         {filteredProjects.map((project, index) => (
-          <article key={project.slug} className="border border-[#dadada] p-8 hover:bg-[#e8e8e8] transition-colors group flex flex-col justify-between min-w-0">
+          <motion.article data-archive-card key={project.slug} layout initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduceMotion ? 0 : -12 }} transition={{ duration: reduceMotion ? 0.01 : 0.45, delay: reduceMotion ? 0 : index * 0.04 }} className="border border-[#dadada] p-8 hover:bg-[#e8e8e8] transition-colors group flex flex-col justify-between min-w-0">
             <div>
               <div className="flex justify-between items-start gap-6 mb-8">
                 <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest shrink-0">{String(index + 1).padStart(3, "0")}</span>
@@ -71,8 +75,9 @@ export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
                 </a>
               ))}
             </div>
-          </article>
+          </motion.article>
         ))}
+        </AnimatePresence>
       </div>
     </>
   );

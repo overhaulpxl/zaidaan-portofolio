@@ -1,18 +1,28 @@
-import { FaDiscord, FaTelegramPlane, FaWhatsapp, FaMicrosoft, FaCode, FaGithub, FaPython, FaServer, FaCloud, FaNetworkWired, FaTools, FaVideo, FaRobot, FaBrain, FaGoogle } from "react-icons/fa";
-import { TbBrandNextjs, TbBrandSupabase } from "react-icons/tb";
+import {
+  SiClaude,
+  SiCloudinary,
+  SiDiscord,
+  SiGooglegemini,
+  SiMikrotik,
+  SiTelegram,
+  SiWhatsapp,
+} from "react-icons/si";
+import {
+  TbBrandAdobePhotoshop,
+  TbBrandGithub,
+  TbBrandNextjs,
+  TbBrandOffice,
+  TbBrandOpenai,
+  TbBrandPython,
+  TbBrandSupabase,
+  TbBrandVscode,
+} from "react-icons/tb";
 
 export function ToolsSection() {
   return (
     <section id="tools" className="w-full px-[5vw] py-14 lg:py-20 relative grid grid-cols-12 gap-[2rem]">
-      {/* Chapter Indicator */}
-      <div className="hidden lg:block col-span-1 relative">
-        <div className="sticky top-32 vertical-text font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest uppercase">
-          CHAPTER 05 / TOOLS & PROGRAMS
-        </div>
-      </div>
-
       {/* Content Area */}
-      <div className="col-span-12 lg:col-span-10 flex flex-col">
+      <div className="col-span-12 lg:col-span-10 lg:col-start-2 flex flex-col">
         <div className="mb-16 lg:mb-20">
           <p className="lg:hidden font-['Inter'] text-[12px] font-semibold text-[#5c5f60] mb-4 uppercase tracking-widest">
             CHAPTER 05
@@ -33,12 +43,12 @@ export function ToolsSection() {
             </div>
             <div className="md:col-span-8 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-2 min-[360px]:gap-8">
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaDiscord className="text-[16px] min-[360px]:text-[18px]" /> Discord</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaTelegramPlane className="text-[16px] min-[360px]:text-[18px]" /> Telegram</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiDiscord className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Discord</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiTelegram className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Telegram</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaWhatsapp className="text-[16px] min-[360px]:text-[18px]" /> WhatsApp</li>
-                <li className="flex min-w-0 items-center gap-1 min-[360px]:gap-3"><FaMicrosoft className="shrink-0 text-[16px] min-[360px]:text-[18px]" /><span className="min-w-0 max-w-[5rem] min-[360px]:max-w-none leading-tight">Microsoft Office</span></li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiWhatsapp className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> WhatsApp</li>
+                <li className="flex min-w-0 items-center gap-1 min-[360px]:gap-3"><TbBrandOffice className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /><span className="min-w-0 max-w-[5rem] min-[360px]:max-w-none leading-tight">Microsoft Office</span></li>
               </ul>
             </div>
           </div>
@@ -50,16 +60,16 @@ export function ToolsSection() {
             </div>
             <div className="md:col-span-8 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-2 min-[360px]:gap-8">
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaCode className="text-[16px] min-[360px]:text-[18px]" /> VS Code</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaGithub className="text-[16px] min-[360px]:text-[18px]" /> GitHub</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandVscode className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> VS Code</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandGithub className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> GitHub</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaPython className="text-[16px] min-[360px]:text-[18px]" /> Python</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandNextjs className="text-[16px] min-[360px]:text-[18px]" /> Next.js</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandPython className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Python</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandNextjs className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Next.js</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandSupabase className="text-[16px] min-[360px]:text-[18px]" /> Supabase</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaCloud className="text-[16px] min-[360px]:text-[18px]" /> Cloudinary</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandSupabase className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Supabase</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiCloudinary className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Cloudinary</li>
               </ul>
             </div>
           </div>
@@ -71,8 +81,8 @@ export function ToolsSection() {
             </div>
             <div className="md:col-span-8 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-2 min-[360px]:gap-8">
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaNetworkWired className="text-[16px] min-[360px]:text-[18px]" /> MikroTik</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaServer className="text-[16px] min-[360px]:text-[18px]" /> Winbox</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiMikrotik className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> MikroTik</li>
+                <li>Winbox</li>
               </ul>
             </div>
           </div>
@@ -84,15 +94,15 @@ export function ToolsSection() {
             </div>
             <div className="md:col-span-8 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-2 min-[360px]:gap-8">
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaTools className="text-[16px] min-[360px]:text-[18px]" /> Adobe After Effects</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaTools className="text-[16px] min-[360px]:text-[18px]" /> Adobe Photoshop</li>
+                <li>Adobe After Effects</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandAdobePhotoshop className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Adobe Photoshop</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaTools className="text-[16px] min-[360px]:text-[18px]" /> Affinity by Canva</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaTools className="text-[16px] min-[360px]:text-[18px]" /> Canva</li>
+                <li>Affinity by Canva</li>
+                <li>Canva</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaVideo className="text-[16px] min-[360px]:text-[18px]" /> CapCut</li>
+                <li>CapCut</li>
               </ul>
             </div>
           </div>
@@ -104,15 +114,15 @@ export function ToolsSection() {
             </div>
             <div className="md:col-span-8 lg:col-span-9 grid grid-cols-2 lg:grid-cols-3 gap-2 min-[360px]:gap-8">
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaRobot className="text-[16px] min-[360px]:text-[18px]" /> ChatGPT</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaCode className="text-[16px] min-[360px]:text-[18px]" /> Codex</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><TbBrandOpenai className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> ChatGPT</li>
+                <li>Codex</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaBrain className="text-[16px] min-[360px]:text-[18px]" /> Claude</li>
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaGoogle className="text-[16px] min-[360px]:text-[18px]" /> Gemini</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiClaude className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Claude</li>
+                <li className="flex items-center gap-1 min-[360px]:gap-3"><SiGooglegemini className="size-[18px] shrink-0 min-[360px]:size-5" aria-hidden="true" /> Gemini</li>
               </ul>
               <ul className="space-y-4 font-['Inter'] text-[14px] min-[360px]:text-[16px] text-[#1a1c1c]">
-                <li className="flex items-center gap-1 min-[360px]:gap-3"><FaServer className="text-[16px] min-[360px]:text-[18px]" /> Antigravity</li>
+                <li>Antigravity</li>
               </ul>
             </div>
           </div>

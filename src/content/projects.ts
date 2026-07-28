@@ -49,13 +49,13 @@ export const projects: Project[] = [
     filters: ["Services", "Community Systems"],
     status: "Active Service",
     description:
-      "Structured buyer-seller transaction coordination, providing reliable record handling, dispute support, and customer communication. Completed 500+ buyer-seller transactions.",
+      "Structured buyer–seller transaction coordination with clear records, responsive communication, and dispute support. Completed 1,000+ transactions.",
     role: "Middleman / transaction handling",
     technologies: ["Discord", "Spreadsheets"],
     links: [
       {
-        label: "Open Instagram",
-        href: "https://instagram.com/zaidaan.middleman",
+        label: "VIEW 1,000+ MILESTONE",
+        href: "https://www.facebook.com/share/p/183hRYRgcU/",
       }
     ],
     featured: true,

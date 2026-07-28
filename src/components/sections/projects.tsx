@@ -1,4 +1,5 @@
 import { projects } from "@/content/projects";
+import { TransitionLink } from "@/components/navigation/transition-link";
 
 export function ProjectsSection() {
   const featuredProjects = projects
@@ -6,7 +7,7 @@ export function ProjectsSection() {
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (
-    <section id="work" className="w-full py-14 lg:py-20">
+    <section id="selected-work" className="w-full scroll-mt-24 py-14 lg:scroll-mt-28 lg:py-20">
       <div className="px-[5vw] mb-12">
         <div className="grid grid-cols-12 gap-[2rem] items-end">
           <div className="col-span-12 md:col-span-9">
@@ -14,10 +15,10 @@ export function ProjectsSection() {
             <h2 className="font-['Montserrat'] text-[48px] md:text-[80px] font-black text-black uppercase leading-[1] tracking-[-0.02em]">SELECTED WORK</h2>
           </div>
           <div className="col-span-12 md:col-span-3 flex md:justify-end mt-8 md:mt-0">
-            <a href="/work" className="group inline-flex min-h-11 items-center gap-2 py-2 font-['Inter'] text-[12px] font-bold text-black uppercase tracking-widest hover:opacity-70 transition-opacity">
+            <TransitionLink href="/work" className="group inline-flex min-h-11 items-center gap-2 py-2 font-['Inter'] text-[12px] font-bold text-black uppercase tracking-widest hover:opacity-70 transition-opacity">
               VIEW ALL WORK
               <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
-            </a>
+            </TransitionLink>
           </div>
         </div>
       </div>

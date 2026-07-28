@@ -1,278 +1,169 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import "./critical-readiness-loader.css";
 
-const SESSION_KEY = "zaidaan:readiness:v1";
-const SHOW_DELAY_MS = 120;
-const MINIMUM_VISIBLE_MS = 420;
-const FONT_ACCEPTANCE_MS = 900;
-const HARD_TIMEOUT_MS = 2250;
+const FIRST_ADVANCE_MS = 360;
+const CHAPTER_INTERVAL_MS = 210;
+const CONTACT_HOLD_MS = 240;
+const HARD_TIMEOUT_MS = 2480;
+const EXIT_MS = 360;
+const REDUCED_HOLD_MS = 220;
+const REDUCED_EXIT_MS = 120;
 
-type CompletionReason =
-  | "hard-timeout"
-  | "reduced-motion"
-  | "repeat-session"
-  | "save-data"
-  | "success";
+const CHAPTERS = [
+  ["00", "ENTRY"],
+  ["01", "IDENTITY"],
+  ["02", "EXPERIENCE"],
+  ["03", "SELECTED WORK"],
+  ["04", "SKILLS"],
+  ["05", "TOOLS & PROGRAMS"],
+  ["06", "EDUCATION"],
+  ["07", "CREDENTIALS & INVOLVEMENT"],
+  ["08", "CONTACT"],
+] as const;
 
-type NavigatorWithConnection = Navigator & {
-  connection?: {
-    saveData?: boolean;
-  };
-};
+type IntroState = "opening" | "ready" | "exiting" | "complete";
+type NavigatorWithConnection = Navigator & { connection?: { saveData?: boolean } };
 
 export function CriticalReadinessLoader() {
-  const [visible, setVisible] = useState(false);
-  const [milestones, setMilestones] = useState(1);
+  const [state, setState] = useState<IntroState>("opening");
+  const [progress, setProgress] = useState(1 / CHAPTERS.length);
+  const [chapterIndex, setChapterIndex] = useState(0);
 
   useEffect(() => {
-    const siteShell = document.getElementById("site-shell");
+    const shell = document.querySelector<HTMLElement>("[data-route-shell]");
+    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const saveData = Boolean((navigator as NavigatorWithConnection).connection?.saveData);
 
-    if (!siteShell) {
+    const finishImmediately = () => {
+      document.body.style.overflow = "";
+      document.documentElement.classList.remove("intro-running", "intro-releasing");
+      document.documentElement.classList.add("intro-complete");
+      window.dispatchEvent(new Event("introcomplete"));
+      setState("complete");
+    };
+
+    if (!shell || saveData) {
+      finishImmediately();
       return;
     }
 
-    const startedAt = performance.now();
-    const deadline = startedAt + HARD_TIMEOUT_MS;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.documentElement.classList.add("intro-running");
+
+    let disposed = false;
+    let released = false;
     const timers = new Set<number>();
-    const frames = new Set<number>();
-    let mounted = true;
-    let finalized = false;
-    let overlayShownAt: number | null = null;
-    let previousBodyOverflow: string | null = null;
-
-    const clearScheduledWork = () => {
-      timers.forEach((timer) => window.clearTimeout(timer));
-      timers.clear();
-      frames.forEach((frame) => window.cancelAnimationFrame(frame));
-      frames.clear();
-    };
-
-    const releaseInteractionLock = () => {
-      siteShell.removeAttribute("inert");
-      siteShell.removeAttribute("aria-busy");
-
-      if (previousBodyOverflow !== null) {
-        document.body.style.overflow = previousBodyOverflow;
-        previousBodyOverflow = null;
-      }
-    };
-
-    const cleanup = (updateReactState: boolean) => {
-      clearScheduledWork();
-      document
-        .querySelector<HTMLElement>("[data-readiness-loader]")
-        ?.style.setProperty("pointer-events", "none");
-      releaseInteractionLock();
-
-      if (updateReactState && mounted) {
-        setVisible(false);
-      }
-    };
-
-    const writeSessionComplete = () => {
-      try {
-        window.sessionStorage.setItem(SESSION_KEY, "complete");
-      } catch {
-        // Storage is optional. The bounded loader flow remains safe without it.
-      }
-    };
-
-    const finalize = (reason: CompletionReason) => {
-      if (finalized) {
-        return;
-      }
-
-      finalized = true;
-      writeSessionComplete();
-      cleanup(true);
-
-      if (reason === "hard-timeout") {
-        return;
-      }
-    };
-
-    const requestCompletion = (reason: CompletionReason) => {
-      if (finalized) {
-        return;
-      }
-
-      if (reason === "hard-timeout" || overlayShownAt === null) {
-        finalize(reason);
-        return;
-      }
-
-      const now = performance.now();
-      const minimumVisibleAt = overlayShownAt + MINIMUM_VISIBLE_MS;
-      const finishAt = Math.min(minimumVisibleAt, deadline);
-      const remaining = Math.max(0, finishAt - now);
-
-      if (remaining === 0) {
-        finalize(reason);
-        return;
-      }
-
-      const timer = window.setTimeout(() => {
-        timers.delete(timer);
-        finalize(reason);
-      }, remaining);
-      timers.add(timer);
-    };
-
-    const scheduleFrame = (callback: () => void) => {
-      const frame = window.requestAnimationFrame(() => {
-        frames.delete(frame);
-        callback();
-      });
-      frames.add(frame);
-      return frame;
-    };
-
-    const showOverlay = () => {
-      if (overlayShownAt !== null || finalized) {
-        return;
-      }
-
-      overlayShownAt = performance.now();
-      setVisible(true);
-
-      const lockWhenVisible = () => {
-        if (finalized) {
-          return;
-        }
-
-        if (!document.querySelector("[data-readiness-loader]")) {
-          scheduleFrame(lockWhenVisible);
-          return;
-        }
-
-        previousBodyOverflow = document.body.style.overflow;
-        siteShell.setAttribute("inert", "");
-        siteShell.setAttribute("aria-busy", "true");
-        document.body.style.overflow = "hidden";
-      };
-
-      scheduleFrame(lockWhenVisible);
-    };
-
-    const scheduleTimer = (callback: () => void, delay: number) => {
+    const schedule = (callback: () => void, delay: number) => {
       const timer = window.setTimeout(() => {
         timers.delete(timer);
         callback();
       }, delay);
       timers.add(timer);
-      return timer;
     };
 
-    const nextFrame = () =>
-      new Promise<void>((resolve) => {
-        scheduleFrame(resolve);
-      });
+    const showChapter = (nextIndex: number) => {
+      setChapterIndex(nextIndex);
+      setProgress((nextIndex + 1) / CHAPTERS.length);
+    };
 
-    try {
-      if (window.sessionStorage.getItem(SESSION_KEY) === "complete") {
-        finalize("repeat-session");
-        return () => {
-          mounted = false;
-          cleanup(false);
-        };
-      }
-    } catch {
-      // Continue with the bounded readiness flow when storage is unavailable.
-    }
+    if (reduced) {
+      schedule(() => {
+        setProgress(1);
+        setState("ready");
+        document.documentElement.classList.add("intro-releasing", "intro-complete");
+        setState("exiting");
+      }, REDUCED_HOLD_MS);
+      schedule(finishImmediately, REDUCED_HOLD_MS + REDUCED_EXIT_MS);
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    const saveData = Boolean(
-      (navigator as NavigatorWithConnection).connection?.saveData
-    );
-
-    if (reducedMotion || saveData) {
-      finalize(reducedMotion ? "reduced-motion" : "save-data");
       return () => {
-        mounted = false;
-        cleanup(false);
+        disposed = true;
+        timers.forEach((timer) => window.clearTimeout(timer));
+        document.body.style.overflow = previousOverflow;
+        document.documentElement.classList.remove("intro-running", "intro-releasing");
       };
     }
 
-    scheduleTimer(showOverlay, SHOW_DELAY_MS);
-    scheduleTimer(() => requestCompletion("hard-timeout"), HARD_TIMEOUT_MS);
+    const release = () => {
+      if (disposed || released) return;
+      released = true;
+      document.body.style.overflow = previousOverflow;
+      document.documentElement.classList.remove("intro-running");
+      document.documentElement.classList.remove("intro-releasing");
+      document.documentElement.classList.add("intro-complete");
+      window.dispatchEvent(new Event("introcomplete"));
+      setState("complete");
+    };
 
-    const acceptFonts = () =>
-      new Promise<void>((resolve) => {
-        let accepted = false;
+    const exit = () => {
+      if (disposed || released) return;
+      setProgress(1);
+      setState("ready");
+      document.documentElement.classList.add("intro-releasing", "intro-complete");
+      setState("exiting");
+      schedule(release, EXIT_MS);
+    };
 
-        const finish = () => {
-          if (accepted) {
-            return;
-          }
+    for (let index = 1; index < CHAPTERS.length; index += 1) {
+      schedule(() => showChapter(index), FIRST_ADVANCE_MS + (index - 1) * CHAPTER_INTERVAL_MS);
+    }
 
-          accepted = true;
-          resolve();
-        };
-
-        scheduleTimer(finish, FONT_ACCEPTANCE_MS);
-
-        if (document.fonts?.ready) {
-          void document.fonts.ready.then(finish, finish);
-        } else {
-          finish();
-        }
-      });
-
-    void (async () => {
-      try {
-        await acceptFonts();
-
-        if (!mounted || finalized) {
-          return;
-        }
-
-        setMilestones(2);
-        await nextFrame();
-        await nextFrame();
-
-        if (!mounted || finalized) {
-          return;
-        }
-
-        setMilestones(3);
-        requestCompletion("success");
-      } catch {
-        if (!finalized) {
-          finalized = true;
-          cleanup(true);
-        }
-      }
-    })();
+    const contactStartsAt = FIRST_ADVANCE_MS + (CHAPTERS.length - 2) * CHAPTER_INTERVAL_MS;
+    schedule(exit, contactStartsAt + CONTACT_HOLD_MS);
+    schedule(release, HARD_TIMEOUT_MS);
 
     return () => {
-      mounted = false;
-      cleanup(false);
+      disposed = true;
+      timers.forEach((timer) => window.clearTimeout(timer));
+      document.body.style.overflow = previousOverflow;
+      document.documentElement.classList.remove("intro-running", "intro-releasing");
     };
   }, []);
 
-  if (!visible) {
-    return null;
-  }
+  if (state === "complete") return null;
+
+  const [chapterNumber, chapterName] = CHAPTERS[chapterIndex];
 
   return (
     <div
-      className="readiness-loader"
+      className="editorial-loader"
+      data-intro-state={state}
+      data-chapter={chapterNumber}
       data-readiness-loader
-      data-readiness-milestones={milestones}
+      role="status"
+      aria-label="Preparing portfolio index"
     >
-      <div className="readiness-loader__content">
-        <p className="readiness-loader__name">ZAIDAAN ZALFAA</p>
-        <p className="readiness-loader__label">PERSONAL PORTFOLIO</p>
-        <div className="readiness-loader__trace" aria-hidden="true">
-          <span style={{ inlineSize: `${(milestones / 3) * 100}%` }} />
-        </div>
-        <p className="sr-only" role="status" aria-live="polite">
-          Preparing portfolio
-        </p>
+      <div className="editorial-loader__meta">
+        <span>ZAIDAAN</span>
+        <span>PERSONAL PORTFOLIO</span>
+        <span>2026</span>
       </div>
+
+      <div className="editorial-loader__stage">
+        <div className="editorial-loader__rule" aria-hidden="true" />
+        <div className="editorial-loader__index">
+          <div className="editorial-loader__title-mask">
+            <h1>PORTFOLIO INDEX</h1>
+          </div>
+          <div className="editorial-loader__range" aria-hidden="true">00—08</div>
+        </div>
+        <div className="editorial-loader__chapter-window">
+          <div key={chapterNumber} className="editorial-loader__chapter">
+            <span>{chapterNumber}</span>
+            <strong>{chapterName}</strong>
+          </div>
+        </div>
+      </div>
+
+      <div className="editorial-loader__loading">
+        <span>LOADING</span>
+        <span className="editorial-loader__track" aria-hidden="true">
+          <span style={{ transform: `scaleX(${progress})` }} />
+        </span>
+      </div>
+      <span className="sr-only">Chapter {chapterNumber}: {chapterName}</span>
     </div>
   );
 }

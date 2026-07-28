@@ -15,7 +15,7 @@ export function ContactSection() {
         <div className="col-span-12 md:col-span-7 flex flex-col justify-end pb-12">
           <p className="hidden md:block font-['Montserrat'] text-[24px] font-bold mb-4 uppercase">CHAPTER 08</p>
           <h2 className="font-['Montserrat'] text-[48px] md:text-[clamp(96px,8vw,120px)] font-black leading-[0.85] tracking-tighter uppercase w-full">
-            LET&apos;S<br />WORK<br /><span className="whitespace-nowrap">TOGETHER</span>
+            <span data-contact-line className="block">LET&apos;S</span><span data-contact-line className="block">WORK</span><span data-contact-line className="block whitespace-nowrap">TOGETHER</span>
           </h2>
           <p className="font-['Inter'] text-[18px] mt-8 md:mt-12 max-w-md text-[#5c5f60]">
             {profile.opportunityNote}

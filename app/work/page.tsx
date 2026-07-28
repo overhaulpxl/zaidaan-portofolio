@@ -11,9 +11,9 @@ export default function WorkPage() {
       <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
         <Header />
         
-        <main className="flex-grow pt-[120px] pb-48 px-[5vw]">
+        <main data-route-page="work" tabIndex={-1} className="flex-grow pt-[120px] pb-48 px-[5vw]">
           {/* Chapter Header */}
-          <div className="grid grid-cols-12 gap-[2rem] mb-24">
+          <div data-archive-heading className="grid grid-cols-12 gap-[2rem] mb-24">
             <div className="col-span-12 md:col-span-8 md:col-start-2">
               <h1 className="font-['Montserrat'] text-[48px] md:text-[80px] font-black uppercase leading-[1.05] tracking-[-0.02em]">
                 Project<br />Archive.
@@ -21,7 +21,7 @@ export default function WorkPage() {
             </div>
           </div>
 
-          <WorkArchiveClient initialProjects={projects} />
+          <div data-archive-content><WorkArchiveClient initialProjects={projects} /></div>
         </main>
         
         <Footer />
