@@ -13,7 +13,6 @@ export type SiteConfig = {
   language: string;
   seo: {
     title: string;
-    titleTemplate: string;
     description: string;
     keywords: string[];
   };
@@ -51,10 +50,9 @@ export const siteConfig: SiteConfig = {
   locale: "en_US",
   language: "en",
   seo: {
-    title: "Zaidaan Zalfaa — Personal Portfolio",
-    titleTemplate: "%s | Zaidaan Zalfaa — Personal Portfolio",
+    title: "Zaidaan Zalfaa — Personal Portofolio",
     description:
-      "Personal portfolio of Zaidaan Zalfaa, featuring practical digital products, community systems, automation, operations, and technical work.",
+      "Personal portfolio of Zaidaan Zalfaa, based in Cianjur, Indonesia, featuring digital products, community systems, automation, websites, and transaction services.",
     keywords: [
       "Zaidaan Zalfaa",
       "customer service",

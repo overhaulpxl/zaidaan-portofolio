@@ -18,13 +18,13 @@ export function Footer() {
           </div>
 
           <nav aria-label="Footer links" className="flex max-w-full items-center gap-3">
-            <a href={siteConfig.socials.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub" className={iconLinkClass}>
+            <a href={siteConfig.socials.github} target="_blank" rel="me noopener noreferrer" aria-label="GitHub" title="GitHub" className={iconLinkClass}>
               <FaGithub className="size-5" aria-hidden="true" />
             </a>
-            <a href={siteConfig.socials.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconLinkClass}>
+            <a href={siteConfig.socials.linkedin} target="_blank" rel="me noopener noreferrer" aria-label="LinkedIn" title="LinkedIn" className={iconLinkClass}>
               <FaLinkedinIn className="size-[19px]" aria-hidden="true" />
             </a>
-            <a href={siteConfig.socials.linktree} target="_blank" rel="noopener noreferrer" aria-label="Linktree" title="Linktree" className={iconLinkClass}>
+            <a href={siteConfig.socials.linktree} target="_blank" rel="me noopener noreferrer" aria-label="Linktree" title="Linktree" className={iconLinkClass}>
               <SiLinktree className="size-[19px]" aria-hidden="true" />
             </a>
             {siteConfig.cvUrl ? (

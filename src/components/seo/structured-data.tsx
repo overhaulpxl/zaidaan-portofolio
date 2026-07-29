@@ -2,6 +2,8 @@ import { siteConfig } from "@/content/site";
 
 const personId = `${siteConfig.url}/#person`;
 const websiteId = `${siteConfig.url}/#website`;
+const profilePageId = `${siteConfig.url}/#profile-page`;
+const portraitUrl = `${siteConfig.url}/images/zaidaan-portrait.jpg`;
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -10,18 +12,15 @@ const structuredData = {
       "@type": "Person",
       "@id": personId,
       name: siteConfig.name,
-      url: siteConfig.url,
-      description: "Digital products, community systems, automation, community operations, and technical work.",
+      url: `${siteConfig.url}/`,
+      image: portraitUrl,
+      description: "Digital product builder and community operations specialist based in Cianjur, Indonesia.",
       email: `mailto:${siteConfig.contact.email}`,
       address: {
         "@type": "PostalAddress",
         addressLocality: siteConfig.location.locality,
         addressRegion: siteConfig.location.region,
-        addressCountry: siteConfig.location.country,
-      },
-      alumniOf: {
-        "@type": "EducationalOrganization",
-        name: "SMKN 1 Pacet",
+        addressCountry: "ID",
       },
       sameAs: [
         siteConfig.socials.github,
@@ -32,12 +31,26 @@ const structuredData = {
     {
       "@type": "WebSite",
       "@id": websiteId,
-      name: `${siteConfig.name} — Personal Portfolio`,
-      url: siteConfig.url,
+      name: siteConfig.seo.title,
+      url: `${siteConfig.url}/`,
       description: siteConfig.seo.description,
       inLanguage: siteConfig.language,
       publisher: {
         "@id": personId,
+      },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": profilePageId,
+      name: siteConfig.seo.title,
+      url: `${siteConfig.url}/`,
+      description: siteConfig.seo.description,
+      inLanguage: siteConfig.language,
+      mainEntity: {
+        "@id": personId,
+      },
+      isPartOf: {
+        "@id": websiteId,
       },
     },
   ],

@@ -21,10 +21,7 @@ const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.seo.title,
-    template: siteConfig.seo.titleTemplate,
-  },
+  title: { absolute: siteConfig.seo.title },
   description: siteConfig.seo.description,
   applicationName: siteConfig.applicationName,
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
@@ -32,15 +29,16 @@ export const metadata: Metadata = {
   publisher: siteConfig.name,
   keywords: siteConfig.seo.keywords,
   alternates: {
-    canonical: siteConfig.url,
+    canonical: `${siteConfig.url}/`,
   },
   openGraph: {
     type: "website",
     locale: siteConfig.locale,
-    url: siteConfig.url,
-    siteName: siteConfig.applicationName,
+    url: `${siteConfig.url}/`,
+    siteName: siteConfig.name,
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
+    images: [{ url: socialImageUrl, alt: `${siteConfig.name} portfolio` }],
   },
   twitter: {
     card: "summary_large_image",

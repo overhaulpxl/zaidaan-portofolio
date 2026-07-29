@@ -1,13 +1,37 @@
+import type { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { StructuredData } from "@/components/seo/structured-data";
 import { WorkArchiveClient } from "@/components/projects/work-archive-client";
 import { projects } from "@/content/projects";
+import { siteConfig } from "@/content/site";
+
+const description = "Selected digital products, Discord bots, websites, automation projects, community systems, and transaction services by Zaidaan Zalfaa.";
+const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
+
+export const metadata: Metadata = {
+  title: { absolute: "Project Archive" },
+  description,
+  alternates: { canonical: `${siteConfig.url}/work` },
+  openGraph: {
+    type: "website",
+    title: "Project Archive",
+    description,
+    url: `${siteConfig.url}/work`,
+    siteName: siteConfig.name,
+    locale: siteConfig.locale,
+    images: [{ url: socialImageUrl, alt: `${siteConfig.name} project archive` }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Project Archive",
+    description,
+    images: [{ url: socialImageUrl, alt: `${siteConfig.name} project archive` }],
+  },
+};
 
 export default function WorkPage() {
   return (
     <>
-      <StructuredData />
       <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
         <Header />
         
