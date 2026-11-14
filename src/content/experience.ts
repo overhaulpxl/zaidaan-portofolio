@@ -8,10 +8,9 @@ export const experiences: readonly Experience[] = [
     startDate: "Sep 2022",
     endDate: "Present",
     responsibilities: [
+      "Built the Mandalawangi Outbound company website in January 2026 — the company's information platform. Live at https://mandalawangioutbound.com",
       "Facilitated outbound and team-building activities — guided participants, briefed groups, kept sessions on schedule, supported participant safety and event logistics.",
       "Photographed events, edited photos, and handled post uploads as part of the Creative & Media team since joining.",
-      "Developed the Mandalawangi Outbound company website in January 2026. See it live: https://mandalawangioutbound.com",
-      "Listed on the company team page (mandalawangioutbound.com/team) as Technical & Creative Specialist.",
       "Engaged only when customers or event schedules arise — project-based, not a fixed-term contract."
     ],
     sortOrder: 0
