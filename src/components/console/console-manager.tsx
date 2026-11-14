@@ -78,6 +78,7 @@ export function ConsoleManager({
   const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "vouches" | "settings" | "testimonials">("projects");
   const [vouches, setVouches] = useState<VouchItem[]>(initialVouches);
   const [vouchFilter, setVouchFilter] = useState<"all" | "pending" | "approved" | "rejected">("all");
+  const [vouchVisibleCount, setVouchVisibleCount] = useState(25);
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -108,6 +109,12 @@ export function ConsoleManager({
       }
     });
   }
+
+  // Vouch list filter + incremental rendering (pagination)
+  const filteredVouches = vouches.filter(
+    (v) => vouchFilter === "all" || v.status === vouchFilter
+  );
+  const visibleVouches = filteredVouches.slice(0, vouchVisibleCount);
 
   // Handle Vouch Delete
   async function handleVouchDelete(id: string, name: string) {
@@ -841,7 +848,10 @@ export function ConsoleManager({
                   <button
                     key={status}
                     type="button"
-                    onClick={() => setVouchFilter(status)}
+                    onClick={() => {
+                      setVouchFilter(status);
+                      setVouchVisibleCount(25);
+                    }}
                     className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer ${
                       vouchFilter === status
                         ? "bg-black text-white"
@@ -856,7 +866,7 @@ export function ConsoleManager({
           </div>
 
           {/* Vouch List */}
-          {vouches.filter((v) => vouchFilter === "all" || v.status === vouchFilter).length === 0 ? (
+          {filteredVouches.length === 0 ? (
             <div className="border border-black bg-white p-12 text-center">
               <p className="font-['Montserrat'] text-[16px] font-bold uppercase text-[#5c5f60]">
                 No vouches found in {vouchFilter.toUpperCase()} queue.
@@ -864,9 +874,7 @@ export function ConsoleManager({
             </div>
           ) : (
             <div className="space-y-4">
-              {vouches
-                .filter((v) => vouchFilter === "all" || v.status === vouchFilter)
-                .map((vouch) => (
+              {visibleVouches.map((vouch) => (
                   <div
                     key={vouch.id}
                     className={`border border-black bg-white p-6 shadow-sm transition-all ${
@@ -977,6 +985,22 @@ export function ConsoleManager({
                     </div>
                   </div>
                 ))}
+              </div>
+          )}
+
+          {/* Incremental pagination */}
+          {filteredVouches.length > vouchVisibleCount && (
+            <div className="pt-6 text-center">
+              <button
+                type="button"
+                onClick={() => setVouchVisibleCount((prev) => prev + 25)}
+                className="border border-black bg-black px-8 py-3 text-[11px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-white hover:text-black cursor-pointer"
+              >
+                LOAD MORE VOUCHES (+{Math.min(25, filteredVouches.length - vouchVisibleCount)})
+              </button>
+              <p className="mt-2 text-[11px] text-[#5c5f60] uppercase tracking-wider">
+                Showing {Math.min(vouchVisibleCount, filteredVouches.length)} of {filteredVouches.length}
+              </p>
             </div>
           )}
         </div>
