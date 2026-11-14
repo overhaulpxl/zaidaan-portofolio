@@ -4,7 +4,7 @@ import { useState } from "react";
 import { profile } from "@/content/profile";
 import { siteConfig } from "@/content/site";
 
-export function ContactSection() {
+export function ContactSection({ whatsappVisible = true }: { whatsappVisible?: boolean }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = async (e: React.MouseEvent) => {
@@ -44,19 +44,21 @@ export function ContactSection() {
 
         {/* Right Side: Contact Actions */}
         <div className="col-span-12 md:col-span-4 md:col-start-9 flex flex-col justify-end pb-12 gap-8 md:gap-12">
-          <a 
-            href={siteConfig.contact.whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer" 
-            className="group block border-t border-[#000000] py-7 md:py-8 hover:bg-[#e8e8e8] md:hover:bg-transparent transition-colors duration-300"
-          >
-            <div className="flex items-center justify-between mb-3 group-hover:px-4 md:group-hover:px-0 transition-all duration-300">
-              <h3 className="font-['Montserrat'] text-[32px] md:text-[40px] font-black flex items-center gap-4 uppercase tracking-tight leading-none">WHATSAPP</h3>
-              <svg className="w-8 h-8 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="5 5 19 5 19 19"></polyline></svg>
-            </div>
-            <p className="font-['Inter'] text-[14px] font-bold uppercase tracking-widest text-[#5c5f60] md:opacity-60 group-hover:px-4 md:group-hover:px-0 transition-all duration-300">Message Directly</p>
-          </a>
-          
+          {whatsappVisible && (
+            <a
+              href={siteConfig.contact.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block border-t border-[#000000] py-7 md:py-8 hover:bg-[#e8e8e8] md:hover:bg-transparent transition-colors duration-300"
+            >
+              <div className="flex items-center justify-between mb-3 group-hover:px-4 md:group-hover:px-0 transition-all duration-300">
+                <h3 className="font-['Montserrat'] text-[32px] md:text-[40px] font-black flex items-center gap-4 uppercase tracking-tight leading-none">WHATSAPP</h3>
+                <svg className="w-8 h-8 group-hover:-translate-y-1 group-hover:translate-x-1 transition-transform duration-300 shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="19" x2="19" y2="5"></line><polyline points="5 5 19 5 19 19"></polyline></svg>
+              </div>
+              <p className="font-['Inter'] text-[14px] font-bold uppercase tracking-widest text-[#5c5f60] md:opacity-60 group-hover:px-4 md:group-hover:px-0 transition-all duration-300">Message Directly</p>
+            </a>
+          )}
+
           <button
             type="button"
             onClick={handleCopyEmail}

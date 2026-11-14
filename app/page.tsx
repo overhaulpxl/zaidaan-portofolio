@@ -9,14 +9,18 @@ import { EducationSection } from "@/components/sections/education-certifications
 import { ContactSection } from "@/components/sections/contact";
 import { Footer } from "@/components/layout/footer";
 import { StructuredData } from "@/components/seo/structured-data";
+import { fetchSiteSettings } from "@/lib/supabase/data";
 
 import { ChapterMotion } from "@/components/motion/chapter-motion";
 import { ChapterIndicator } from "@/components/navigation/chapter-indicator";
 
-export default function Home() {
+export default async function Home() {
+  const settings = await fetchSiteSettings();
+  const whatsappVisible = settings.whatsappVisible;
+
   return (
     <>
-      <StructuredData />
+      <StructuredData whatsappVisible={whatsappVisible} />
       <ChapterMotion />
       <ChapterIndicator />
       <div id="top" data-site-shell className="flex min-h-full flex-col bg-[#f8f9fa] text-[#1b1b1b]">
@@ -32,7 +36,7 @@ export default function Home() {
           <SkillsSection />
           <ToolsSection />
           <EducationSection />
-          <ContactSection />
+          <ContactSection whatsappVisible={whatsappVisible} />
         </main>
         <Footer />
       </div>

@@ -60,6 +60,7 @@ export default async function ConsolePage({ searchParams }: ConsolePageProps) {
   const settings: SettingsRow = {
     availability: settingsRes.data?.value?.availability || "Available for Select Opportunities",
     totalProofs: Number(settingsRes.data?.value?.totalProofs) || 2451,
+    whatsappVisible: settingsRes.data?.value?.whatsappVisible !== false,
   };
 
   const manifestStats = {

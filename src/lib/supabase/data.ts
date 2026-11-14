@@ -75,12 +75,14 @@ export async function fetchCertificates(): Promise<Certification[]> {
 export type SiteSettings = {
   availability: string;
   totalProofs: number;
+  whatsappVisible: boolean;
 };
 
 export async function fetchSiteSettings(): Promise<SiteSettings> {
   const defaultSettings: SiteSettings = {
     availability: "Available for Select Opportunities",
     totalProofs: 2451,
+    whatsappVisible: true,
   };
 
   if (!isSupabaseConfigured) return defaultSettings;
@@ -98,6 +100,7 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
     return {
       availability: data.value.availability || defaultSettings.availability,
       totalProofs: Number(data.value.totalProofs) || defaultSettings.totalProofs,
+      whatsappVisible: data.value.whatsappVisible !== false,
     };
   } catch {
     return defaultSettings;

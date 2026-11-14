@@ -54,6 +54,7 @@ export type CertificateRow = {
 export type SettingsRow = {
   availability: string;
   totalProofs: number;
+  whatsappVisible?: boolean;
 };
 
 type Props = {
@@ -1025,6 +1026,27 @@ export function ConsoleManager({
               <span className="text-[11px] text-[#5c5f60] mt-1 block">
                 Shown next to active status indicator in header and profile hero.
               </span>
+            </div>
+
+            <div>
+              <label className="flex items-start gap-3 border border-black p-4 cursor-pointer hover:bg-neutral-50 transition-colors">
+                <input
+                  type="checkbox"
+                  name="show_whatsapp"
+                  defaultChecked={initialSettings.whatsappVisible !== false}
+                  className="mt-0.5 size-4 accent-black cursor-pointer"
+                />
+                <span>
+                  <span className="block text-[13px] font-bold uppercase tracking-wider text-black">
+                    SHOW WHATSAPP BUTTON
+                  </span>
+                  <span className="block text-[11px] text-[#5c5f60] mt-1 leading-snug">
+                    Uncheck to hide the WhatsApp link from the site and remove your phone number
+                    from the public page &amp; JSON-LD structured data. The number itself stays
+                    stored in settings (not deleted); re-check to re-enable anytime.
+                  </span>
+                </span>
+              </label>
             </div>
 
             <div>

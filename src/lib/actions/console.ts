@@ -241,6 +241,7 @@ export async function saveSiteSettingsAction(formData: FormData) {
 
   const availability = (formData.get("availability") as string)?.trim() || "Available for Select Opportunities";
   const totalProofs = parseInt(formData.get("total_proofs") as string, 10) || 2451;
+  const whatsappVisible = formData.get("show_whatsapp") === "on";
 
   const { data: prev } = await admin
     .from("site_settings")
@@ -249,12 +250,16 @@ export async function saveSiteSettingsAction(formData: FormData) {
     .maybeSingle();
   await snapshotSiteSettingsValue(admin, "general", prev?.value ?? null, "saveSiteSettingsAction");
 
+  const mergedValue = {
+    ...(prev?.value && typeof prev.value === "object" ? prev.value : {}),
+    availability,
+    totalProofs,
+    whatsappVisible,
+  };
+
   const { error } = await admin.from("site_settings").upsert({
     key: "general",
-    value: {
-      availability,
-      totalProofs,
-    },
+    value: mergedValue,
     updated_at: new Date().toISOString(),
   });
 
