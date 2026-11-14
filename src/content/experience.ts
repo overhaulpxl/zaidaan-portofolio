@@ -2,6 +2,20 @@ import type { Experience } from "@/types/portfolio";
 
 export const experiences: readonly Experience[] = [
   {
+    company: "Confidential — AI Training Project",
+    role: "AI Trainer",
+    arrangement: "Project-based / Confidential",
+    startDate: "May 2026",
+    endDate: "Present",
+    responsibilities: [
+      "Evaluated and rated AI model outputs through structured preference and quality-review tasks.",
+      "Created content and exemplars (prompts, ideal responses, examples) used to train AI models.",
+      "Completed domain-specific tasks (coding, math, language) to improve model performance.",
+      "Company identity withheld under project confidentiality — details available on request."
+    ],
+    sortOrder: 0
+  },
+  {
     company: "Mandalawangi Outbound",
     role: "Event Facilitator & Technical & Creative Specialist",
     arrangement: "On-call · Per-customer / No fixed contract",
@@ -13,7 +27,7 @@ export const experiences: readonly Experience[] = [
       "Photographed events, edited photos, and handled post uploads as part of the Creative & Media team since joining.",
       "Engaged only when customers or event schedules arise — project-based, not a fixed-term contract."
     ],
-    sortOrder: 0
+    sortOrder: 1
   },
   {
     company: "Way 2 Eternal Community",
@@ -27,7 +41,7 @@ export const experiences: readonly Experience[] = [
       "Supported the Bloxistry partnership and Shopee affiliate voucher activities.",
       "Maintained transaction records and supported basic financial administration."
     ],
-    sortOrder: 1
+    sortOrder: 2
   },
   {
     company: "NXRDEN Store",
@@ -40,7 +54,7 @@ export const experiences: readonly Experience[] = [
       "Processed customer orders and checked payment information.",
       "Responded to customer questions and helped resolve order or payment issues."
     ],
-    sortOrder: 2
+    sortOrder: 3
   },
   {
     company: "Seraphim Robux Store",
@@ -52,7 +66,7 @@ export const experiences: readonly Experience[] = [
       "Communicated with customers about order progress and issues.",
       "Built a Python-based Telegram bot to automate order tracking."
     ],
-    sortOrder: 3
+    sortOrder: 4
   },
   {
     company: "JP.Computindo",
