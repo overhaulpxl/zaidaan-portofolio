@@ -14,7 +14,10 @@ type Props = {
 const PAGE_SIZE = 36;
 const DISCORD_USERNAME = "c10h14n2overdose";
 const FACEBOOK_URL = "https://www.facebook.com/zxxllz/";
-const STORAGE_BASE_URL = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL?.replace(/\/$/, "") || "";
+const DEFAULT_STORAGE_BASE_URL =
+  "https://pwjonnqmksqfbbxrbikm.supabase.co/storage/v1/object/public/testimonials";
+const STORAGE_BASE_URL =
+  process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL?.replace(/\/$/, "") || DEFAULT_STORAGE_BASE_URL;
 
 const ALL_MONTHS = [
   { num: "01", label: "JAN" },

@@ -10,7 +10,11 @@ import {
   deleteCertificateAction,
   toggleCertificatePublishedAction,
   saveSiteSettingsAction,
+  updateVouchStatusAction,
+  deleteVouchAction,
 } from "@/lib/actions/console";
+import type { VouchItem } from "@/lib/supabase/data";
+import { FaStar, FaRegStar } from "react-icons/fa";
 
 export type ProjectRow = {
   id: string;
@@ -54,6 +58,7 @@ export type SettingsRow = {
 type Props = {
   initialProjects: ProjectRow[];
   initialCertificates: CertificateRow[];
+  initialVouches?: VouchItem[];
   initialSettings: SettingsRow;
   manifestStats: {
     count: number;
@@ -65,10 +70,13 @@ type Props = {
 export function ConsoleManager({
   initialProjects,
   initialCertificates,
+  initialVouches = [],
   initialSettings,
   manifestStats,
 }: Props) {
-  const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "settings" | "testimonials">("projects");
+  const [activeTab, setActiveTab] = useState<"projects" | "certificates" | "vouches" | "settings" | "testimonials">("projects");
+  const [vouches, setVouches] = useState<VouchItem[]>(initialVouches);
+  const [vouchFilter, setVouchFilter] = useState<"all" | "pending" | "approved" | "rejected">("all");
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -83,6 +91,37 @@ export function ConsoleManager({
   function notify(text: string, type: "success" | "error" = "success") {
     setFeedback({ type, text });
     setTimeout(() => setFeedback(null), 4000);
+  }
+
+  // Handle Vouch Status Update (Approve / Reject)
+  async function handleVouchStatus(id: string, nextStatus: "approved" | "rejected") {
+    startTransition(async () => {
+      try {
+        await updateVouchStatusAction(id, nextStatus);
+        setVouches((prev) =>
+          prev.map((v) => (v.id === id ? { ...v, status: nextStatus } : v))
+        );
+        notify(`Vouch successfully marked as ${nextStatus.toUpperCase()}.`);
+      } catch (err: unknown) {
+        notify(err instanceof Error ? err.message : "Failed to update vouch status", "error");
+      }
+    });
+  }
+
+  // Handle Vouch Delete
+  async function handleVouchDelete(id: string, name: string) {
+    if (!window.confirm(`Permanently delete vouch submission from "${name}"?`)) {
+      return;
+    }
+    startTransition(async () => {
+      try {
+        await deleteVouchAction(id);
+        setVouches((prev) => prev.filter((v) => v.id !== id));
+        notify("Vouch deleted successfully.");
+      } catch (err: unknown) {
+        notify(err instanceof Error ? err.message : "Failed to delete vouch", "error");
+      }
+    });
   }
 
   // Handle Project Form Submission
@@ -154,6 +193,15 @@ export function ConsoleManager({
         {[
           { id: "projects", label: `PROJECTS (${initialProjects.length})` },
           { id: "certificates", label: `CERTIFICATES (${initialCertificates.length})` },
+          {
+            id: "vouches",
+            label: `VOUCHES (${vouches.length})${
+              vouches.filter((v) => v.status === "pending").length > 0
+                ? ` [${vouches.filter((v) => v.status === "pending").length} PENDING]`
+                : ""
+            }`,
+            highlight: vouches.filter((v) => v.status === "pending").length > 0,
+          },
           { id: "settings", label: "SITE SETTINGS" },
           { id: "testimonials", label: `TESTIMONIALS (${manifestStats.count})` },
         ].map((tab) => (
@@ -167,6 +215,8 @@ export function ConsoleManager({
             className={`px-5 py-2.5 text-[12px] font-bold uppercase tracking-wider transition-colors border ${
               activeTab === tab.id
                 ? "bg-black text-white border-black"
+                : tab.highlight
+                ? "bg-amber-100 text-black border-black hover:bg-amber-200"
                 : "bg-white text-black border-black hover:bg-neutral-100"
             }`}
           >
@@ -742,6 +792,171 @@ export function ConsoleManager({
               </tbody>
             </table>
           </div>
+        </div>
+      )}
+
+      {/* TAB: VOUCHES MODERATION */}
+      {activeTab === "vouches" && (
+        <div>
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+            <div>
+              <h2 className="font-['Montserrat'] text-[24px] font-black uppercase">
+                Vouches & Testimonials Queue
+              </h2>
+              <p className="text-[13px] text-[#5c5f60]">
+                Incoming public reviews from `/middleman`. Items remain hidden until approved.
+              </p>
+            </div>
+
+            {/* Status Filter Buttons */}
+            <div className="flex flex-wrap gap-2 border border-black p-1 bg-white">
+              {(["all", "pending", "approved", "rejected"] as const).map((status) => {
+                const count =
+                  status === "all"
+                    ? vouches.length
+                    : vouches.filter((v) => v.status === status).length;
+                return (
+                  <button
+                    key={status}
+                    type="button"
+                    onClick={() => setVouchFilter(status)}
+                    className={`px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider transition-colors cursor-pointer ${
+                      vouchFilter === status
+                        ? "bg-black text-white"
+                        : "hover:bg-neutral-100 text-[#333]"
+                    }`}
+                  >
+                    {status} ({count})
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Vouch List */}
+          {vouches.filter((v) => vouchFilter === "all" || v.status === vouchFilter).length === 0 ? (
+            <div className="border border-black bg-white p-12 text-center">
+              <p className="font-['Montserrat'] text-[16px] font-bold uppercase text-[#5c5f60]">
+                No vouches found in {vouchFilter.toUpperCase()} queue.
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {vouches
+                .filter((v) => vouchFilter === "all" || v.status === vouchFilter)
+                .map((vouch) => (
+                  <div
+                    key={vouch.id}
+                    className={`border border-black bg-white p-6 shadow-sm transition-all ${
+                      vouch.status === "pending"
+                        ? "border-l-8 border-l-amber-500"
+                        : vouch.status === "approved"
+                        ? "border-l-8 border-l-emerald-600"
+                        : "border-l-8 border-l-neutral-400 opacity-70"
+                    }`}
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 pb-4 border-b border-black/10">
+                      <div>
+                        <div className="flex flex-wrap items-center gap-2 mb-1.5">
+                          <span className="font-['Montserrat'] text-[18px] font-black text-black">
+                            {vouch.name}
+                          </span>
+                          {vouch.handle && (
+                            <span className="font-mono text-[12px] bg-neutral-100 border border-neutral-300 px-2 py-0.5 text-black">
+                              {vouch.handle}
+                            </span>
+                          )}
+                          <span className="font-['Inter'] text-[10px] font-bold uppercase tracking-wider bg-black text-white px-2 py-0.5">
+                            {vouch.role}
+                          </span>
+                          {vouch.transactionNominal && (
+                            <span className="font-mono text-[11px] font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 px-2 py-0.5">
+                              {vouch.transactionNominal}
+                            </span>
+                          )}
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <div className="flex text-black">
+                            {[...Array(5)].map((_, i) =>
+                              i < vouch.rating ? (
+                                <FaStar key={i} className="size-3.5 fill-black" />
+                              ) : (
+                                <FaRegStar key={i} className="size-3.5 text-neutral-300" />
+                              )
+                            )}
+                          </div>
+                          <span className="font-mono text-[12px] font-bold">{vouch.rating}/5</span>
+                          <span className="text-[11px] text-[#8c8c8c]">·</span>
+                          <span className="text-[11px] text-[#5c5f60] font-mono">
+                            Submitted: {new Date(vouch.createdAt).toLocaleString("en-US", {
+                              month: "short",
+                              day: "numeric",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                            })}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Status Indicator & Moderation Buttons */}
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span
+                          className={`px-3 py-1 text-[11px] font-bold uppercase tracking-wider border ${
+                            vouch.status === "approved"
+                              ? "bg-emerald-100 border-emerald-500 text-emerald-900"
+                              : vouch.status === "pending"
+                              ? "bg-amber-100 border-amber-500 text-amber-900 animate-pulse"
+                              : "bg-neutral-100 border-neutral-400 text-neutral-700"
+                          }`}
+                        >
+                          STATUS: {vouch.status}
+                        </span>
+
+                        {vouch.status !== "approved" && (
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => handleVouchStatus(vouch.id, "approved")}
+                            className="bg-emerald-700 text-white px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider hover:bg-emerald-800 disabled:opacity-50 transition-colors cursor-pointer border border-emerald-900"
+                          >
+                            ✓ ACC / APPROVE
+                          </button>
+                        )}
+
+                        {vouch.status !== "rejected" && (
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => handleVouchStatus(vouch.id, "rejected")}
+                            className="border border-black bg-white text-black px-4 py-1.5 text-[11px] font-bold uppercase tracking-wider hover:bg-neutral-100 disabled:opacity-50 transition-colors cursor-pointer"
+                          >
+                            ✕ REJECT
+                          </button>
+                        )}
+
+                        <button
+                          type="button"
+                          disabled={isPending}
+                          onClick={() => handleVouchDelete(vouch.id, vouch.name)}
+                          className="border border-rose-600 text-rose-600 px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider hover:bg-rose-600 hover:text-white disabled:opacity-50 transition-colors cursor-pointer"
+                        >
+                          DELETE
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Vouch Comment Text */}
+                    <div className="pt-4">
+                      <p className="font-['Inter'] text-[14px] text-[#222] leading-relaxed italic bg-neutral-50 p-4 border border-black/10">
+                        &ldquo;{vouch.comment}&rdquo;
+                      </p>
+                    </div>
+                  </div>
+                ))}
+            </div>
+          )}
         </div>
       )}
 

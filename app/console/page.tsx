@@ -4,6 +4,7 @@ import rawManifest from "@/content/testimonials-manifest.json";
 import type { TestimonialsManifest } from "@/types/middleman";
 import { getAdminSupabase } from "@/lib/supabase/admin";
 import { logoutAction, persistSessionAction } from "@/lib/actions/console";
+import { fetchAllVouches, type VouchItem } from "@/lib/supabase/data";
 import { ConsoleManager, type ProjectRow, type CertificateRow, type SettingsRow } from "@/components/console/console-manager";
 import Link from "next/link";
 
@@ -31,14 +32,16 @@ export default async function ConsolePage({ searchParams }: ConsolePageProps) {
   // Fetch live administrative datasets from Supabase
   const admin = getAdminSupabase();
 
-  const [projectsRes, certsRes, settingsRes] = await Promise.all([
+  const [projectsRes, certsRes, settingsRes, vouchesList] = await Promise.all([
     admin.from("projects").select("*").order("sort_order", { ascending: true }),
     admin.from("certificates").select("*").order("sort_order", { ascending: true }),
     admin.from("site_settings").select("value").eq("key", "general").single(),
+    fetchAllVouches(),
   ]);
 
   const projects: ProjectRow[] = projectsRes.data || [];
   const certificates: CertificateRow[] = certsRes.data || [];
+  const vouches: VouchItem[] = vouchesList || [];
   const settings: SettingsRow = {
     availability: settingsRes.data?.value?.availability || "Available for Select Opportunities",
     totalProofs: Number(settingsRes.data?.value?.totalProofs) || 2451,
@@ -102,6 +105,7 @@ export default async function ConsolePage({ searchParams }: ConsolePageProps) {
         <ConsoleManager
           initialProjects={projects}
           initialCertificates={certificates}
+          initialVouches={vouches}
           initialSettings={settings}
           manifestStats={manifestStats}
         />

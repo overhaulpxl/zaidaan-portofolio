@@ -217,3 +217,140 @@ export async function saveSiteSettingsAction(formData: FormData) {
   revalidatePath("/console");
   return { success: true };
 }
+
+export async function submitPublicVouchAction(formData: FormData) {
+  // 1. Anti-spam honeypot
+  const honeypot = (formData.get("website_url_hp") as string)?.trim();
+  if (honeypot) {
+    return { success: true, message: "Vouch received." };
+  }
+
+  const name = (formData.get("name") as string)?.trim();
+  const comment = (formData.get("comment") as string)?.trim();
+  const handle = (formData.get("handle") as string)?.trim() || "";
+  const role = (formData.get("role") as string)?.trim() || "Buyer";
+  const transactionNominal = (formData.get("transaction_nominal") as string)?.trim() || "";
+  const rawRating = parseInt(formData.get("rating") as string, 10);
+  const rating = Math.min(5, Math.max(1, isNaN(rawRating) ? 5 : rawRating));
+
+  if (!name || name.length < 2) {
+    throw new Error("Name is required (minimum 2 characters).");
+  }
+  if (!comment || comment.length < 5) {
+    throw new Error("Review comment is required (minimum 5 characters).");
+  }
+
+  const admin = getAdminSupabase();
+  const { data } = await admin
+    .from("site_settings")
+    .select("value")
+    .eq("key", "middleman_vouches")
+    .single();
+
+  const currentVouches = (data?.value?.vouches || []) as Array<{
+    id: string;
+    name: string;
+    handle?: string;
+    role: string;
+    rating: number;
+    transactionNominal?: string;
+    comment: string;
+    status: "pending" | "approved" | "rejected";
+    createdAt: string;
+  }>;
+
+  const newVouch = {
+    id: crypto.randomUUID(),
+    name: name.slice(0, 50),
+    handle: handle.slice(0, 50),
+    role: role.slice(0, 20),
+    rating,
+    transactionNominal: transactionNominal.slice(0, 50),
+    comment: comment.slice(0, 500),
+    status: "pending" as const,
+    createdAt: new Date().toISOString(),
+  };
+
+  const updatedVouches = [newVouch, ...currentVouches];
+
+  const { error } = await admin.from("site_settings").upsert({
+    key: "middleman_vouches",
+    value: { vouches: updatedVouches },
+    updated_at: new Date().toISOString(),
+  });
+
+  if (error) {
+    throw new Error("Failed to record vouch. Please try again.");
+  }
+
+  revalidatePath("/middleman");
+  revalidatePath("/console");
+  return {
+    success: true,
+    message: "Thank you! Your review has been submitted and is pending verification.",
+  };
+}
+
+export async function updateVouchStatusAction(id: string, nextStatus: "approved" | "rejected") {
+  await verifyAuth();
+  const admin = getAdminSupabase();
+
+  const { data } = await admin
+    .from("site_settings")
+    .select("value")
+    .eq("key", "middleman_vouches")
+    .single();
+
+  const currentVouches = (data?.value?.vouches || []) as Array<{
+    id: string;
+    status: string;
+    reviewedAt?: string;
+    [k: string]: unknown;
+  }>;
+
+  const updatedVouches = currentVouches.map((v) =>
+    v.id === id ? { ...v, status: nextStatus, reviewedAt: new Date().toISOString() } : v
+  );
+
+  const { error } = await admin.from("site_settings").upsert({
+    key: "middleman_vouches",
+    value: { vouches: updatedVouches },
+    updated_at: new Date().toISOString(),
+  });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/middleman");
+  revalidatePath("/console");
+  return { success: true };
+}
+
+export async function deleteVouchAction(id: string) {
+  await verifyAuth();
+  const admin = getAdminSupabase();
+
+  const { data } = await admin
+    .from("site_settings")
+    .select("value")
+    .eq("key", "middleman_vouches")
+    .single();
+
+  const currentVouches = (data?.value?.vouches || []) as Array<{
+    id: string;
+    [k: string]: unknown;
+  }>;
+
+  const updatedVouches = currentVouches.filter((v) => v.id !== id);
+
+  const { error } = await admin.from("site_settings").upsert({
+    key: "middleman_vouches",
+    value: { vouches: updatedVouches },
+    updated_at: new Date().toISOString(),
+  });
+
+  if (error) throw new Error(error.message);
+
+  revalidatePath("/middleman");
+  revalidatePath("/console");
+  return { success: true };
+}

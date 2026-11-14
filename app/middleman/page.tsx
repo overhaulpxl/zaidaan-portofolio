@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { MiddlemanGalleryClient } from "@/components/middleman/middleman-gallery-client";
+import { MiddlemanVouches } from "@/components/middleman/middleman-vouches";
+import { fetchApprovedVouches } from "@/lib/supabase/data";
 import { siteConfig } from "@/content/site";
 import rawManifest from "@/content/testimonials-manifest.json";
 import type { TestimonialsManifest } from "@/types/middleman";
@@ -34,7 +36,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function MiddlemanPage() {
+export default async function MiddlemanPage() {
+  const approvedVouches = await fetchApprovedVouches();
+
   const middlemanStructuredData = {
     "@context": "https://schema.org",
     "@graph": [
@@ -122,6 +126,9 @@ export default function MiddlemanPage() {
             </div>
           </div>
         </div>
+
+        {/* Community Vouches & Reviews Section */}
+        <MiddlemanVouches initialVouches={approvedVouches} />
 
         {/* Gallery Interface */}
         <div data-archive-content>
