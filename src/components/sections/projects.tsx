@@ -11,7 +11,7 @@ export async function ProjectsSection() {
     <section id="selected-work" className="w-full scroll-mt-24 py-14 lg:scroll-mt-28 lg:py-20 relative">
       <div className="px-[5vw] mb-12 relative">
         <span id="projects" className="absolute -top-28 pointer-events-none" aria-hidden="true" />
-        <div className="grid grid-cols-12 gap-[2rem] items-end">
+        <div className="grid grid-cols-12 gap-6 md:gap-[2rem] items-end">
           <div className="col-span-12 md:col-span-9">
             <p data-scene-role="work-cue" className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase mb-4 tracking-widest">CHAPTER 03 / SELECTED WORK</p>
             <h2 data-scene-role="work-title" className="font-['Montserrat'] text-[48px] md:text-[80px] font-black text-black uppercase leading-[1] tracking-[-0.02em]">SELECTED WORK</h2>

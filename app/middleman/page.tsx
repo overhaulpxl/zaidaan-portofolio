@@ -100,7 +100,7 @@ export default async function MiddlemanPage() {
 
       <main data-route-page="middleman" tabIndex={-1} className="flex-grow pt-[120px] pb-48 px-[5vw]">
         {/* Editorial Heading & Metadata Rail */}
-        <div className="grid grid-cols-12 gap-[2rem] mb-16 border-b border-black pb-12">
+        <div className="grid grid-cols-12 gap-6 md:gap-[2rem] mb-16 border-b border-black pb-12">
           <div className="col-span-12 lg:col-span-8">
             <span
               data-archive-meta

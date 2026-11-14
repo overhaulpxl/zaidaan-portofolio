@@ -4,7 +4,7 @@ import { siteConfig } from "@/content/site";
 export function HeroSection() {
   return (
     <section id="home" className="relative w-full min-h-[90vh] lg:min-h-screen px-[5vw] pt-32 pb-24 lg:pt-40 lg:pb-40 flex items-center overflow-hidden">
-      <div data-hero-content className="grid min-w-0 max-w-full grid-cols-12 gap-[2rem] items-end w-full">
+      <div data-hero-content className="grid min-w-0 max-w-full grid-cols-12 gap-6 md:gap-[2rem] items-end w-full">
         <div data-hero-name className="col-span-12 min-w-0 w-full max-w-[90vw] lg:max-w-none lg:col-span-8 flex flex-col gap-6">
           <h1 className="font-['Montserrat'] text-[48px] md:text-[80px] lg:text-[120px] font-black leading-[0.9] tracking-[-0.04em] text-black uppercase break-words [transform-style:preserve-3d]">
             <span data-hero-line="1">ZAIDAAN</span><span data-hero-line="2">ZALFAA</span>

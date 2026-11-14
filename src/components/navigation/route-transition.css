@@ -154,6 +154,17 @@
   .route-transition strong {
     font-size: clamp(2.75rem, 14vw, 4rem);
   }
+  .route-transition__meta {
+    gap: 0.5rem;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+  }
+  .route-transition__meta span {
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -5,7 +5,7 @@ export function ExperienceSection() {
 
   return (
     <section id="experience" className="w-full px-[5vw] py-14 lg:py-20">
-      <div className="grid min-w-0 max-w-full grid-cols-12 gap-[2rem] w-full">
+      <div className="grid min-w-0 max-w-full grid-cols-12 gap-6 md:gap-[2rem] w-full">
         <div className="col-span-12 lg:col-span-10 lg:col-start-2 border-b border-black pb-8 mb-8 lg:mb-12">
           <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase tracking-widest block mb-4">CHAPTER 02 / EXPERIENCE</span>
           <h2 className="font-['Montserrat'] text-[42px] sm:text-[48px] md:text-[80px] font-black text-black uppercase tracking-[-0.02em] leading-[1]">EXPERIENCE</h2>

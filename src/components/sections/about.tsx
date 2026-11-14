@@ -9,7 +9,7 @@ export function AboutSection() {
 
   return (
     <section id="about" className="w-full px-[5vw] py-14 lg:py-20 relative overflow-hidden">
-      <div className="grid min-w-0 max-w-full grid-cols-1 gap-[2rem] items-center lg:grid-cols-[minmax(0,37fr)_minmax(0,63fr)]">
+      <div className="grid min-w-0 max-w-full grid-cols-1 gap-6 md:gap-[2rem] items-center lg:grid-cols-[minmax(0,37fr)_minmax(0,63fr)]">
         <div className="lg:hidden mb-8">
           <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest uppercase">CHAPTER 01</span>
           <div className="h-px w-full bg-black mt-2 mb-4" />

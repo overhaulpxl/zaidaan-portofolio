@@ -24,7 +24,7 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="w-full px-[5vw] pt-24 pb-32 lg:pt-44 lg:pb-44">
-      <div className="grid grid-cols-12 gap-[2rem] text-[#000000]">
+      <div className="grid grid-cols-12 gap-6 md:gap-[2rem] text-[#000000]">
         
         {/* Mobile Chapter Indicator */}
         <div className="col-span-12 md:hidden mb-8">

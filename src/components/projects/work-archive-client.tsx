@@ -31,7 +31,7 @@ export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
 
   return (
     <>
-      <div className="grid grid-cols-12 gap-[2rem] mb-16 border-b border-[#dadada] pb-4">
+      <div className="grid grid-cols-12 gap-6 md:gap-[2rem] mb-16 border-b border-[#dadada] pb-4">
         <div className="col-span-12 flex overflow-x-auto whitespace-nowrap gap-x-6 gap-y-4 pb-2 -mx-[5vw] px-[5vw] md:mx-0 md:px-0 no-scrollbar">
           <div className="flex gap-6 min-w-max">
             {CATEGORIES.map((category) => (

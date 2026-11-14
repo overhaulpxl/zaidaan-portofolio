@@ -74,7 +74,7 @@ function AntigravityIcon({ className }: { className?: string }) {
 
 export function ToolsSection() {
   return (
-    <section id="tools" className="w-full px-[5vw] py-14 lg:py-20 relative grid grid-cols-12 gap-[2rem]">
+    <section id="tools" className="w-full px-[5vw] py-14 lg:py-20 relative grid grid-cols-12 gap-6 md:gap-[2rem]">
       {/* Content Area */}
       <div className="col-span-12 lg:col-span-10 lg:col-start-2 flex flex-col">
         <div className="mb-16 lg:mb-20">
