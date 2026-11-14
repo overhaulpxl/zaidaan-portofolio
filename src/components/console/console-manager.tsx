@@ -12,6 +12,7 @@ import {
   saveSiteSettingsAction,
   updateVouchStatusAction,
   deleteVouchAction,
+  exportSiteSettingsAction,
 } from "@/lib/actions/console";
 import type { VouchItem } from "@/lib/supabase/data";
 import { FaStar, FaRegStar } from "react-icons/fa";
@@ -166,6 +167,27 @@ export function ConsoleManager({
         notify("Site settings updated successfully.");
       } catch (err: unknown) {
         notify(err instanceof Error ? err.message : "Failed to save settings", "error");
+      }
+    });
+  }
+
+  // Export site_settings as a downloadable JSON backup
+  async function handleExportSettings() {
+    startTransition(async () => {
+      try {
+        const { filename, payload } = await exportSiteSettingsAction();
+        const blob = new Blob([payload], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = filename;
+        document.body.appendChild(anchor);
+        anchor.click();
+        anchor.remove();
+        URL.revokeObjectURL(url);
+        notify("Settings backup downloaded.");
+      } catch (err: unknown) {
+        notify(err instanceof Error ? err.message : "Failed to export settings", "error");
       }
     });
   }
@@ -1006,6 +1028,26 @@ export function ConsoleManager({
               </button>
             </div>
           </form>
+
+          {/* Backup & Export */}
+          <div className="mt-8 max-w-2xl border border-black bg-neutral-50 p-5">
+            <h3 className="font-['Montserrat'] text-[13px] font-bold uppercase tracking-wider mb-1.5">
+              Backup &amp; Recovery
+            </h3>
+            <p className="text-[12px] text-[#5c5f60] leading-relaxed mb-4">
+              Every settings or vouch write automatically snapshots the previous value into a
+              capped history (last 50 entries). Export downloads a full JSON dump of
+              site_settings (general, middleman_vouches, settings_history).
+            </p>
+            <button
+              type="button"
+              onClick={handleExportSettings}
+              disabled={isPending}
+              className="border border-black bg-white px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider hover:bg-black hover:text-white disabled:opacity-50 transition-colors cursor-pointer"
+            >
+              EXPORT SETTINGS BACKUP (.JSON)
+            </button>
+          </div>
         </div>
       )}
 

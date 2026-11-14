@@ -5,6 +5,12 @@ import type { TestimonialsManifest } from "@/types/middleman";
 import { getAdminSupabase } from "@/lib/supabase/admin";
 import { logoutAction, persistSessionAction } from "@/lib/actions/console";
 import { fetchAllVouches, type VouchItem } from "@/lib/supabase/data";
+import {
+  CONSOLE_COOKIE,
+  getConsoleSecret,
+  safeKeyEqual,
+  verifyConsoleSessionValue,
+} from "@/lib/console-session";
 import { ConsoleManager, type ProjectRow, type CertificateRow, type SettingsRow } from "@/components/console/console-manager";
 import Link from "next/link";
 
@@ -17,12 +23,21 @@ type ConsolePageProps = {
 export default async function ConsolePage({ searchParams }: ConsolePageProps) {
   const params = await searchParams;
   const cookieStore = await cookies();
-  const authCookie = cookieStore.get("console_auth");
+  const authCookie = cookieStore.get(CONSOLE_COOKIE);
 
-  const masterKey = process.env.CONSOLE_SECRET_KEY || "zaidaan1337";
-  const hasValidCookie = authCookie?.value === "authenticated";
-  const hasValidKey = params.key === masterKey;
+  let hasValidKey = false;
+  try {
+    hasValidKey = Boolean(params.key && safeKeyEqual(params.key, getConsoleSecret()));
+  } catch {
+    hasValidKey = false;
+  }
+  const hasValidCookie = verifyConsoleSessionValue(authCookie?.value);
   const isAuthenticated = hasValidCookie || hasValidKey;
+
+  // Slow down brute-force attempts against the key gate
+  if (params.key && !hasValidKey) {
+    await new Promise((resolve) => setTimeout(resolve, 750));
+  }
 
   // Stealth gate: trigger true 404 Not Found if unauthenticated
   if (!isAuthenticated) {

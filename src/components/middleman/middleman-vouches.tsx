@@ -29,6 +29,10 @@ export function MiddlemanVouches({ initialVouches }: Props) {
     startTransition(async () => {
       try {
         const res = await submitPublicVouchAction(formData);
+        if (res.success === false) {
+          setFeedback({ type: "error", message: res.message });
+          return;
+        }
         setFeedback({ type: "success", message: res.message });
         setTimeout(() => {
           setIsOpen(false);

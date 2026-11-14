@@ -1,32 +1,73 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { revalidatePath } from "next/cache";
+import crypto from "node:crypto";
 import { getAdminSupabase } from "@/lib/supabase/admin";
+import { snapshotSiteSettingsValue } from "@/lib/supabase/backup";
+import {
+  checkAndRecordVouchRateLimit,
+  deleteVouch,
+  insertVouch,
+  updateVouchStatus,
+} from "@/lib/supabase/vouches";
+import {
+  CONSOLE_COOKIE,
+  CONSOLE_COOKIE_MAX_AGE,
+  createConsoleSessionValue,
+  verifyConsoleSessionValue,
+} from "@/lib/console-session";
 
 async function verifyAuth() {
   const cookieStore = await cookies();
-  const auth = cookieStore.get("console_auth");
-  if (auth?.value !== "authenticated") {
+  const auth = cookieStore.get(CONSOLE_COOKIE);
+  if (!verifyConsoleSessionValue(auth?.value)) {
     throw new Error("Unauthorized: Invalid console session");
   }
 }
 
 export async function logoutAction() {
   const cookieStore = await cookies();
-  cookieStore.delete("console_auth");
+  cookieStore.delete(CONSOLE_COOKIE);
   revalidatePath("/console");
 }
 
 export async function persistSessionAction() {
   const cookieStore = await cookies();
-  cookieStore.set("console_auth", "authenticated", {
+  cookieStore.set(CONSOLE_COOKIE, createConsoleSessionValue(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 60 * 60 * 24 * 7, // 7 days
+    maxAge: CONSOLE_COOKIE_MAX_AGE,
   });
   revalidatePath("/console");
+}
+
+export async function exportSiteSettingsAction() {
+  await verifyAuth();
+  const admin = getAdminSupabase();
+
+  const { data } = await admin
+    .from("site_settings")
+    .select("key, value, updated_at")
+    .in("key", ["general", "middleman_vouches", "settings_history"]);
+
+  const settings: Record<string, unknown> = {};
+  for (const row of data || []) {
+    settings[row.key] = row.value;
+  }
+
+  return {
+    filename: `zaidaan-settings-backup-${new Date().toISOString().slice(0, 10)}.json`,
+    payload: JSON.stringify(
+      {
+        exportedAt: new Date().toISOString(),
+        siteSettings: settings,
+      },
+      null,
+      2
+    ),
+  };
 }
 
 export async function saveProjectAction(formData: FormData) {
@@ -201,6 +242,13 @@ export async function saveSiteSettingsAction(formData: FormData) {
   const availability = (formData.get("availability") as string)?.trim() || "Available for Select Opportunities";
   const totalProofs = parseInt(formData.get("total_proofs") as string, 10) || 2451;
 
+  const { data: prev } = await admin
+    .from("site_settings")
+    .select("value")
+    .eq("key", "general")
+    .maybeSingle();
+  await snapshotSiteSettingsValue(admin, "general", prev?.value ?? null, "saveSiteSettingsAction");
+
   const { error } = await admin.from("site_settings").upsert({
     key: "general",
     value: {
@@ -240,24 +288,26 @@ export async function submitPublicVouchAction(formData: FormData) {
     throw new Error("Review comment is required (minimum 5 characters).");
   }
 
-  const admin = getAdminSupabase();
-  const { data } = await admin
-    .from("site_settings")
-    .select("value")
-    .eq("key", "middleman_vouches")
-    .single();
+  // 2. Per-IP rate limit (HMAC-hashed; raw IPs are never stored)
+  const headerList = await headers();
+  const forwarded = headerList.get("x-forwarded-for") || "";
+  const ip =
+    forwarded.split(",")[0].trim() || headerList.get("x-real-ip") || "unknown";
+  const pepper = process.env.CONSOLE_SECRET_KEY || "console-pepper";
+  const ipHash = crypto
+    .createHmac("sha256", pepper)
+    .update(`vouch-ip:${ip}`)
+    .digest("hex")
+    .slice(0, 24);
 
-  const currentVouches = (data?.value?.vouches || []) as Array<{
-    id: string;
-    name: string;
-    handle?: string;
-    role: string;
-    rating: number;
-    transactionNominal?: string;
-    comment: string;
-    status: "pending" | "approved" | "rejected";
-    createdAt: string;
-  }>;
+  try {
+    const rate = await checkAndRecordVouchRateLimit(ipHash);
+    if (!rate.ok) {
+      return { success: false, message: rate.message || "Too many submissions. Please try again later." };
+    }
+  } catch {
+    // Rate-limit storage must never make the form unusable; proceed.
+  }
 
   const newVouch = {
     id: crypto.randomUUID(),
@@ -271,17 +321,7 @@ export async function submitPublicVouchAction(formData: FormData) {
     createdAt: new Date().toISOString(),
   };
 
-  const updatedVouches = [newVouch, ...currentVouches];
-
-  const { error } = await admin.from("site_settings").upsert({
-    key: "middleman_vouches",
-    value: { vouches: updatedVouches },
-    updated_at: new Date().toISOString(),
-  });
-
-  if (error) {
-    throw new Error("Failed to record vouch. Please try again.");
-  }
+  await insertVouch(newVouch);
 
   revalidatePath("/middleman");
   revalidatePath("/console");
@@ -293,32 +333,7 @@ export async function submitPublicVouchAction(formData: FormData) {
 
 export async function updateVouchStatusAction(id: string, nextStatus: "approved" | "rejected") {
   await verifyAuth();
-  const admin = getAdminSupabase();
-
-  const { data } = await admin
-    .from("site_settings")
-    .select("value")
-    .eq("key", "middleman_vouches")
-    .single();
-
-  const currentVouches = (data?.value?.vouches || []) as Array<{
-    id: string;
-    status: string;
-    reviewedAt?: string;
-    [k: string]: unknown;
-  }>;
-
-  const updatedVouches = currentVouches.map((v) =>
-    v.id === id ? { ...v, status: nextStatus, reviewedAt: new Date().toISOString() } : v
-  );
-
-  const { error } = await admin.from("site_settings").upsert({
-    key: "middleman_vouches",
-    value: { vouches: updatedVouches },
-    updated_at: new Date().toISOString(),
-  });
-
-  if (error) throw new Error(error.message);
+  await updateVouchStatus(id, nextStatus);
 
   revalidatePath("/middleman");
   revalidatePath("/console");
@@ -327,28 +342,7 @@ export async function updateVouchStatusAction(id: string, nextStatus: "approved"
 
 export async function deleteVouchAction(id: string) {
   await verifyAuth();
-  const admin = getAdminSupabase();
-
-  const { data } = await admin
-    .from("site_settings")
-    .select("value")
-    .eq("key", "middleman_vouches")
-    .single();
-
-  const currentVouches = (data?.value?.vouches || []) as Array<{
-    id: string;
-    [k: string]: unknown;
-  }>;
-
-  const updatedVouches = currentVouches.filter((v) => v.id !== id);
-
-  const { error } = await admin.from("site_settings").upsert({
-    key: "middleman_vouches",
-    value: { vouches: updatedVouches },
-    updated_at: new Date().toISOString(),
-  });
-
-  if (error) throw new Error(error.message);
+  await deleteVouch(id);
 
   revalidatePath("/middleman");
   revalidatePath("/console");

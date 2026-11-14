@@ -1,6 +1,11 @@
 import { isSupabaseConfigured, supabase } from "./client";
 import { projects as staticProjects } from "@/content/projects";
 import { certificates as staticCertificates } from "@/content/certificates";
+import {
+  fetchApprovedVouches,
+  fetchAllVouches,
+  type VouchItem,
+} from "./vouches";
 import type { Project, Certification, ProjectStatus, ProjectFilterType } from "@/types/portfolio";
 
 export async function fetchProjects(): Promise<Project[]> {
@@ -99,56 +104,5 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
   }
 }
 
-export type VouchItem = {
-  id: string;
-  name: string;
-  handle?: string;
-  role: string;
-  rating: number;
-  transactionNominal?: string;
-  comment: string;
-  status: "pending" | "approved" | "rejected";
-  createdAt: string;
-};
-
-export async function fetchApprovedVouches(): Promise<VouchItem[]> {
-  if (!isSupabaseConfigured) return [];
-  try {
-    const { data, error } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "middleman_vouches")
-      .single();
-
-    if (error || !data?.value?.vouches) {
-      return [];
-    }
-
-    const all = data.value.vouches as VouchItem[];
-    return all
-      .filter((v) => v.status === "approved")
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  } catch {
-    return [];
-  }
-}
-
-export async function fetchAllVouches(): Promise<VouchItem[]> {
-  if (!isSupabaseConfigured) return [];
-  try {
-    const { data, error } = await supabase
-      .from("site_settings")
-      .select("value")
-      .eq("key", "middleman_vouches")
-      .single();
-
-    if (error || !data?.value?.vouches) {
-      return [];
-    }
-
-    const all = data.value.vouches as VouchItem[];
-    return all.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  } catch {
-    return [];
-  }
-}
+export type { VouchItem };
+export { fetchApprovedVouches, fetchAllVouches };

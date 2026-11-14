@@ -11,9 +11,22 @@ import type { TestimonialsManifest } from "@/types/middleman";
 const manifest = rawManifest as unknown as TestimonialsManifest;
 const totalCount = Array.isArray(manifest.items) ? manifest.items.length : (manifest.count || 0);
 
+// Only the fields the client actually renders — trims ~250KB of unused data
+// (amount, w, h, ts) from the serialized RSC payload.
+const galleryItems = (manifest.items || []).map((item) => ({
+  id: item.id,
+  category: item.category,
+  highValue: item.highValue,
+  date: item.date,
+  year: item.year,
+  month: item.month,
+  thumb: item.thumb,
+  full: item.full,
+}));
+
 const title = "Middleman Testimonials & Transaction Proofs — Zaidaan Zalfaa";
 const description = `Verified evidence and transaction screenshots from ${totalCount.toLocaleString()}+ completed middleman (escrow) services coordinated by Zaidaan Zalfaa.`;
-const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
+const socialImageUrl = new URL("/middleman/opengraph-image", siteConfig.url).toString();
 
 export const metadata: Metadata = {
   title: { absolute: title },
@@ -132,7 +145,7 @@ export default async function MiddlemanPage() {
 
         {/* Gallery Interface */}
         <div data-archive-content>
-          <MiddlemanGalleryClient items={manifest.items || []} totalCount={totalCount} />
+          <MiddlemanGalleryClient items={galleryItems} totalCount={totalCount} />
         </div>
       </main>
 

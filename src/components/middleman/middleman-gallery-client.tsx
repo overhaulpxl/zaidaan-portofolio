@@ -19,6 +19,12 @@ const DEFAULT_STORAGE_BASE_URL =
 const STORAGE_BASE_URL =
   process.env.NEXT_PUBLIC_SUPABASE_STORAGE_URL?.replace(/\/$/, "") || DEFAULT_STORAGE_BASE_URL;
 
+// Deter casual right-click/drag image saving (best effort; a determined user
+// can still screenshot/devtools, watermark remains the real protection)
+const blockImageInteraction = (e: React.SyntheticEvent) => {
+  e.preventDefault();
+};
+
 const ALL_MONTHS = [
   { num: "01", label: "JAN" },
   { num: "02", label: "FEB" },
@@ -478,9 +484,11 @@ export function MiddlemanGalleryClient({ items, totalCount: initialTotalCount }:
                 key={item.id}
                 type="button"
                 onClick={() => openLightbox(idx)}
-                className="group relative flex flex-col border border-black bg-white p-2 text-left transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-1 focus-visible:outline-black active:scale-[0.98]"
+                onContextMenu={blockImageInteraction}
+                onDragStart={blockImageInteraction}
+                className="group relative flex flex-col border border-black bg-white p-2 text-left transition-all hover:-translate-y-0.5 hover:shadow-md focus-visible:outline-1 focus-visible:outline-black active:scale-[0.98] select-none"
               >
-                <div className="relative aspect-[9/16] w-full overflow-hidden bg-[#e9ecef]">
+                <div className="relative aspect-[9/16] w-full overflow-hidden bg-[#e9ecef] select-none">
                   <div className="absolute top-2 right-2 z-10 flex flex-col gap-1 items-end">
                     {item.category === "international" && (
                       <span className="border border-black bg-black px-1.5 py-0.5 font-['Inter'] text-[9px] font-bold uppercase tracking-wider text-white shadow-sm">
@@ -499,7 +507,10 @@ export function MiddlemanGalleryClient({ items, totalCount: initialTotalCount }:
                       alt={`Transaction proof ${item.id} from ${dateDisplay}`}
                       fill
                       sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 20vw"
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
+                      className="object-cover transition-transform duration-300 group-hover:scale-105 select-none"
+                      draggable={false}
+                      onContextMenu={blockImageInteraction}
+                      onDragStart={blockImageInteraction}
                       loading="lazy"
                     />
                   ) : (
@@ -508,6 +519,13 @@ export function MiddlemanGalleryClient({ items, totalCount: initialTotalCount }:
                     </div>
                   )}
                   <div className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+                  {/* Interaction barrier: blocks right-click/drag save on the thumbnail */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 z-[5] select-none"
+                    onContextMenu={blockImageInteraction}
+                    onDragStart={blockImageInteraction}
+                  />
                 </div>
                 <div className="mt-2 flex items-center justify-between text-[11px] font-['Inter'] font-semibold text-[#5c5f60]">
                   <span className="truncate">{dateDisplay}</span>
@@ -611,11 +629,21 @@ export function MiddlemanGalleryClient({ items, totalCount: initialTotalCount }:
                       alt={`Verified transaction proof ${activeItem.id}`}
                       onLoad={() => setImageLoading(false)}
                       onError={() => setImageLoading(false)}
-                      className={`max-h-[80vh] w-auto max-w-full object-contain shadow-2xl border border-[#2c2c2c] transition-opacity duration-200 ${imageLoading ? "opacity-0" : "opacity-100"}`}
+                      draggable={false}
+                      onContextMenu={blockImageInteraction}
+                      onDragStart={blockImageInteraction}
+                      className={`max-h-[80vh] w-auto max-w-full object-contain shadow-2xl border border-[#2c2c2c] select-none transition-opacity duration-200 ${imageLoading ? "opacity-0" : "opacity-100"}`}
                     />
                   ) : (
                     <div className="p-8 text-center text-[#8c8c8c]">Image unavailable</div>
                   )}
+                  {/* Interaction barrier over the full-size proof image */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 z-[5] select-none cursor-default"
+                    onContextMenu={blockImageInteraction}
+                    onDragStart={blockImageInteraction}
+                  />
                 </div>
 
                 {/* Next Button */}

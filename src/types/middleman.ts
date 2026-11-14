@@ -5,8 +5,8 @@ export type TestimonialItem = {
   amount?: number;
   thumb: string;
   full: string;
-  w: number;
-  h: number;
+  w?: number;
+  h?: number;
   month: string;
   date?: string;
   year?: string;

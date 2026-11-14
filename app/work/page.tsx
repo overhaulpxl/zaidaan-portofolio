@@ -6,7 +6,7 @@ import { fetchProjects } from "@/lib/supabase/data";
 import { siteConfig } from "@/content/site";
 
 const description = "Selected digital products, Discord bots, websites, automation projects, community systems, and transaction services by Zaidaan Zalfaa.";
-const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
+const socialImageUrl = new URL("/work/opengraph-image", siteConfig.url).toString();
 
 export const metadata: Metadata = {
   title: { absolute: "Project Archive — Zaidaan Zalfaa" },
