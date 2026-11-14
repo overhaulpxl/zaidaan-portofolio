@@ -75,7 +75,7 @@ export const siteConfig: SiteConfig = {
   contact: {
     phoneDisplay: "+62 857-9371-9676",
     phoneInternational: whatsappNumber,
-    email: "zaidaan1337@gmail.com",
+    email: "me@zaidaan.my.id",
     website: "zaidaan.my.id",
     whatsappMessage,
     whatsappUrl: `https://wa.me/${whatsappNumber}`,
