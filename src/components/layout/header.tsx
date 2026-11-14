@@ -42,10 +42,16 @@ export function Header() {
   }, [mobileMenuOpen, closeMenu]);
 
   const navLinks = [
-    { href: "/#about", label: "ABOUT" }, { href: "/#experience", label: "EXPERIENCE" },
-    { href: "/#selected-work", label: "WORK" }, { href: "/#skills", label: "SKILLS" },
-    { href: "/#tools", label: "TOOLS" }, { href: "/#education", label: "EDUCATION" },
-    { href: "/#contact", label: "CONTACT" }, { href: "/work", label: "PROJECT ARCHIVE" },
+    { href: "/#about", label: "ABOUT" },
+    { href: "/#experience", label: "EXPERIENCE" },
+    { href: "/#selected-work", label: "WORK" },
+    { href: "/middleman", label: "MIDDLEMAN REKBER" },
+    { href: "/#skills", label: "SKILLS" },
+    { href: "/#tools", label: "TOOLS" },
+    { href: "/#education", label: "EDUCATION" },
+    { href: "/#contact", label: "CONTACT" },
+    { href: "/work", label: "PROJECT ARCHIVE" },
+    { href: "/cv", label: "DOWNLOAD CV" },
   ];
 
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
