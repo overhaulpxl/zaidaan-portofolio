@@ -9,12 +9,12 @@ const description = "Selected digital products, Discord bots, websites, automati
 const socialImageUrl = new URL("/opengraph-image", siteConfig.url).toString();
 
 export const metadata: Metadata = {
-  title: { absolute: "Project Archive" },
+  title: { absolute: "Project Archive — Zaidaan Zalfaa" },
   description,
   alternates: { canonical: `${siteConfig.url}/work` },
   openGraph: {
     type: "website",
-    title: "Project Archive",
+    title: "Project Archive — Zaidaan Zalfaa",
     description,
     url: `${siteConfig.url}/work`,
     siteName: siteConfig.name,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Project Archive",
+    title: "Project Archive — Zaidaan Zalfaa",
     description,
     images: [{ url: socialImageUrl, alt: `${siteConfig.name} project archive` }],
   },

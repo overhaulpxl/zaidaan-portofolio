@@ -50,11 +50,18 @@ export const siteConfig: SiteConfig = {
   locale: "en_US",
   language: "en",
   seo: {
-    title: "Zaidaan Zalfaa — Personal Portofolio",
+    title: "Zaidaan Zalfaa — Portfolio | Computer & Network Engineering Graduate & IS Student",
     description:
-      "Personal portfolio of Zaidaan Zalfaa, based in Cianjur, Indonesia, featuring digital products, community systems, automation, websites, and transaction services.",
+      "Personal portfolio of Zaidaan Zalfaa, Computer & Network Engineering graduate from SMKN 1 Pacet and Information Systems undergraduate at Universitas Terbuka, featuring middleman transaction services, digital products, community operations, and automation.",
     keywords: [
       "Zaidaan Zalfaa",
+      "SMKN 1 Pacet",
+      "Universitas Terbuka",
+      "Computer and Network Engineering",
+      "Teknik Komputer dan Jaringan",
+      "Information Systems",
+      "middleman transaction",
+      "rekber",
       "customer service",
       "community operations",
       "digital transactions",

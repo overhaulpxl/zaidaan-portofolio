@@ -14,8 +14,23 @@ const structuredData = {
       name: siteConfig.name,
       url: `${siteConfig.url}/`,
       image: portraitUrl,
-      description: "Digital product builder and community operations specialist based in Cianjur, Indonesia.",
+      description: siteConfig.seo.description,
+      jobTitle: "Customer Service, Community Operations & IT Support Specialist",
       email: `mailto:${siteConfig.contact.email}`,
+      alumniOf: [
+        {
+          "@type": "EducationalOrganization",
+          name: "SMKN 1 Pacet",
+          description: "Vocational High School Graduate in Computer and Network Engineering (TKJ)",
+        },
+      ],
+      memberOf: [
+        {
+          "@type": "CollegeOrUniversity",
+          name: "Universitas Terbuka",
+          description: "Current Undergraduate Student in Information Systems",
+        },
+      ],
       address: {
         "@type": "PostalAddress",
         addressLocality: siteConfig.location.locality,

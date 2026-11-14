@@ -2,45 +2,25 @@ import type { Project } from "@/types/portfolio";
 
 export const projects: Project[] = [
   {
-    slug: "norden",
-    title: "NORDEN",
-    category: "Discord Bot",
-    filters: ["Bots", "Automation", "Community Systems"],
-    status: "In Development",
+    slug: "norden-finance",
+    title: "NORDEN Finance",
+    category: "Websites",
+    filters: ["Websites"],
+    status: "Completed · Live",
     description:
-      "A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.",
-    role: "Product Development & Full-Stack Engineering",
-    technologies: ["Python", "discord.py", "PostgreSQL", "Redis"],
-    featuredTechnologies: ["Python", "discord.py", "PostgreSQL"],
+      "A full-stack personal finance platform with wallet management, budgeting, analytics, automation, and Gemini-powered transaction capture and receipt extraction.",
+    role: "Product Development, Full-Stack Engineering & AI Integration",
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Gemini API"],
+    featuredTechnologies: ["Next.js", "TypeScript", "PostgreSQL"],
     links: [
       {
-        label: "View Repository",
-        href: "https://github.com/overhaulpxl/norden",
+        label: "Visit Website",
+        href: "https://nordenfinance.site",
       }
     ],
     featured: true,
     published: true,
     sortOrder: 1,
-  },
-  {
-    slug: "way-2-eternal-bot",
-    title: "Way 2 Eternal Bot",
-    category: "Discord Bot",
-    filters: ["Bots", "Automation", "Community Systems"],
-    status: "Active Development",
-    description:
-      "A Discord community bot combining AI-powered interactions, RPG and economy systems, community utilities, and structured transaction workflows.",
-    role: "Bot Development & System Maintenance",
-    technologies: ["Python", "discord.py", "aiosqlite", "Gemini API"],
-    links: [
-      {
-        label: "View Repository",
-        href: "https://github.com/overhaulpxl/w2ebot",
-      }
-    ],
-    featured: true,
-    published: true,
-    sortOrder: 2,
   },
   {
     slug: "middleman",
@@ -54,13 +34,13 @@ export const projects: Project[] = [
     technologies: ["Discord", "Spreadsheets"],
     links: [
       {
-        label: "VIEW 1,000+ MILESTONE",
-        href: "https://www.facebook.com/share/p/183hRYRgcU/",
+        label: "VIEW TESTIMONIALS",
+        href: "/middleman",
       }
     ],
     featured: true,
     published: true,
-    sortOrder: 3,
+    sortOrder: 2,
   },
   {
     slug: "mandalawangi-outbound",
@@ -80,22 +60,43 @@ export const projects: Project[] = [
     ],
     featured: true,
     published: true,
+    sortOrder: 3,
+  },
+  {
+    slug: "way-2-eternal-bot",
+    title: "Way 2 Eternal Bot",
+    category: "Discord Bot",
+    filters: ["Bots", "Automation", "Community Systems"],
+    status: "Active Development",
+    description:
+      "A Discord community bot combining AI-powered interactions, RPG and economy systems, community utilities, and structured transaction workflows.",
+    role: "Bot Development & System Maintenance",
+    technologies: ["Python", "discord.py", "aiosqlite", "Gemini API"],
+    links: [
+      {
+        label: "View Repository",
+        href: "https://github.com/overhaulpxl/w2ebot",
+      }
+    ],
+    featured: true,
+    published: true,
     sortOrder: 4,
   },
   {
-    slug: "norden-finance",
-    title: "NORDEN Finance",
-    category: "Websites",
-    filters: ["Websites"],
-    status: "Archived · No Longer Maintained",
+    slug: "norden",
+    title: "NORDEN",
+    category: "Discord Bot",
+    filters: ["Bots", "Automation", "Community Systems"],
+    status: "In Development",
     description:
-      "A full-stack personal finance platform with wallet management, budgeting, analytics, automation, and Gemini-powered transaction capture and receipt extraction.",
-    role: "Product Development, Full-Stack Engineering & AI Integration",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Gemini API"],
+      "A Discord bot designed to support structured digital transactions, identity verification, payment coordination, and reputation workflows.",
+    role: "Product Development & Full-Stack Engineering",
+    technologies: ["Python", "discord.py", "PostgreSQL", "Redis"],
+    featuredTechnologies: ["Python", "discord.py", "PostgreSQL"],
     links: [
       {
-        label: "Visit Website",
-        href: "https://nordenfinance.vercel.app/",
+        label: "View Repository",
+        href: "https://github.com/overhaulpxl/norden",
       }
     ],
     featured: false,

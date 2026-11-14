@@ -45,7 +45,7 @@ Do not:
 
 ## Design
 
-Use a monochrome Apple-inspired Liquid Glass direction.
+Use a monochrome Swiss/editorial architectural direction as specified in `docs/DESIGN.md`.
 
 Approved colors:
 
@@ -53,7 +53,6 @@ Approved colors:
 - Graphite
 - White
 - Silver
-- Transparent glass
 - Semantic green for availability or success
 
 Do not use persistent blue, purple, pink, or orange accents.
@@ -67,9 +66,6 @@ Avoid:
 - Excessive gradients
 - Meaningless 3D decorations
 - Excessive animation
-- Glass on every paragraph
-
-Liquid Glass should be used selectively on navigation, buttons, cards, tool chips, certificates, and contact elements.
 
 ## Homepage Structure
 
@@ -119,7 +115,6 @@ Use:
 - Next.js App Router
 - TypeScript
 - Tailwind CSS
-- liquid-glass-react
 - Framer Motion
 - Supabase
 - Cloudinary
@@ -134,7 +129,7 @@ Rules:
 - Do not add Firebase.
 - Do not expose secret environment variables.
 - Do not commit `.env`, `.env.local`, `.next`, or `node_modules`.
-- Support keyboard navigation, reduced motion, responsive layouts, and glass fallbacks.
+- Support keyboard navigation, reduced motion, responsive layouts, and clean fallbacks.
 
 Do not implement Supabase, Cloudinary, analytics, or the admin dashboard before their approved phase.
 

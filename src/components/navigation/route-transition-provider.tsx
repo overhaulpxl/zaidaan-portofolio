@@ -14,15 +14,26 @@ type TransitionContextValue = {
 
 const TransitionContext = createContext<TransitionContextValue>({ phase: "idle", start: () => false });
 
-const COVER_MS = 240;
-const REVEAL_MS = 280;
-const SAFETY_MS = 1800;
+const COVER_MS = 340;
+const REVEAL_MS = 380;
+const SAFETY_MS = 2200;
 
 function destinationFor(href: string): Destination {
-  const pathname = new URL(href, "http://local").pathname;
-  return pathname === "/work"
-    ? { href, eyebrow: "ZAIDAAN", title: "WORK ARCHIVE", index: "01" }
-    : { href, eyebrow: "ZAIDAAN", title: "HOME", index: "00" };
+  try {
+    const pathname = new URL(href, "http://local").pathname;
+    if (pathname === "/work") {
+      return { href, eyebrow: "ZAIDAAN", title: "WORK ARCHIVE", index: "01" };
+    }
+    if (pathname === "/middleman") {
+      return { href, eyebrow: "MIDDLEMAN", title: "TESTIMONIALS", index: "02" };
+    }
+    if (pathname === "/console") {
+      return { href, eyebrow: "SYSTEM", title: "CONSOLE OPS", index: "03" };
+    }
+    return { href, eyebrow: "ZAIDAAN", title: "HOME", index: "00" };
+  } catch {
+    return { href, eyebrow: "ZAIDAAN", title: "HOME", index: "00" };
+  }
 }
 
 export function RouteTransitionProvider({ children }: { children: React.ReactNode }) {

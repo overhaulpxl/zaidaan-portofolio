@@ -1,76 +1,485 @@
-:root{--scene-ease:cubic-bezier(.22,1,.36,1)}
-[data-scene]{perspective:1300px;transform-style:preserve-3d}
-[data-scene-role]{transform-origin:left center}
+:root {
+  --scene-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --scene-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
 
-/* 00 — loader-to-hero continuation */
-.chapter-motion-ready:not(.intro-complete) [data-hero-line],.chapter-motion-ready:not(.intro-complete) [data-hero-context],.chapter-motion-ready:not(.intro-complete) [data-hero-actions],.chapter-motion-ready:not(.intro-complete) [data-scroll-cue]{opacity:0}
-[data-hero-line]{display:block;clip-path:inset(0 0 100%);transform:translate3d(0,30px,-38px) rotateX(3deg) scale(.985);transition:clip-path .68s var(--scene-ease),transform .68s var(--scene-ease),opacity .3s ease}
-.intro-complete [data-hero-line]{opacity:1;clip-path:inset(0);transform:none}
-.intro-complete [data-hero-line="2"]{transition-delay:90ms}
-[data-hero-context] .h-px{transform:scaleX(0);transform-origin:left;transition:transform .48s var(--scene-ease)}
-.intro-complete [data-hero-context] .h-px{transform:scaleX(1)}
-[data-hero-context]>div>div{opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(10px);transition:clip-path .42s var(--scene-ease),transform .42s var(--scene-ease),opacity .24s ease}
-.intro-complete [data-hero-context]>div>div{opacity:1;clip-path:inset(0);transform:none}
-.intro-complete [data-hero-context]>div>div:nth-child(1){transition-delay:160ms}.intro-complete [data-hero-context]>div>div:nth-child(2){transition-delay:260ms}.intro-complete [data-hero-context]>div>div:nth-child(3){transition-delay:360ms}
-[data-hero-actions]{transform:translateY(14px);transition:transform .4s var(--scene-ease) .46s,opacity .3s ease .46s}.intro-complete [data-hero-actions]{opacity:1;transform:none}
-[data-scroll-cue]{transform:translate(-50%,8px);transition:transform .38s var(--scene-ease) .66s,opacity .3s ease .66s}.intro-complete [data-scroll-cue]{opacity:1;transform:translate(-50%,0)}
-[data-scroll-cue] svg{animation:cue-drift 2.8s ease-in-out infinite}@keyframes cue-drift{50%{transform:translateY(4px)}}
-[data-scene="entry"] [data-hero-content]{transform:translateZ(calc(var(--scene-exit)*-55px)) scale(calc(1 - var(--scene-exit)*.012));opacity:calc(1 - var(--scene-exit)*.42)}
-.intro-complete [data-scene="entry"] [data-scroll-cue]{opacity:calc(1 - var(--scene-exit)*5);transform:translate(-50%,calc(var(--scene-exit)*-12px));transition:opacity .1s linear,transform .1s linear}
+[data-scene] {
+  perspective: none;
+}
 
-/* Shared phase semantics only: chapters define their own visuals below */
-.chapter-motion-ready [data-scene-role]{will-change:auto}
+[data-scene-role] {
+  transform-origin: center center;
+}
 
-/* 01 — profile spread */
-#about [data-scene-role="identity-cue"]{opacity:0;transform:translateX(-16px);transition:opacity .25s ease,transform .4s var(--scene-ease)}#about.scene-approach [data-scene-role="identity-cue"]{opacity:1;transform:none}
-#about [data-scene-role="identity-portrait"]{clip-path:inset(0 100% 0 0);transform:translate3d(-18px,0,-32px) rotateY(3deg);transition:clip-path .66s var(--scene-ease),transform .72s var(--scene-ease)}#about.scene-established [data-scene-role="identity-portrait"]{clip-path:inset(0);transform:none}
-#about [data-scene-role="identity-title"]{clip-path:inset(0 100% 0 0);transform:translateX(14px);transition:clip-path .56s var(--scene-ease),transform .56s var(--scene-ease)}#about.scene-established [data-scene-role="identity-title"]{clip-path:inset(0);transform:none}#about [data-scene-role="identity-title"]:nth-child(2){transition-delay:80ms}
-#about [data-scene-role="identity-copy"]{opacity:0;transform:translateX(12px);transition:opacity .3s ease,transform .45s var(--scene-ease)}#about.scene-content [data-scene-role="identity-copy"]{opacity:1;transform:none}#about [data-scene-role="identity-copy"]:nth-child(2){transition-delay:90ms}
-#about [data-scene-role="identity-actions"]{opacity:0;transform:translateX(20px);transition:opacity .3s ease .18s,transform .5s var(--scene-ease) .18s}#about.scene-content [data-scene-role="identity-actions"]{opacity:1;transform:none}
+/* 00 — Hero Entrance */
+.chapter-motion-ready:not(.intro-complete) [data-hero-line],
+.chapter-motion-ready:not(.intro-complete) [data-hero-context],
+.chapter-motion-ready:not(.intro-complete) [data-hero-actions],
+.chapter-motion-ready:not(.intro-complete) [data-scroll-cue] {
+  opacity: 0;
+}
 
-/* 02 — chronology */
-#experience [data-scene-role="experience-header"]{clip-path:inset(0 100% 0 0);transform:translateX(-18px);transition:clip-path .62s var(--scene-ease),transform .62s var(--scene-ease)}#experience.scene-established [data-scene-role="experience-header"]{clip-path:inset(0);transform:none}
-#experience [data-scene-role="experience-record"]{--record-distance:1;opacity:calc(1 - var(--record-distance)*.28);transform:translateZ(calc(var(--record-distance)*-22px)) scale(calc(1 - var(--record-distance)*.01));transition:opacity .24s ease,transform .28s var(--scene-ease)}
-#experience [data-scene-role="experience-record"]:before{content:"";position:absolute;inset:0 auto auto 0;width:100%;height:1px;background:#111;transform:scaleX(0);transform-origin:left;transition:transform .48s var(--scene-ease)}#experience [data-scene-role="experience-record"]{position:relative}#experience [data-scene-role="experience-record"].record-approach:before{transform:scaleX(1)}
-#experience [data-scene-role="experience-role"],#experience [data-scene-role="experience-company"],#experience [data-scene-role="experience-description"]{opacity:0;transform:translateX(-16px);transition:opacity .28s ease,transform .44s var(--scene-ease)}#experience .record-active [data-scene-role="experience-role"],#experience .record-active [data-scene-role="experience-company"],#experience .record-active [data-scene-role="experience-description"]{opacity:1;transform:none}
-#experience [data-scene-role="experience-company"]{transition-delay:55ms}#experience [data-scene-role="experience-description"]{transition-delay:110ms}
-#experience [data-scene-role="experience-date"]{opacity:0;transform:translateX(18px);transition:opacity .28s ease .1s,transform .44s var(--scene-ease) .1s}#experience .record-active [data-scene-role="experience-date"]{opacity:1;transform:none}
+[data-hero-line] {
+  display: block;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s var(--scene-ease), transform 0.65s var(--scene-ease);
+}
 
-/* 03 — gallery construction */
-#selected-work [data-scene-role="work-cue"]{opacity:0;transform:translateX(-12px);transition:.3s ease}#selected-work.scene-approach [data-scene-role="work-cue"]{opacity:1;transform:none}
-#selected-work [data-scene-role="work-title"]{clip-path:inset(0 100% 0 0);transition:clip-path .58s var(--scene-ease)}#selected-work.scene-established [data-scene-role="work-title"]{clip-path:inset(0)}
-#selected-work [data-scene-role="work-link"]{opacity:0;transform:translateX(14px);transition:opacity .25s ease .15s,transform .4s var(--scene-ease) .15s}#selected-work.scene-established [data-scene-role="work-link"]{opacity:1;transform:none}
-#selected-work [data-scene-role="work-grid"]{clip-path:inset(0 50% 100%);transform:translateZ(-18px);transition:clip-path .72s var(--scene-ease),transform .72s var(--scene-ease)}#selected-work.scene-established [data-scene-role="work-grid"]{clip-path:inset(0);transform:none}
-#selected-work [data-scene-role="work-cell"]{opacity:0;transform:translate3d(var(--cell-x,-10px),var(--cell-y,0),-10px);transition:opacity .28s ease,transform .42s var(--scene-ease)}#selected-work [data-scene-role="work-cell"]:nth-child(2){--cell-x:10px}#selected-work [data-scene-role="work-cell"]:nth-child(3){--cell-y:10px}#selected-work [data-scene-role="work-cell"]:nth-child(4){--cell-x:10px;--cell-y:10px}#selected-work.scene-content [data-scene-role="work-cell"]{opacity:1;transform:none}#selected-work [data-scene-role="work-cell"]:nth-child(2){transition-delay:55ms}#selected-work [data-scene-role="work-cell"]:nth-child(3){transition-delay:105ms}#selected-work [data-scene-role="work-cell"]:nth-child(4){transition-delay:155ms}
+.intro-complete [data-hero-line] {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-/* 04 — information matrix */
-#skills [data-scene-role="skills-header"]{clip-path:inset(0 100% 0 0);transition:clip-path .58s var(--scene-ease)}#skills.scene-established [data-scene-role="skills-header"]{clip-path:inset(0)}
-#skills [data-scene-role="skill-column"]{opacity:0;clip-path:inset(0 0 100%);transition:opacity .25s ease,clip-path .58s var(--scene-ease),transform .58s var(--scene-ease)}#skills [data-scene-role="skill-column"]:nth-child(1){transform:translateX(-18px)}#skills [data-scene-role="skill-column"]:nth-child(2){transform:translateY(18px)}#skills [data-scene-role="skill-column"]:nth-child(3){transform:translateX(18px)}#skills.scene-content [data-scene-role="skill-column"]{opacity:1;clip-path:inset(0);transform:none}#skills [data-scene-role="skill-column"]:nth-child(2){transition-delay:80ms}#skills [data-scene-role="skill-column"]:nth-child(3){transition-delay:160ms}
+.intro-complete [data-hero-line="2"] {
+  transition-delay: 80ms;
+}
 
-/* 05 — technical index */
-#tools [data-scene-role="tools-header"]{clip-path:inset(0 100% 0 0);transition:clip-path .62s var(--scene-ease)}#tools.scene-established [data-scene-role="tools-header"]{clip-path:inset(0)}
-#tools [data-scene-role="tool-group"]{clip-path:inset(0 100% 0 0);transition:clip-path .52s var(--scene-ease)}#tools.scene-content [data-scene-role="tool-group"]{clip-path:inset(0)}#tools [data-scene-role="tool-group"]:nth-child(2){transition-delay:70ms}#tools [data-scene-role="tool-group"]:nth-child(3){transition-delay:140ms}#tools [data-scene-role="tool-group"]:nth-child(4){transition-delay:210ms}#tools [data-scene-role="tool-group"]:nth-child(5){transition-delay:280ms}
-#tools [data-scene-role="tool-item"]{opacity:0;transform:scale(.94) translateZ(-8px);transition:opacity .22s ease,transform .34s var(--scene-ease)}#tools.scene-content [data-scene-role="tool-item"]{opacity:1;transform:none}
+[data-hero-context] .h-px {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--scene-ease) 0.15s;
+}
 
-/* 06 — archival records */
-#education [data-scene-role="education-header"]{clip-path:inset(0 100% 0 0);transition:clip-path .62s var(--scene-ease)}#education.scene-established [data-scene-role="education-header"]{clip-path:inset(0)}
-#education [data-scene-role="education-record"]{clip-path:inset(0 100% 0 0);transform:perspective(1400px) rotateY(-2deg);transition:clip-path .62s var(--scene-ease),transform .62s var(--scene-ease)}#education.scene-content [data-scene-role="education-record"]{clip-path:inset(0);transform:none}#education [data-scene-role="education-record"]:nth-child(2){transition-delay:100ms}#education [data-scene-role="education-record"]:nth-child(3){transition-delay:200ms}
-#education [data-scene-role="education-date"]{opacity:0;transform:translateX(16px);transition:opacity .25s ease .18s,transform .4s var(--scene-ease) .18s}#education.scene-content [data-scene-role="education-date"]{opacity:1;transform:none}
+.intro-complete [data-hero-context] .h-px {
+  transform: scaleX(1);
+}
 
-/* 07 — primary dossier / secondary index */
-#credentials [data-scene-role="credentials-header"]{clip-path:inset(0 100% 0 0);transition:clip-path .65s var(--scene-ease)}#credentials.scene-established [data-scene-role="credentials-header"]{clip-path:inset(0)}
-#credentials [data-scene-role="credentials-split"]{position:relative}#credentials [data-scene-role="credentials-split"]:after{content:"";position:absolute;top:0;bottom:0;left:calc(66.666% + .5rem);width:1px;background:#d5d5d5;transform:scaleY(0);transform-origin:top;transition:transform .56s var(--scene-ease)}#credentials.scene-established [data-scene-role="credentials-split"]:after{transform:scaleY(1)}
-#credentials [data-scene-role="certifications-column"]{opacity:0;transform:translateX(-14px);transition:opacity .3s ease,transform .48s var(--scene-ease)}#credentials.scene-content [data-scene-role="certifications-column"]{opacity:1;transform:none}
-#credentials [data-scene-role="organizations-column"]{opacity:0;transform:translateX(14px);transition:opacity .28s ease .18s,transform .42s var(--scene-ease) .18s}#credentials.scene-content [data-scene-role="organizations-column"]{opacity:1;transform:none}
-#credentials [data-scene-role="certificate-record"]{clip-path:inset(0 100% 0 0);transition:clip-path .48s var(--scene-ease)}#credentials.scene-content [data-scene-role="certificate-record"]{clip-path:inset(0)}#credentials [data-scene-role="certificate-record"]:nth-child(2){transition-delay:70ms}#credentials [data-scene-role="certificate-record"]:nth-child(3){transition-delay:140ms}
+[data-hero-context] > div > div {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s var(--scene-ease);
+}
 
-/* 08 — final destination */
-#contact [data-scene-role="contact-cue"]{opacity:0;transform:translateY(10px);transition:opacity .25s ease,transform .36s var(--scene-ease)}#contact.scene-approach [data-scene-role="contact-cue"]{opacity:1;transform:none}
-#contact [data-scene-role="contact-line"]{display:block;opacity:0;clip-path:inset(100% 0 0);transform:translate3d(0,20px,-28px) scale(.985);transition:opacity .25s ease,clip-path .58s var(--scene-ease),transform .58s var(--scene-ease)}#contact.scene-established [data-scene-role="contact-line"]{opacity:1;clip-path:inset(0);transform:none}#contact [data-scene-role="contact-line"]:nth-child(2){transition-delay:80ms}#contact [data-scene-role="contact-line"]:nth-child(3){transition-delay:160ms}
-#contact [data-scene-role="contact-support"]{opacity:0;transform:translateY(12px);transition:opacity .28s ease,transform .4s var(--scene-ease)}#contact.scene-content [data-scene-role="contact-support"]{opacity:1;transform:none}
-#contact [data-scene-role="contact-action"]{opacity:0;clip-path:inset(0 100% 0 0);transform:translateX(12px);transition:opacity .25s ease,clip-path .52s var(--scene-ease),transform .52s var(--scene-ease)}#contact.scene-content [data-scene-role="contact-action"]{opacity:1;clip-path:inset(0);transform:none}#contact [data-scene-role="contact-action"]:nth-child(2){transition-delay:120ms}
+.intro-complete [data-hero-context] > div > div {
+  opacity: 1;
+  transform: translateY(0);
+}
 
+.intro-complete [data-hero-context] > div > div:nth-child(1) { transition-delay: 180ms; }
+.intro-complete [data-hero-context] > div > div:nth-child(2) { transition-delay: 280ms; }
+.intro-complete [data-hero-context] > div > div:nth-child(3) { transition-delay: 380ms; }
 
-@media(hover:hover) and (pointer:fine) and (min-width:1024px){#selected-work article,[data-archive-card]{transform-style:preserve-3d;transition:transform .22s var(--scene-ease),background-color .2s ease}#selected-work article:hover,[data-archive-card]:hover{transform:perspective(1200px) translate3d(0,-3px,9px) rotateX(.6deg) rotateY(-.6deg)}#tools li:hover{transform:translate3d(2px,-2px,6px)}#tools li:hover svg{transform:scale(1.08)}}
-@media(max-width:767px){#credentials [data-scene-role="credentials-split"]:after{display:none}#about [data-scene-role="identity-portrait"]{transform:translateX(-12px)}#experience [data-scene-role="experience-record"]{transform:translateY(calc(var(--record-distance)*10px))}#contact [data-scene-role="contact-line"]{transform:translateY(16px)}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}[data-scene-role],[data-hero-line],[data-hero-actions],[data-hero-context]>div>div,[data-scroll-cue]{opacity:1!important;clip-path:inset(0)!important;transform:none!important}#credentials [data-scene-role="credentials-split"]:after{transform:none!important}}
+[data-hero-actions] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease 0.44s, transform 0.5s var(--scene-ease) 0.44s;
+}
+
+.intro-complete [data-hero-actions] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-scroll-cue] {
+  opacity: 0;
+  transform: translate(-50%, 8px);
+  transition: opacity 0.4s ease 0.6s, transform 0.45s var(--scene-ease) 0.6s;
+}
+
+.intro-complete [data-scroll-cue] {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+[data-scroll-cue] svg {
+  animation: cue-drift 2.8s ease-in-out infinite;
+}
+
+@keyframes cue-drift {
+  50% { transform: translateY(4px); }
+}
+
+[data-scene="entry"] [data-hero-content] {
+  opacity: calc(1 - var(--scene-exit) * 0.4);
+  transform: translateY(calc(var(--scene-exit) * -16px));
+}
+
+.intro-complete [data-scene="entry"] [data-scroll-cue] {
+  opacity: calc(1 - var(--scene-exit) * 5);
+  transform: translate(-50%, calc(var(--scene-exit) * -12px));
+  transition: opacity 0.1s linear, transform 0.1s linear;
+}
+
+/* 01 — Chapter 01: About / Identity */
+#about [data-scene-role="identity-cue"] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.55s var(--scene-ease);
+}
+#about.scene-approach [data-scene-role="identity-cue"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#about [data-scene-role="identity-portrait"] {
+  opacity: 0;
+  transform: scale(0.95) translateY(12px);
+  transition: opacity 0.7s ease, transform 0.75s var(--scene-ease);
+}
+#about.scene-established [data-scene-role="identity-portrait"] {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+#about [data-scene-role="identity-title"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#about.scene-established [data-scene-role="identity-title"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#about [data-scene-role="identity-title"]:nth-child(2) {
+  transition-delay: 90ms;
+}
+
+#about [data-scene-role="identity-copy"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.6s var(--scene-ease);
+}
+#about.scene-content [data-scene-role="identity-copy"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#about [data-scene-role="identity-copy"]:nth-child(2) {
+  transition-delay: 110ms;
+}
+
+#about [data-scene-role="identity-actions"] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease 0.15s, transform 0.55s var(--scene-ease) 0.15s;
+}
+#about.scene-content [data-scene-role="identity-actions"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 02 — Chapter 02: Experience */
+#experience [data-scene-role="experience-header"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#experience.scene-established [data-scene-role="experience-header"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#experience [data-scene-role="experience-record"] {
+  position: relative;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+#experience [data-scene-role="experience-record"]:before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 1px;
+  background: #000000;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.65s var(--scene-ease);
+}
+#experience [data-scene-role="experience-record"].record-approach:before {
+  transform: scaleX(1);
+}
+#experience [data-scene-role="experience-record"].record-approach {
+  opacity: 1;
+}
+
+#experience [data-scene-role="experience-role"],
+#experience [data-scene-role="experience-company"],
+#experience [data-scene-role="experience-description"],
+#experience [data-scene-role="experience-date"] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.55s var(--scene-ease);
+}
+#experience .record-active [data-scene-role="experience-role"],
+#experience .record-active [data-scene-role="experience-company"],
+#experience .record-active [data-scene-role="experience-description"],
+#experience .record-active [data-scene-role="experience-date"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#experience [data-scene-role="experience-company"] { transition-delay: 70ms; }
+#experience [data-scene-role="experience-description"] { transition-delay: 130ms; }
+#experience [data-scene-role="experience-date"] { transition-delay: 170ms; }
+
+/* 03 — Chapter 03: Selected Work */
+#selected-work [data-scene-role="work-cue"] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.5s var(--scene-ease);
+}
+#selected-work.scene-approach [data-scene-role="work-cue"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#selected-work [data-scene-role="work-title"] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#selected-work.scene-established [data-scene-role="work-title"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#selected-work [data-scene-role="work-link"] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.45s ease 0.12s, transform 0.55s var(--scene-ease) 0.12s;
+}
+#selected-work.scene-established [data-scene-role="work-link"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#selected-work [data-scene-role="work-grid"] {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+#selected-work.scene-established [data-scene-role="work-grid"] {
+  opacity: 1;
+}
+
+#selected-work [data-scene-role="work-cell"] {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.5s ease, transform 0.6s var(--scene-ease), background-color 0.25s ease;
+}
+#selected-work.scene-content [data-scene-role="work-cell"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#selected-work [data-scene-role="work-cell"]:nth-child(1) { transition-delay: 50ms; }
+#selected-work [data-scene-role="work-cell"]:nth-child(2) { transition-delay: 120ms; }
+#selected-work [data-scene-role="work-cell"]:nth-child(3) { transition-delay: 190ms; }
+#selected-work [data-scene-role="work-cell"]:nth-child(4) { transition-delay: 260ms; }
+
+/* 04 — Chapter 04: Skills */
+#skills [data-scene-role="skills-header"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#skills.scene-established [data-scene-role="skills-header"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#skills [data-scene-role="skill-column"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.6s var(--scene-ease);
+}
+#skills.scene-content [data-scene-role="skill-column"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#skills [data-scene-role="skill-column"]:nth-child(1) { transition-delay: 60ms; }
+#skills [data-scene-role="skill-column"]:nth-child(2) { transition-delay: 140ms; }
+#skills [data-scene-role="skill-column"]:nth-child(3) { transition-delay: 220ms; }
+
+/* 05 — Chapter 05: Tools */
+#tools [data-scene-role="tools-header"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#tools.scene-established [data-scene-role="tools-header"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#tools [data-scene-role="tool-group"] {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.55s var(--scene-ease);
+}
+#tools.scene-content [data-scene-role="tool-group"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#tools [data-scene-role="tool-group"]:nth-child(1) { transition-delay: 50ms; }
+#tools [data-scene-role="tool-group"]:nth-child(2) { transition-delay: 110ms; }
+#tools [data-scene-role="tool-group"]:nth-child(3) { transition-delay: 170ms; }
+#tools [data-scene-role="tool-group"]:nth-child(4) { transition-delay: 230ms; }
+#tools [data-scene-role="tool-group"]:nth-child(5) { transition-delay: 290ms; }
+
+#tools [data-scene-role="tool-item"] {
+  transition: transform 0.2s ease;
+}
+
+/* 06 — Chapter 06: Education */
+#education [data-scene-role="education-header"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#education.scene-established [data-scene-role="education-header"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#education [data-scene-role="education-record"] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.6s var(--scene-ease);
+}
+#education.scene-content [data-scene-role="education-record"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#education [data-scene-role="education-record"]:nth-child(2) { transition-delay: 90ms; }
+#education [data-scene-role="education-record"]:nth-child(3) { transition-delay: 180ms; }
+
+#education [data-scene-role="education-date"] {
+  opacity: 0;
+  transition: opacity 0.45s ease 0.15s;
+}
+#education.scene-content [data-scene-role="education-date"] {
+  opacity: 1;
+}
+
+/* 07 — Chapter 07: Credentials & Involvement */
+#credentials [data-scene-role="credentials-header"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#credentials.scene-established [data-scene-role="credentials-header"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#credentials [data-scene-role="credentials-split"] {
+  position: relative;
+}
+#credentials [data-scene-role="credentials-split"]:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(66.666% + 0.5rem);
+  width: 1px;
+  background: #d5d5d5;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.65s var(--scene-ease);
+}
+#credentials.scene-established [data-scene-role="credentials-split"]:after {
+  transform: scaleY(1);
+}
+
+#credentials [data-scene-role="certifications-column"],
+#credentials [data-scene-role="organizations-column"] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s ease, transform 0.6s var(--scene-ease);
+}
+#credentials.scene-content [data-scene-role="certifications-column"],
+#credentials.scene-content [data-scene-role="organizations-column"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#credentials [data-scene-role="organizations-column"] {
+  transition-delay: 120ms;
+}
+
+#credentials [data-scene-role="certificate-record"] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s ease, transform 0.55s var(--scene-ease);
+}
+#credentials.scene-content [data-scene-role="certificate-record"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#credentials [data-scene-role="certificate-record"]:nth-child(2) { transition-delay: 80ms; }
+#credentials [data-scene-role="certificate-record"]:nth-child(3) { transition-delay: 160ms; }
+
+/* 08 — Chapter 08: Contact */
+#contact [data-scene-role="contact-cue"] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.5s var(--scene-ease);
+}
+#contact.scene-approach [data-scene-role="contact-cue"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#contact [data-scene-role="contact-line"] {
+  display: block;
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.55s ease, transform 0.65s var(--scene-ease);
+}
+#contact.scene-established [data-scene-role="contact-line"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#contact [data-scene-role="contact-line"]:nth-child(2) { transition-delay: 80ms; }
+#contact [data-scene-role="contact-line"]:nth-child(3) { transition-delay: 160ms; }
+
+#contact [data-scene-role="contact-support"] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s ease 0.12s, transform 0.6s var(--scene-ease) 0.12s;
+}
+#contact.scene-content [data-scene-role="contact-support"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#contact [data-scene-role="contact-action"] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.45s ease, transform 0.55s var(--scene-ease);
+}
+#contact.scene-content [data-scene-role="contact-action"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+#contact [data-scene-role="contact-action"]:nth-child(2) { transition-delay: 100ms; }
+
+/* Micro-interactions: Crisp, Solid, No Jitter */
+@media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
+  #tools li:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (max-width: 767px) {
+  #credentials [data-scene-role="credentials-split"]:after {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *:before, *:after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  [data-scene-role],
+  [data-hero-line],
+  [data-hero-actions],
+  [data-hero-context] > div > div,
+  [data-scroll-cue] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  #credentials [data-scene-role="credentials-split"]:after {
+    transform: none !important;
+  }
+}

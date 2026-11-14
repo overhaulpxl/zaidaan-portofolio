@@ -40,7 +40,7 @@ export function ChapterMotion() {
     });
 
     roles("#about [class*='lg:flex'][class*='items-center'], #about > div > div:first-child", "identity-cue");
-    roles("#about [class*='aspect-[4/3]']", "identity-portrait");
+    roles("#about [class*='aspect-[3/4]']", "identity-portrait");
     roles("#about h2 span", "identity-title");
     roles("#about [class*='max-w-2xl'] p", "identity-copy");
     roles("#about [class*='flex-wrap']", "identity-actions");
@@ -79,7 +79,7 @@ export function ChapterMotion() {
     roles("#contact [class*='md:hidden'], #contact [class*='md:block']", "contact-cue");
     roles("#contact [data-contact-line]", "contact-line");
     roles("#contact h2 + p", "contact-support");
-    roles("#contact a", "contact-action");
+    roles("#contact a, #contact button", "contact-action");
     const records = [...document.querySelectorAll<HTMLElement>("#experience article")];
     let raf = 0;
     const update = () => {

@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import type { Project, ProjectFilterType } from "@/types/portfolio";
+import { TransitionLink } from "@/components/navigation/transition-link";
 
 interface WorkArchiveClientProps {
   initialProjects: Project[];
@@ -50,33 +51,68 @@ export function WorkArchiveClient({ initialProjects }: WorkArchiveClientProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <AnimatePresence mode="popLayout" initial={false}>
-        {filteredProjects.map((project, index) => (
-          <motion.article data-archive-card key={project.slug} layout initial={{ opacity: 0, y: reduceMotion ? 0 : 24 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: reduceMotion ? 0 : -12 }} transition={{ duration: reduceMotion ? 0.01 : 0.45, delay: reduceMotion ? 0 : index * 0.04 }} className="border border-[#dadada] p-8 hover:bg-[#e8e8e8] transition-colors group flex flex-col justify-between min-w-0">
-            <div>
-              <div className="flex justify-between items-start gap-6 mb-8">
-                <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest shrink-0">{String(index + 1).padStart(3, "0")}</span>
-                <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase tracking-widest text-right">{project.category}</span>
-              </div>
-              <h2 className="font-['Montserrat'] text-[24px] font-bold text-black uppercase mb-2">{project.title}</h2>
-              <p className="font-['Inter'] text-[16px] text-[#4c4546] mb-6 leading-relaxed">{project.description}</p>
-              <div className="flex flex-col gap-2 mb-8 font-['Inter'] text-[11px] font-bold text-[#5c5f60] uppercase tracking-wider">
-                <span>Status: {project.status}</span>
-                <span>Role: {project.role}</span>
-              </div>
-            </div>
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            key={activeCategory}
+            initial={{ opacity: 0, y: reduceMotion ? 0 : 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: reduceMotion ? 0 : -8 }}
+            transition={{ duration: reduceMotion ? 0.01 : 0.2, ease: [0.22, 1, 0.36, 1] }}
+            className="contents"
+          >
+            {filteredProjects.map((project) => (
+              <article
+                key={project.slug}
+                className="border border-[#dadada] hover:border-black p-8 hover:bg-[#f0f0f2] transition-colors duration-200 group flex flex-col justify-between min-w-0"
+              >
+                <div>
+                  <div className="flex justify-between items-start gap-6 mb-8">
+                    <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-widest shrink-0">{String(project.sortOrder).padStart(3, "0")}</span>
+                    <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase tracking-widest text-right">{project.category}</span>
+                  </div>
+                  <h2 className="font-['Montserrat'] text-[24px] font-bold text-black uppercase mb-2">{project.title}</h2>
+                  <p className="font-['Inter'] text-[16px] text-[#4c4546] mb-6 leading-relaxed">{project.description}</p>
+                  <div className="flex flex-col gap-2 mb-8 font-['Inter'] text-[11px] font-bold text-[#5c5f60] uppercase tracking-wider">
+                    <span>Status: {project.status}</span>
+                    <span>Role: {project.role}</span>
+                  </div>
+                </div>
 
-            <div className="border-t border-[#dadada] pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-5 mt-auto">
-              <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase tracking-widest">{project.technologies.join(" • ")}</span>
-              {project.links?.map((link) => (
-                <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className="font-['Inter'] text-[14px] font-semibold text-black uppercase hover:opacity-70 transition-opacity flex items-center gap-1 group/link shrink-0">
-                  {link.label}
-                  <svg className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
-                </a>
-              ))}
-            </div>
-          </motion.article>
-        ))}
+                <div className="border-t border-[#dadada] pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-5 mt-auto">
+                  <span className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] uppercase tracking-widest">{project.technologies.join(" • ")}</span>
+                  <div className="flex flex-wrap items-center gap-4">
+                    {project.links?.map((link) => {
+                      const isInternal = link.href.startsWith("/") && !link.href.startsWith("//");
+                      if (isInternal) {
+                        return (
+                          <TransitionLink
+                            key={link.href}
+                            href={link.href}
+                            className="font-['Inter'] text-[14px] font-semibold text-black uppercase hover:opacity-70 transition-all flex items-center gap-1 group/link shrink-0"
+                          >
+                            <span>{link.label}</span>
+                            <svg className="w-4 h-4 group-hover/link:translate-x-1.5 transition-transform duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="12 5 19 12 12 19" /></svg>
+                          </TransitionLink>
+                        );
+                      }
+                      return (
+                        <a
+                          key={link.href}
+                          href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-['Inter'] text-[14px] font-semibold text-black uppercase hover:opacity-70 transition-all flex items-center gap-1 group/link shrink-0"
+                        >
+                          <span>{link.label}</span>
+                          <svg className="w-4 h-4 group-hover/link:translate-x-1 group-hover/link:-translate-y-1 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+              </article>
+            ))}
+          </motion.div>
         </AnimatePresence>
       </div>
     </>

@@ -6,11 +6,23 @@ import { TransitionLink } from "@/components/navigation/transition-link";
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 
+function LogoMark({ className = "size-4" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 64 64" aria-hidden="true">
+      <rect width="64" height="64" rx="14" fill="#000000" />
+      <polygon points="13,13 29,13 13,43.4" fill="#ffffff" />
+      <polygon points="33.5,13 38.5,13 18.5,51 13.5,51" fill="#ffffff" />
+      <polygon points="41.5,13 46.5,13 26.5,51 21.5,51" fill="#ffffff" />
+      <polygon points="51,20.6 51,51 35,51" fill="#ffffff" />
+    </svg>
+  );
+}
+
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [portalRoot, setPortalRoot] = useState<HTMLElement | null>(null);
   const reduceMotion = useReducedMotion();
-  const closeMenu = useCallback(() => { setMobileMenuOpen(false); document.body.style.overflow = "auto"; }, []);
+  const closeMenu = useCallback(() => { setMobileMenuOpen(false); document.body.style.overflow = ""; }, []);
   const openMenu = useCallback(() => { setMobileMenuOpen(true); document.body.style.overflow = "hidden"; }, []);
 
   useEffect(() => {
@@ -36,13 +48,31 @@ export function Header() {
     { href: "/#contact", label: "CONTACT" }, { href: "/work", label: "PROJECT ARCHIVE" },
   ];
 
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (window.location.pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const menu = (
     <motion.div className="fixed inset-0 z-[60] bg-[#f8f9fa] flex flex-col items-start justify-center px-[5vw]" role="dialog" aria-modal="true"
       initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
       transition={{ duration: reduceMotion ? 0.01 : 0.28, ease: [0.22, 0.61, 0.36, 1] }}>
       <div className="absolute top-8 right-[5vw]"><button onClick={closeMenu} className="text-[#1b1b1b] hover:opacity-70 transition-opacity p-2" aria-label="Close menu"><X size={24} /></button></div>
       <motion.div className="mb-12" initial={{ opacity: 0, y: reduceMotion ? 0 : 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: reduceMotion ? 0 : 0.08, duration: 0.5 }}>
-        <h2 className="text-[24px] font-bold text-[#1b1b1b] uppercase font-['Montserrat'] tracking-widest">ZAIDAAN</h2>
+        <button
+          type="button"
+          onClick={() => {
+            closeMenu();
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+          className="text-[24px] font-bold text-[#1b1b1b] uppercase font-['Montserrat'] tracking-widest flex items-center gap-3 text-left hover:opacity-70 transition-opacity active:scale-95"
+          aria-label="Back to top"
+        >
+          <LogoMark className="size-6 shrink-0" />
+          <span>ZAIDAAN</span>
+        </button>
         <p className="text-[12px] font-semibold text-[#5c5f60] mt-2 font-['Inter'] tracking-[0.05em] uppercase">Editorial Portfolio</p>
       </motion.div>
       <nav className="flex flex-col gap-6">
@@ -57,7 +87,10 @@ export function Header() {
 
   return <>
     <header className="fixed top-0 w-full z-50 flex justify-between items-center px-[5vw] py-8 bg-[#f8f9fa] border-b border-[#000000] lg:border-none">
-      <TransitionLink href="/" className="text-[12px] font-semibold text-[#1b1b1b] uppercase tracking-widest font-['Inter'] hover:opacity-70 transition-opacity active:scale-95">ZAIDAAN</TransitionLink>
+      <TransitionLink href="/" onClick={handleLogoClick} className="flex items-center gap-2.5 text-[12px] font-semibold text-[#1b1b1b] uppercase tracking-widest font-['Inter'] hover:opacity-70 transition-opacity active:scale-95">
+        <LogoMark className="size-4 shrink-0" />
+        <span>ZAIDAAN</span>
+      </TransitionLink>
       <button onClick={openMenu} className="text-[#1b1b1b] hover:opacity-70 transition-opacity active:scale-95 flex items-center justify-center p-2" aria-label="Open menu"><Menu size={24} /></button>
     </header>
     {portalRoot ? createPortal(<AnimatePresence>{mobileMenuOpen ? menu : null}</AnimatePresence>, portalRoot) : null}

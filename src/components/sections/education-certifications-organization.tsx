@@ -44,8 +44,9 @@ export function EducationSection() {
         </div>
       </section>
 
-      <section id="credentials" className="pt-14 pb-0 lg:pt-20 lg:pb-0">
-        <div className="mb-12 lg:mb-20">
+      <section id="credentials" className="pt-14 pb-0 lg:pt-20 lg:pb-0 relative">
+        <div className="mb-12 lg:mb-20 relative">
+          <span id="certifications" className="absolute -top-28 pointer-events-none" aria-hidden="true" />
           <span className="font-['Inter'] text-[12px] font-semibold uppercase text-[#5c5f60] tracking-widest block mb-4">CHAPTER 07 / CREDENTIALS &amp; INVOLVEMENT</span>
           <h2 className="max-w-full font-['Montserrat'] text-[36px] min-[360px]:text-[40px] md:text-[64px] font-black text-black uppercase leading-none tracking-[-0.02em] mb-8">Credentials &amp; Involvement</h2>
           <div className="w-full h-px bg-black" />
