@@ -35,8 +35,50 @@ export const metadata: Metadata = {
 };
 
 export default function MiddlemanPage() {
+  const middlemanStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${siteConfig.url}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Middleman Testimonials",
+            item: `${siteConfig.url}/middleman`,
+          },
+        ],
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${siteConfig.url}/middleman#collection`,
+        url: `${siteConfig.url}/middleman`,
+        name: title,
+        description,
+        isPartOf: {
+          "@type": "WebSite",
+          url: `${siteConfig.url}/`,
+          name: siteConfig.seo.title,
+        },
+      },
+    ],
+  };
+
   return (
-    <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(middlemanStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
+      <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
       <Header />
 
       <main data-route-page="middleman" tabIndex={-1} className="flex-grow pt-[120px] pb-48 px-[5vw]">
@@ -89,5 +131,6 @@ export default function MiddlemanPage() {
 
       <Footer />
     </div>
+    </>
   );
 }

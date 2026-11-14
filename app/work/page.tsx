@@ -32,8 +32,49 @@ export const metadata: Metadata = {
 export default async function WorkPage() {
   const allProjects = await fetchProjects();
 
+  const workStructuredData = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: "Home",
+            item: `${siteConfig.url}/`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: "Project Archive",
+            item: `${siteConfig.url}/work`,
+          },
+        ],
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${siteConfig.url}/work#collection`,
+        url: `${siteConfig.url}/work`,
+        name: "Project Archive — Zaidaan Zalfaa",
+        description,
+        isPartOf: {
+          "@type": "WebSite",
+          url: `${siteConfig.url}/`,
+          name: siteConfig.seo.title,
+        },
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(workStructuredData).replace(/</g, "\\u003c"),
+        }}
+      />
       <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
         <Header />
         
