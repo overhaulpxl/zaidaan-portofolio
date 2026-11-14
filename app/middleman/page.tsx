@@ -110,7 +110,7 @@ export default async function MiddlemanPage() {
             </span>
             <h1
               data-archive-heading
-              className="font-['Montserrat'] text-[44px] md:text-[76px] lg:text-[96px] font-black uppercase leading-[0.95] tracking-[-0.03em] mb-6"
+              className="font-['Montserrat'] text-[clamp(2.75rem,6.4vw,6rem)] font-black uppercase leading-[0.95] tracking-[-0.03em] mb-6 break-words"
             >
               TRANSACTION<br />TESTIMONIALS.
             </h1>
