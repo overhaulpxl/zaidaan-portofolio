@@ -118,7 +118,7 @@ export default async function MiddlemanPage() {
               data-archive-desc
               className="font-['Inter'] text-[15px] md:text-[17px] text-[#2c2d2e] max-w-2xl leading-relaxed"
             >
-              Every image in this archive is direct evidence from completed middleman (escrow) transactions coordinated by Zaidaan Zalfaa, covering Indonesian domestic services and international cross-border trades. Buyer–seller communications, payment proofs, and account handovers are thoroughly verified before release.
+              Every image in this archive is direct evidence from completed middleman (escrow) transactions coordinated by Zaidaan Zalfaa — known on Discord as lui — covering Indonesian domestic services and international cross-border trades. Buyer–seller communications, payment proofs, and account handovers are thoroughly verified before release.
             </p>
           </div>
 
