@@ -13,6 +13,7 @@ type Props = {
 
 const PAGE_SIZE = 36;
 const DISCORD_USERNAME = "c10h14n2overdose";
+const DISCORD_NICKNAME = "lui";
 const FACEBOOK_URL = "https://www.facebook.com/zxxllz/";
 const DEFAULT_STORAGE_BASE_URL =
   "https://pwjonnqmksqfbbxrbikm.supabase.co/storage/v1/object/public/testimonials";
@@ -248,15 +249,18 @@ export function MiddlemanGalleryClient({ items, totalCount: initialTotalCount }:
           type="button"
           onClick={handleCopyDiscord}
           className="flex items-center justify-between gap-4 border border-black p-5 text-left transition-colors hover:bg-black hover:text-white active:scale-[0.99] group"
-          aria-label="Copy Discord Username"
+          aria-label="Copy Discord Username (lui)"
         >
           <div className="flex items-center gap-4">
             <FaDiscord className="size-6 shrink-0" aria-hidden="true" />
             <div>
               <span className="block font-['Inter'] text-[11px] font-semibold uppercase tracking-widest text-[#5c5f60] group-hover:text-[#a0a0a0]">
-                DISCORD
+                DISCORD · KNOWN AS
               </span>
-              <span className="block font-['Inter'] text-[15px] font-bold tracking-wide">
+              <span className="block font-['Inter'] text-[19px] font-extrabold tracking-wide">
+                {DISCORD_NICKNAME}
+              </span>
+              <span className="block font-mono text-[12px] text-[#5c5f60] group-hover:text-[#a0a0a0]">
                 {DISCORD_USERNAME}
               </span>
             </div>

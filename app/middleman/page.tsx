@@ -137,6 +137,14 @@ export default async function MiddlemanPage() {
             <div className="border border-black p-3 bg-white text-[11px] font-['Inter'] font-semibold uppercase tracking-wider text-[#5c5f60]">
               PRIVACY COMPLIANT · SENSITIVE DATA REDACTED
             </div>
+            <div className="border border-black p-4 bg-black text-white transition-all hover:bg-neutral-800">
+              <span className="block font-['Inter'] text-[11px] font-semibold uppercase tracking-widest text-[#a0a0a0]">
+                KNOWN ON DISCORD AS
+              </span>
+              <span className="block font-['Montserrat'] text-[26px] font-black tracking-tight mt-1">
+                lui
+              </span>
+            </div>
           </div>
         </div>
 
