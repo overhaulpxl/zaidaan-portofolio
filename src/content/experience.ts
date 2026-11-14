@@ -2,16 +2,16 @@ import type { Experience } from "@/types/portfolio";
 
 export const experiences: readonly Experience[] = [
   {
-    company: "Confidential — AI Training Project",
+    company: "Aether Project",
     role: "AI Trainer",
-    arrangement: "Project-based / Confidential",
+    arrangement: "Project-based",
     startDate: "May 2026",
     endDate: "Present",
     responsibilities: [
       "Evaluated and rated AI model outputs through structured preference and quality-review tasks.",
       "Created content and exemplars (prompts, ideal responses, examples) used to train AI models.",
       "Completed domain-specific tasks (coding, math, language) to improve model performance.",
-      "Company identity withheld under project confidentiality — details available on request."
+      "Delivered under a confidential codename; parent company identity not publicly disclosed."
     ],
     sortOrder: 0
   },
