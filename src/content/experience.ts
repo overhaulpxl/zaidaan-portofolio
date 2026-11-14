@@ -3,15 +3,16 @@ import type { Experience } from "@/types/portfolio";
 export const experiences: readonly Experience[] = [
   {
     company: "Mandalawangi Outbound",
-    role: "Technical & Creative Specialist",
+    role: "Event Facilitator & Technical & Creative Specialist",
     arrangement: "On-call · Per-customer / No fixed contract",
-    startDate: "Jan 2026",
+    startDate: "Sep 2022",
     endDate: "Present",
     responsibilities: [
-      "Listed on the company team page (mandalawangioutbound.com/team) as Technical & Creative Specialist under Creative & Media.",
-      "Photographed events, edited photos, and handled post uploads for the company since joining the Outbound team.",
-      "Developed the Mandalawangi Outbound company website in January 2026 (Next.js + Tailwind CSS) as its information platform.",
-      "Engaged only when customers or event schedules arise — work is project-based, not a fixed-term contract."
+      "Facilitated outbound and team-building activities — guided participants, briefed groups, kept sessions on schedule, supported participant safety and event logistics.",
+      "Photographed events, edited photos, and handled post uploads as part of the Creative & Media team since joining.",
+      "Developed the Mandalawangi Outbound company website in January 2026. See it live: https://mandalawangioutbound.com",
+      "Listed on the company team page (mandalawangioutbound.com/team) as Technical & Creative Specialist.",
+      "Engaged only when customers or event schedules arise — project-based, not a fixed-term contract."
     ],
     sortOrder: 0
   },
@@ -53,18 +54,6 @@ export const experiences: readonly Experience[] = [
       "Built a Python-based Telegram bot to automate order tracking."
     ],
     sortOrder: 3
-  },
-  {
-    company: "Mandalawangi Outbound",
-    role: "Event Facilitator",
-    startDate: "Sep 2022",
-    endDate: "Oct 2023",
-    responsibilities: [
-      "Facilitated outbound and team-building activities.",
-      "Supported participant safety and event logistics.",
-      "Developed the MAP OBM website as the company’s information platform."
-    ],
-    sortOrder: 4
   },
   {
     company: "JP.Computindo",

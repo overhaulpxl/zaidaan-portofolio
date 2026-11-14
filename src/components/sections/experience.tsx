@@ -1,4 +1,31 @@
+import type { ReactNode } from "react";
 import { experiences } from "@/content/experience";
+
+const urlRegex = /https?:\/\/[^\s<]+/g;
+
+function renderResponsibility(text: string) {
+  const parts = text.split(urlRegex);
+  const matches = text.match(urlRegex);
+  if (!matches) return text;
+  return parts.reduce<ReactNode[]>((acc, part, i) => {
+    acc.push(part);
+    const url = matches[i];
+    if (url) {
+      acc.push(
+        <a
+          key={i}
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="break-all underline decoration-black/40 underline-offset-2 hover:opacity-70"
+        >
+          {url}
+        </a>
+      );
+    }
+    return acc;
+  }, []);
+}
 
 export function ExperienceSection() {
   const orderedExperiences = [...experiences].sort((a, b) => a.sortOrder - b.sortOrder);
@@ -19,7 +46,7 @@ export function ExperienceSection() {
                 <p className="font-['Inter'] text-[14px] font-bold text-black uppercase tracking-widest mb-1">{experience.company}</p>
                 {experience.arrangement ? <p className="font-['Inter'] text-[12px] font-semibold text-[#5c5f60] tracking-wide mb-6">{experience.arrangement}</p> : <div className="mb-6" />}
                 <ul className="max-w-full font-['Inter'] text-[16px] text-[#5c5f60] lg:max-w-3xl leading-relaxed space-y-3 list-none p-0 m-0">
-                  {experience.responsibilities.map((responsibility) => <li key={responsibility} className="max-w-full break-words">{responsibility}</li>)}
+                  {experience.responsibilities.map((responsibility) => <li key={responsibility} className="max-w-full break-words">{renderResponsibility(responsibility)}</li>)}
                 </ul>
               </div>
               <div className="lg:col-span-3 lg:text-right lg:pr-[2vw] lg:pt-2">
