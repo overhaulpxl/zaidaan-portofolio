@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { WorkArchiveClient } from "@/components/projects/work-archive-client";
-import { projects } from "@/content/projects";
+import { fetchProjects } from "@/lib/supabase/data";
 import { siteConfig } from "@/content/site";
 
 const description = "Selected digital products, Discord bots, websites, automation projects, community systems, and transaction services by Zaidaan Zalfaa.";
@@ -29,7 +29,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function WorkPage() {
+export default async function WorkPage() {
+  const allProjects = await fetchProjects();
+
   return (
     <>
       <div id="top" className="flex min-h-screen flex-col overflow-x-hidden bg-[#f8f9fa] text-[#000000]">
@@ -45,7 +47,7 @@ export default function WorkPage() {
             </div>
           </div>
 
-          <div data-archive-content><WorkArchiveClient initialProjects={projects} /></div>
+          <div data-archive-content><WorkArchiveClient initialProjects={allProjects} /></div>
         </main>
         
         <Footer />

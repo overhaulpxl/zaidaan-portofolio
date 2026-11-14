@@ -1,4 +1,4 @@
-import { certificates } from "@/content/certificates";
+import { fetchCertificates } from "@/lib/supabase/data";
 import { education } from "@/content/education";
 import { organizations } from "@/content/organizations";
 
@@ -11,9 +11,10 @@ function ExternalArrow() {
   );
 }
 
-export function EducationSection() {
+export async function EducationSection() {
+  const dynamicCertificates = await fetchCertificates();
   const orderedEducation = [...education].sort((a, b) => a.sortOrder - b.sortOrder);
-  const publishedCertificates = certificates.filter((certificate) => certificate.published).sort((a, b) => a.sortOrder - b.sortOrder);
+  const publishedCertificates = dynamicCertificates.filter((certificate) => certificate.published).sort((a, b) => a.sortOrder - b.sortOrder);
   const orderedOrganizations = [...organizations].sort((a, b) => a.sortOrder - b.sortOrder);
 
   return (

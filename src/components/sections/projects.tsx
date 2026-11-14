@@ -1,8 +1,9 @@
-import { projects } from "@/content/projects";
+import { fetchProjects } from "@/lib/supabase/data";
 import { TransitionLink } from "@/components/navigation/transition-link";
 
-export function ProjectsSection() {
-  const featuredProjects = projects
+export async function ProjectsSection() {
+  const allProjects = await fetchProjects();
+  const featuredProjects = allProjects
     .filter((project) => project.published && project.featured)
     .sort((a, b) => a.sortOrder - b.sortOrder);
 
