@@ -1159,7 +1159,7 @@ export function ConsoleManager({
               target="_blank"
               className="border border-black bg-black text-white px-6 py-3 text-[12px] font-bold uppercase tracking-wider hover:bg-neutral-800 transition-colors"
             >
-              PREVIEW REKBER GALLERY ↗
+              PREVIEW MIDDLEMAN GALLERY ↗
             </Link>
           </div>
         </div>

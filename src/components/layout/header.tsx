@@ -45,7 +45,7 @@ export function Header() {
     { href: "/#about", label: "ABOUT" },
     { href: "/#experience", label: "EXPERIENCE" },
     { href: "/#selected-work", label: "WORK" },
-    { href: "/middleman", label: "MIDDLEMAN REKBER" },
+    { href: "/middleman", label: "MIDDLEMAN" },
     { href: "/#skills", label: "SKILLS" },
     { href: "/#tools", label: "TOOLS" },
     { href: "/#education", label: "EDUCATION" },
