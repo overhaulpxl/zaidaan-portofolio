@@ -2,6 +2,20 @@ import type { Experience } from "@/types/portfolio";
 
 export const experiences: readonly Experience[] = [
   {
+    company: "Mandalawangi Outbound",
+    role: "Technical & Creative Specialist",
+    arrangement: "On-call · Per-customer / No fixed contract",
+    startDate: "Jan 2026",
+    endDate: "Present",
+    responsibilities: [
+      "Listed on the company team page (mandalawangioutbound.com/team) as Technical & Creative Specialist under Creative & Media.",
+      "Photographed events, edited photos, and handled post uploads for the company since joining the Outbound team.",
+      "Developed the Mandalawangi Outbound company website in January 2026 (Next.js + Tailwind CSS) as its information platform.",
+      "Engaged only when customers or event schedules arise — work is project-based, not a fixed-term contract."
+    ],
+    sortOrder: 0
+  },
+  {
     company: "Way 2 Eternal Community",
     role: "Community Operations & Transactions",
     arrangement: "Part-time · Remote / Self-managed",
