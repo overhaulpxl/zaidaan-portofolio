@@ -2,7 +2,7 @@ import type { Experience } from "@/types/portfolio";
 
 export const experiences: readonly Experience[] = [
   {
-    company: "Aether Project",
+    company: "Project A",
     role: "AI Trainer",
     arrangement: "Project-based",
     startDate: "May 2026",
