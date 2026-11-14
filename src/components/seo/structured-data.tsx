@@ -6,7 +6,7 @@ const profilePageId = `${siteConfig.url}/#profile-page`;
 const serviceId = `${siteConfig.url}/#middleman-service`;
 const portraitUrl = `${siteConfig.url}/images/zaidaan-portrait.jpg`;
 
-function buildStructuredData(whatsappVisible: boolean) {
+function buildStructuredData(whatsappVisible: boolean, contactEmail: string) {
   return {
     "@context": "https://schema.org",
     "@graph": [
@@ -18,7 +18,7 @@ function buildStructuredData(whatsappVisible: boolean) {
         image: portraitUrl,
         description: siteConfig.seo.description,
         jobTitle: "Customer Service, Community Operations & Digital Support Specialist",
-        email: `mailto:${siteConfig.contact.email}`,
+        email: `mailto:${contactEmail}`,
         ...(whatsappVisible ? { telephone: siteConfig.contact.phoneDisplay } : {}),
         alumniOf: [
           {
@@ -107,12 +107,18 @@ function buildStructuredData(whatsappVisible: boolean) {
   };
 }
 
-export function StructuredData({ whatsappVisible = true }: { whatsappVisible?: boolean }) {
+export function StructuredData({
+  whatsappVisible = true,
+  contactEmail = siteConfig.contact.email,
+}: {
+  whatsappVisible?: boolean;
+  contactEmail?: string;
+}) {
   return (
     <script
       type="application/ld+json"
       dangerouslySetInnerHTML={{
-        __html: JSON.stringify(buildStructuredData(whatsappVisible)).replace(/</g, "\\u003c"),
+        __html: JSON.stringify(buildStructuredData(whatsappVisible, contactEmail)).replace(/</g, "\\u003c"),
       }}
     />
   );

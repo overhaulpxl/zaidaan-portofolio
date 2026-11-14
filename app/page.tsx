@@ -17,10 +17,11 @@ import { ChapterIndicator } from "@/components/navigation/chapter-indicator";
 export default async function Home() {
   const settings = await fetchSiteSettings();
   const whatsappVisible = settings.whatsappVisible;
+  const contactEmail = settings.contactEmail;
 
   return (
     <>
-      <StructuredData whatsappVisible={whatsappVisible} />
+      <StructuredData whatsappVisible={whatsappVisible} contactEmail={contactEmail} />
       <ChapterMotion />
       <ChapterIndicator />
       <div id="top" data-site-shell className="flex min-h-full flex-col bg-[#f8f9fa] text-[#1b1b1b]">
@@ -36,7 +37,7 @@ export default async function Home() {
           <SkillsSection />
           <ToolsSection />
           <EducationSection />
-          <ContactSection whatsappVisible={whatsappVisible} />
+          <ContactSection whatsappVisible={whatsappVisible} contactEmail={contactEmail} />
         </main>
         <Footer />
       </div>

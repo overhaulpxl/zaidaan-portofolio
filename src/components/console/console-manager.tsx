@@ -55,6 +55,7 @@ export type SettingsRow = {
   availability: string;
   totalProofs: number;
   whatsappVisible?: boolean;
+  contactEmail?: string;
 };
 
 type Props = {
@@ -1025,6 +1026,23 @@ export function ConsoleManager({
               />
               <span className="text-[11px] text-[#5c5f60] mt-1 block">
                 Shown next to active status indicator in header and profile hero.
+              </span>
+            </div>
+
+            <div>
+              <label className="block text-[11px] font-bold uppercase tracking-wider mb-1">
+                Contact Email
+              </label>
+              <input
+                name="contact_email"
+                type="email"
+                required
+                defaultValue={initialSettings.contactEmail || "me@zaidaan.my.id"}
+                className="w-full border border-black p-3 text-[14px] bg-neutral-50 focus:bg-white focus:outline-none font-mono"
+              />
+              <span className="text-[11px] text-[#5c5f60] mt-1 block">
+                Shown as the EMAIL contact block on the site — click-to-copy and JSON-LD use this
+                value. Forward your mail (e.g. via ImprovMX) to receive mail here.
               </span>
             </div>
 

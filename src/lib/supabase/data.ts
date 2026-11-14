@@ -76,6 +76,7 @@ export type SiteSettings = {
   availability: string;
   totalProofs: number;
   whatsappVisible: boolean;
+  contactEmail: string;
 };
 
 export async function fetchSiteSettings(): Promise<SiteSettings> {
@@ -83,6 +84,7 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
     availability: "Available for Select Opportunities",
     totalProofs: 2451,
     whatsappVisible: true,
+    contactEmail: "me@zaidaan.my.id",
   };
 
   if (!isSupabaseConfigured) return defaultSettings;
@@ -101,6 +103,10 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
       availability: data.value.availability || defaultSettings.availability,
       totalProofs: Number(data.value.totalProofs) || defaultSettings.totalProofs,
       whatsappVisible: data.value.whatsappVisible !== false,
+      contactEmail:
+        typeof data.value.contactEmail === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.value.contactEmail)
+          ? data.value.contactEmail
+          : defaultSettings.contactEmail,
     };
   } catch {
     return defaultSettings;

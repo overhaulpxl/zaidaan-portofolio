@@ -242,6 +242,10 @@ export async function saveSiteSettingsAction(formData: FormData) {
   const availability = (formData.get("availability") as string)?.trim() || "Available for Select Opportunities";
   const totalProofs = parseInt(formData.get("total_proofs") as string, 10) || 2451;
   const whatsappVisible = formData.get("show_whatsapp") === "on";
+  const contactEmailRaw = ((formData.get("contact_email") as string) || "").trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactEmailRaw)) {
+    throw new Error("Contact email must be a valid email address.");
+  }
 
   const { data: prev } = await admin
     .from("site_settings")
@@ -255,6 +259,7 @@ export async function saveSiteSettingsAction(formData: FormData) {
     availability,
     totalProofs,
     whatsappVisible,
+    contactEmail: contactEmailRaw,
   };
 
   const { error } = await admin.from("site_settings").upsert({

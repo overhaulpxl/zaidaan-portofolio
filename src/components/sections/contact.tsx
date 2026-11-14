@@ -4,21 +4,27 @@ import { useState } from "react";
 import { profile } from "@/content/profile";
 import { siteConfig } from "@/content/site";
 
-export function ContactSection({ whatsappVisible = true }: { whatsappVisible?: boolean }) {
+export function ContactSection({
+  whatsappVisible = true,
+  contactEmail = siteConfig.contact.email,
+}: {
+  whatsappVisible?: boolean;
+  contactEmail?: string;
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(siteConfig.contact.email);
+        await navigator.clipboard.writeText(contactEmail);
         setCopied(true);
         setTimeout(() => setCopied(false), 2500);
       } else {
-        window.location.href = `mailto:${siteConfig.contact.email}`;
+        window.location.href = `mailto:${contactEmail}`;
       }
     } catch {
-      window.location.href = `mailto:${siteConfig.contact.email}`;
+      window.location.href = `mailto:${contactEmail}`;
     }
   };
 
@@ -43,7 +49,11 @@ export function ContactSection({ whatsappVisible = true }: { whatsappVisible?: b
         </div>
 
         {/* Right Side: Contact Actions */}
-        <div className="col-span-12 md:col-span-4 md:col-start-9 flex flex-col justify-end pb-12 gap-8 md:gap-12">
+        <div
+          className={`col-span-12 md:col-span-4 md:col-start-9 flex flex-col gap-8 md:gap-12 pb-12 ${
+            whatsappVisible ? "justify-end" : "justify-center"
+          }`}
+        >
           {whatsappVisible && (
             <a
               href={siteConfig.contact.whatsappUrl}
@@ -79,7 +89,7 @@ export function ContactSection({ whatsappVisible = true }: { whatsappVisible?: b
               </svg>
             </div>
             <p className="font-['Inter'] text-[14px] font-bold uppercase tracking-widest text-[#5c5f60] md:opacity-60 group-hover:px-4 md:group-hover:px-0 transition-all duration-300">
-              {copied ? "COPIED TO CLIPBOARD" : "COPY ADDRESS · " + siteConfig.contact.email}
+              {copied ? "COPIED TO CLIPBOARD" : "COPY ADDRESS · " + contactEmail}
             </p>
           </button>
         </div>

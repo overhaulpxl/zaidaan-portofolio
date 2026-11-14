@@ -61,6 +61,11 @@ export default async function ConsolePage({ searchParams }: ConsolePageProps) {
     availability: settingsRes.data?.value?.availability || "Available for Select Opportunities",
     totalProofs: Number(settingsRes.data?.value?.totalProofs) || 2451,
     whatsappVisible: settingsRes.data?.value?.whatsappVisible !== false,
+    contactEmail:
+      typeof settingsRes.data?.value?.contactEmail === "string" &&
+      /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(settingsRes.data.value.contactEmail)
+        ? settingsRes.data.value.contactEmail
+        : "me@zaidaan.my.id",
   };
 
   const manifestStats = {
