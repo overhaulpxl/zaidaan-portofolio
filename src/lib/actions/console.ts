@@ -9,6 +9,7 @@ import {
   checkAndRecordVouchRateLimit,
   deleteVouch,
   insertVouch,
+  updateVouch,
   updateVouchStatus,
 } from "@/lib/supabase/vouches";
 import {
@@ -353,6 +354,46 @@ export async function updateVouchStatusAction(id: string, nextStatus: "approved"
 export async function deleteVouchAction(id: string) {
   await verifyAuth();
   await deleteVouch(id);
+
+  revalidatePath("/middleman");
+  revalidatePath("/console");
+  return { success: true };
+}
+
+export async function updateVouchAction(
+  id: string,
+  fields: {
+    name: string;
+    handle?: string;
+    role: string;
+    rating: number;
+    transactionNominal?: string;
+    comment: string;
+  }
+) {
+  await verifyAuth();
+
+  const name = (fields.name || "").trim();
+  const comment = (fields.comment || "").trim();
+  if (!name || name.length < 2) {
+    throw new Error("Name is required (minimum 2 characters).");
+  }
+  if (!comment || comment.length < 5) {
+    throw new Error("Review comment is required (minimum 5 characters).");
+  }
+  const handle = (fields.handle || "").trim();
+  const role = (fields.role || "Buyer").trim().slice(0, 20);
+  const transactionNominal = (fields.transactionNominal || "").trim().slice(0, 50);
+  const rating = Math.min(5, Math.max(1, Math.round(Number(fields.rating) || 5)));
+
+  await updateVouch(id, {
+    name: name.slice(0, 50),
+    handle: handle.slice(0, 50),
+    role,
+    rating,
+    transactionNominal,
+    comment: comment.slice(0, 500),
+  });
 
   revalidatePath("/middleman");
   revalidatePath("/console");

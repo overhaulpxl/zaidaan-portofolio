@@ -176,6 +176,57 @@ export async function insertVouch(vouch: VouchItem): Promise<void> {
   await writeJsonbVouches(admin, [vouch, ...current], "insertVouch");
 }
 
+export async function updateVouch(id: string, fields: Partial<VouchItem>): Promise<void> {
+  const admin = writeClient();
+
+  if (await tableAvailable(admin)) {
+    const patch: Record<string, unknown> = {};
+    if (fields.name !== undefined) patch.name = String(fields.name).slice(0, 50);
+    if (fields.handle !== undefined) patch.handle = String(fields.handle).slice(0, 50) || null;
+    if (fields.role !== undefined) patch.role = String(fields.role).slice(0, 20);
+    if (fields.rating !== undefined) {
+      const rating = Math.min(5, Math.max(1, Math.round(Number(fields.rating) || 5)));
+      patch.rating = rating;
+    }
+    if (fields.transactionNominal !== undefined) {
+      patch.transaction_nominal = String(fields.transactionNominal).slice(0, 50) || null;
+    }
+    if (fields.comment !== undefined) patch.comment = String(fields.comment).slice(0, 500);
+
+    const { error } = await admin
+      .from("vouches")
+      .update(patch)
+      .eq("id", id);
+
+    if (error) throw new Error(error.message);
+    return;
+  }
+
+  const current = await readJsonbVouches(admin);
+  const updated = current.map((v) =>
+    v.id === id
+      ? {
+          ...v,
+          ...fields,
+          name: fields.name !== undefined ? String(fields.name).slice(0, 50) : v.name,
+          handle: fields.handle !== undefined ? String(fields.handle).slice(0, 50) : v.handle,
+          role: fields.role !== undefined ? String(fields.role).slice(0, 20) : v.role,
+          rating:
+            fields.rating !== undefined
+              ? Math.min(5, Math.max(1, Math.round(Number(fields.rating) || 5)))
+              : v.rating,
+          transactionNominal:
+            fields.transactionNominal !== undefined
+              ? String(fields.transactionNominal).slice(0, 50)
+              : v.transactionNominal,
+          comment:
+            fields.comment !== undefined ? String(fields.comment).slice(0, 500) : v.comment,
+        }
+      : v
+  );
+  await writeJsonbVouches(admin, updated, "updateVouch");
+}
+
 export async function updateVouchStatus(
   id: string,
   nextStatus: "approved" | "rejected"

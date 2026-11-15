@@ -13,6 +13,7 @@ import {
   updateVouchStatusAction,
   deleteVouchAction,
   exportSiteSettingsAction,
+  updateVouchAction,
 } from "@/lib/actions/console";
 import type { VouchItem } from "@/lib/supabase/data";
 import { FaStar, FaRegStar } from "react-icons/fa";
@@ -81,6 +82,8 @@ export function ConsoleManager({
   const [vouches, setVouches] = useState<VouchItem[]>(initialVouches);
   const [vouchFilter, setVouchFilter] = useState<"all" | "pending" | "approved" | "rejected">("all");
   const [vouchVisibleCount, setVouchVisibleCount] = useState(25);
+  const [editingVouchId, setEditingVouchId] = useState<string | null>(null);
+  const [vouchDraft, setVouchDraft] = useState<VouchItem | null>(null);
   const [isPending, startTransition] = useTransition();
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; text: string } | null>(null);
 
@@ -118,6 +121,40 @@ export function ConsoleManager({
   );
   const visibleVouches = filteredVouches.slice(0, vouchVisibleCount);
 
+  // Handle Vouch Edit (inline)
+  function startVouchEdit(vouch: VouchItem) {
+    setEditingVouchId(vouch.id);
+    setVouchDraft({ ...vouch });
+  }
+
+  function cancelVouchEdit() {
+    setEditingVouchId(null);
+    setVouchDraft(null);
+  }
+
+  async function handleVouchEditSave() {
+    if (!vouchDraft) return;
+    const draft = vouchDraft;
+    startTransition(async () => {
+      try {
+        await updateVouchAction(draft.id, {
+          name: draft.name,
+          handle: draft.handle,
+          role: draft.role,
+          rating: draft.rating,
+          transactionNominal: draft.transactionNominal,
+          comment: draft.comment,
+        });
+        setVouches((prev) => prev.map((v) => (v.id === draft.id ? { ...v, ...draft } : v)));
+        setEditingVouchId(null);
+        setVouchDraft(null);
+        notify("Vouch updated successfully.");
+      } catch (err: unknown) {
+        notify(err instanceof Error ? err.message : "Failed to update vouch", "error");
+      }
+    });
+  }
+
   // Handle Vouch Delete
   async function handleVouchDelete(id: string, name: string) {
     if (!window.confirm(`Permanently delete vouch submission from "${name}"?`)) {
@@ -127,6 +164,10 @@ export function ConsoleManager({
       try {
         await deleteVouchAction(id);
         setVouches((prev) => prev.filter((v) => v.id !== id));
+        if (editingVouchId === id) {
+          setEditingVouchId(null);
+          setVouchDraft(null);
+        }
         notify("Vouch deleted successfully.");
       } catch (err: unknown) {
         notify(err instanceof Error ? err.message : "Failed to delete vouch", "error");
@@ -888,6 +929,76 @@ export function ConsoleManager({
                     }`}
                   >
                     <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-4 pb-4 border-b border-black/10">
+                      {editingVouchId === vouch.id && vouchDraft ? (
+                        <div className="flex-1 space-y-3">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Name / Display Name *</label>
+                              <input
+                                value={vouchDraft.name}
+                                onChange={(e) => setVouchDraft({ ...vouchDraft, name: e.target.value })}
+                                className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Contact (Discord / Facebook)</label>
+                              <input
+                                value={vouchDraft.handle || ""}
+                                onChange={(e) => setVouchDraft({ ...vouchDraft, handle: e.target.value })}
+                                className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none"
+                              />
+                            </div>
+                          </div>
+                          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Role</label>
+                              <select
+                                value={vouchDraft.role}
+                                onChange={(e) => setVouchDraft({ ...vouchDraft, role: e.target.value })}
+                                className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none cursor-pointer"
+                              >
+                                <option value="Buyer">Buyer</option>
+                                <option value="Seller">Seller</option>
+                                <option value="Trader">Trader</option>
+                                <option value="Client">Client</option>
+                              </select>
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Transaction Nominal</label>
+                              <input
+                                value={vouchDraft.transactionNominal || ""}
+                                onChange={(e) => setVouchDraft({ ...vouchDraft, transactionNominal: e.target.value })}
+                                placeholder="e.g. Rp 115.000"
+                                className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none font-mono"
+                              />
+                            </div>
+                            <div>
+                              <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Rating</label>
+                              <select
+                                value={vouchDraft.rating}
+                                onChange={(e) => setVouchDraft({ ...vouchDraft, rating: Number(e.target.value) })}
+                                className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none cursor-pointer"
+                              >
+                                {[5, 4, 3, 2, 1].map((n) => (
+                                  <option key={n} value={n}>
+                                    {n} / 5
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
+                          <div>
+                            <label className="block text-[10px] font-bold uppercase tracking-wider mb-1">Review / Testimonial *</label>
+                            <textarea
+                              rows={2}
+                              value={vouchDraft.comment}
+                              onChange={(e) => setVouchDraft({ ...vouchDraft, comment: e.target.value })}
+                              className="w-full border border-black p-2 text-[13px] bg-neutral-50 focus:bg-white focus:outline-none"
+                            />
+                          </div>
+                          <p className="text-[10px] text-[#8c8c8c] font-mono">Submitted: {new Date(vouch.createdAt).toLocaleString("en-US")}</p>
+                        </div>
+                      ) : (
                       <div>
                         <div className="flex flex-wrap items-center gap-2 mb-1.5">
                           <span className="font-['Montserrat'] text-[18px] font-black text-black">
@@ -931,8 +1042,28 @@ export function ConsoleManager({
                           </span>
                         </div>
                       </div>
+                      )}
 
-                      {/* Status Indicator & Moderation Buttons */}
+                      {/* Status Indicator & Moderation Buttons (or Save/Cancel in edit mode) */}
+                      {editingVouchId === vouch.id && vouchDraft ? (
+                        <div className="flex flex-wrap items-center gap-2">
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={handleVouchEditSave}
+                            className="bg-black text-white px-5 py-2 text-[11px] font-bold uppercase tracking-wider hover:bg-neutral-800 disabled:opacity-50 transition-colors cursor-pointer border border-black"
+                          >
+                            ✓ SAVE
+                          </button>
+                          <button
+                            type="button"
+                            onClick={cancelVouchEdit}
+                            className="border border-black px-5 py-2 text-[11px] font-bold uppercase tracking-wider hover:bg-neutral-100 transition-colors cursor-pointer"
+                          >
+                            CANCEL
+                          </button>
+                        </div>
+                      ) : (
                       <div className="flex flex-wrap items-center gap-2">
                         <span
                           className={`px-3 py-1 text-[11px] font-bold uppercase tracking-wider border ${
@@ -968,6 +1099,17 @@ export function ConsoleManager({
                           </button>
                         )}
 
+                        {editingVouchId !== vouch.id && (
+                          <button
+                            type="button"
+                            disabled={isPending}
+                            onClick={() => startVouchEdit(vouch)}
+                            className="border border-black bg-black text-white px-3 py-1.5 text-[11px] font-bold uppercase tracking-wider hover:bg-neutral-800 disabled:opacity-50 transition-colors cursor-pointer"
+                          >
+                            ✎ EDIT
+                          </button>
+                        )}
+
                         <button
                           type="button"
                           disabled={isPending}
@@ -977,14 +1119,17 @@ export function ConsoleManager({
                           DELETE
                         </button>
                       </div>
+                      )}
                     </div>
 
-                    {/* Vouch Comment Text */}
-                    <div className="pt-4">
-                      <p className="font-['Inter'] text-[14px] text-[#222] leading-relaxed italic bg-neutral-50 p-4 border border-black/10">
-                        &ldquo;{vouch.comment}&rdquo;
-                      </p>
-                    </div>
+                    {/* Vouch Comment Text (hidden while editing — comment textarea is inside the edit form) */}
+                    {!(editingVouchId === vouch.id && vouchDraft) && (
+                      <div className="pt-4">
+                        <p className="font-['Inter'] text-[14px] text-[#222] leading-relaxed italic bg-neutral-50 p-4 border border-black/10">
+                          &ldquo;{vouch.comment}&rdquo;
+                        </p>
+                      </div>
+                    )}
                   </div>
                 ))}
               </div>
