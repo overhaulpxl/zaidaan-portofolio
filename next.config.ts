@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         destination: "/middleman",
         permanent: true,
       },
+      {
+        source: "/sitemap",
+        destination: "/sitemap.xml",
+        permanent: true,
+      },
     ];
   },
   async headers() {
