@@ -276,11 +276,11 @@ export function MiddlemanVouches({ initialVouches }: Props) {
                   </div>
                   <div>
                     <label className="block text-[11px] font-bold uppercase tracking-wider mb-1">
-                      Your Discord Username (of the form submitter)
+                      Your Contact (Discord / Facebook)
                     </label>
                     <input
                       name="handle"
-                      placeholder="e.g. @alex#1234"
+                      placeholder="e.g. @alex#1234 or fb.me/alex"
                       className="w-full border border-black p-2.5 text-[14px] bg-neutral-50 focus:bg-white focus:outline-none"
                     />
                   </div>
