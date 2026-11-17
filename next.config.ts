@@ -65,15 +65,6 @@ const nextConfig: NextConfig = {
         ],
       },
       {
-        source: "/sitemap.xml",
-        headers: [
-          {
-            key: "X-Robots-Tag",
-            value: "noindex, nofollow, noarchive",
-          },
-        ],
-      },
-      {
         source: "/robots.txt",
         headers: [
           {
